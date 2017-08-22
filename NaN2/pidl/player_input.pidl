@@ -1,0 +1,5 @@
+rename cs(nan2::PlayerInputPacket, nan2.LocalCharacterInput);
+
+global GameC2S 5000 {
+	PlayerInput([in] nan2::PlayerInputPacket player_input_packet);
+}
