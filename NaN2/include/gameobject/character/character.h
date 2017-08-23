@@ -12,7 +12,9 @@
 
 #include "character_recorder.h"
 
-#include "../../network/player_input_packet.h"
+#include "network/player_input_packet.h"
+#include "network/local_character_snapshot.h"
+#include "network/remote_character_snapshot.h"
 #include <queue>
 
 namespace nan2 {
@@ -35,7 +37,6 @@ namespace nan2 {
 
     float speed_;
 
-    int update_chance_time_;
 
   public:
     Character(Player* player);
@@ -49,6 +50,10 @@ namespace nan2 {
     void Restore();
 
     void AddInput(const PlayerInputPacket& packet);
+     
+    const LocalCharacterSnapshot GetLocalCharacterSnapshot() const;
+    const RemoteCharacterSnapshot GetRemoteCharacterSnapshot() const;
+    
   };
 
 }

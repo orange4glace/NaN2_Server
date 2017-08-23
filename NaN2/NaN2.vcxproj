@@ -170,8 +170,10 @@
     <ClInclude Include="include\global.h" />
     <ClInclude Include="include\logger\logger.h" />
     <ClInclude Include="include\math_helper.h" />
+    <ClInclude Include="include\network\local_character_snapshot.h" />
     <ClInclude Include="include\network\player_input_packet.h" />
     <ClInclude Include="include\network\proud_server.h" />
+    <ClInclude Include="include\network\remote_character_snapshot.h" />
     <ClInclude Include="include\world\player.h" />
     <ClInclude Include="include\world\world.h" />
     <ClInclude Include="include\world_time.h" />
@@ -193,8 +195,10 @@
     <ClCompile Include="src\gameobject\weapon_factory.cpp" />
     <ClCompile Include="src\logger\logger.cpp" />
     <ClCompile Include="src\math_helper.cpp" />
+    <ClCompile Include="src\network\local_character.snapshot.cpp" />
     <ClCompile Include="src\network\player_input_packet.cpp" />
     <ClCompile Include="src\network\proud_server.cpp" />
+    <ClCompile Include="src\network\remote_character_snapshot.cpp" />
     <ClCompile Include="src\world\player.cpp" />
     <ClCompile Include="src\world\world.cpp" />
     <ClCompile Include="src\world_time.cpp" />

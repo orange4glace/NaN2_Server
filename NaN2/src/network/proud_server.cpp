@@ -1,6 +1,10 @@
 // proud_server.cpp
 #include "network/proud_server.h"
 
+#include "../pidl/game_s2c_common.cpp"
+#include "../pidl/game_s2c_proxy.cpp"
+#include "../pidl/game_s2c_stub.cpp"
+
 #include "../pidl/player_input_common.cpp"
 #include "../pidl/player_input_proxy.cpp"
 #include "../pidl/player_input_stub.cpp"
@@ -19,6 +23,8 @@ namespace nan2 {
   ProudServer::ProudServer() :
   cs_lock_(cs_, false) {
 	  server_ = Proud::CNetServer::Create();
+    server_->AttachProxy(&s2c_proxy_);
+    server_->AttachStub((GameS2C::Stub*)this);
   }
 
   bool ProudServer::OnConnectionRequest(Proud::AddrPort client_addr, Proud::ByteArray& data, Proud::ByteArray& reply) {
@@ -53,6 +59,11 @@ namespace nan2 {
     auto found = players_.TryGetValue(host_id, output);
     if (found) return output;
     return nullptr;
+  }
+
+  void ProudServer::SendCharacterSnapshots(Player* player,
+    LocalCharacterSnapshot local_character_snapshot, std::vector<RemoteCharacterSnapshot> remote_character_snapshots) {
+    s2c_proxy_.PlayerSnapshot(player->id(), Proud::RmiContext::UnreliableSend, local_character_snapshot, remote_character_snapshots);
   }
 
   DEFRMI_GameC2S_PlayerInput(ProudServer) {

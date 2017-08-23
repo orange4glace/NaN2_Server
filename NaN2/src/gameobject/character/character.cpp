@@ -60,4 +60,22 @@ namespace nan2 {
   void Character::AddInput(const PlayerInputPacket& packet) {
     input_queue_.emplace(packet);
   }
+
+  const LocalCharacterSnapshot Character::GetLocalCharacterSnapshot() const {
+    auto& pos = placeable_.position();
+    return{
+      pos.x(),
+      pos.y(),
+      living_.hp()
+    };
+  }
+  const RemoteCharacterSnapshot Character::GetRemoteCharacterSnapshot() const {
+    auto& pos = placeable_.position();
+    return{
+      pos.x(),
+      pos.y(),
+      living_.hp()
+    };
+  }
+
 }

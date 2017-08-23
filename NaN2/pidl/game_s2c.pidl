@@ -1,0 +1,3 @@
+global GameS2C 6000 {
+	PlayerSnapshot([in] nan2::LocalCharacterSnapshot local_character_snapshot, [in] std::vector<nan2::RemoteCharacterSnapshot> remote_character_snapshot);
+}

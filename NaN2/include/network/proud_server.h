@@ -6,6 +6,12 @@
 
 #include "../world/player.h"
 #include "player_input_packet.h"
+#include "local_character_snapshot.h"
+#include "remote_character_snapshot.h"
+
+#include "../pidl/game_s2c_common.h"
+#include "../pidl/game_s2c_proxy.h"
+#include "../pidl/game_s2c_stub.h"
 
 #include "../pidl/player_input_common.h"
 #include "../pidl/player_input_proxy.h"
@@ -15,7 +21,7 @@ namespace nan2 {
 
   using Players = Proud::CFastMap<Proud::HostID, Player*>;
 
-  class ProudServer : public Proud::INetServerEvent, public GameC2S::Stub {
+  class ProudServer : public Proud::INetServerEvent, public GameC2S::Stub, public GameS2C::Proxy {
 
     DECRMI_GameC2S_PlayerInput;
 
@@ -26,6 +32,8 @@ namespace nan2 {
     Proud::CNetServer* server_;
 	  Proud::CriticalSection cs_;
 	  Proud::CriticalSectionLock cs_lock_;
+
+    GameS2C::Proxy s2c_proxy_;
 
     Players players_;
 
@@ -66,6 +74,9 @@ namespace nan2 {
 
 	
     Player* const GetPlayerByHostID(Proud::HostID host_id);
+
+    void SendCharacterSnapshots(Player* player,
+      LocalCharacterSnapshot local_character_snapshot, std::vector<RemoteCharacterSnapshot> remote_character_snapshots);
   };
 
 }
