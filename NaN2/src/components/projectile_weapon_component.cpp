@@ -16,7 +16,7 @@ namespace nan2 {
     return ComponentType::ProjectileWeapon;
   }
 
-  void ProjectileWeaponComponent::Fire(const Vector2& position) {
+  void ProjectileWeaponComponent::Fire(const Vector2& position, int rewind_time) {
     Projectile* projectile = new Projectile(projectile_);
     projectile->set_position(position);
     projectile->set_dir(dir_);

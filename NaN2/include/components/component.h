@@ -17,6 +17,8 @@ namespace nan2 {
   public:
     Component(GameObject* game_object);
 
+    // You should define this static function if a Component class is not abstract
+    // static ComponentType type();
     virtual ComponentType type() const = 0;
     virtual void Awake() {};
     virtual void Start() {};

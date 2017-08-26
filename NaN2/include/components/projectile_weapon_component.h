@@ -4,13 +4,14 @@
 
 #include "component.h"
 
+#include "weapon_component.h"
 #include "../gameobject/projectile.h"
 
 #include <nan2/math/vector2.h>
 
 namespace nan2 {
 
-  class ProjectileWeaponComponent : public Component {
+  class ProjectileWeaponComponent : public WeaponComponent {
 
   private:
     int dir_;
@@ -27,7 +28,7 @@ namespace nan2 {
 
     ComponentType type() const;
 
-    void Fire(const Vector2& position);
+    void Fire(const Vector2& position, int rewind_time);
     
     void Update();
 

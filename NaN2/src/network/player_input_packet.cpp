@@ -5,7 +5,7 @@ namespace Proud {
   using namespace nan2;
 
   CMessage& operator >> (CMessage& a, PlayerInputPacket& packet) {
-    a >> packet.dt >> packet.move_dir >> packet.fire_dir;
+    a >> packet.dt >> packet.sequence >> packet.move_dir >> packet.fire_dir;
     return a;
   }
 

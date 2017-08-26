@@ -1,14 +1,21 @@
 // character_recorder.cpp
 #include "gameobject/character/character_recorder.h"
 
+#include "gameobject/character/character.h"
+
 namespace nan2 {
 
-  CharacterRecorder::CharacterRecorder(GameObject* go) : 
-  Recorder<CharacterRecord>(go) {
+  CharacterRecorder::CharacterRecorder(Character* character) : 
+  Recorder<CharacterRecord>(static_cast<GameObject*>(character)),
+  character_(character) {
   }
 
-  CharacterRecord CharacterRecorder::GetInterpolatedData(int time) {
-    return {};
+  void CharacterRecorder::applyRecord(const CharacterRecord& record) {
+    character_->ApplyRecord(record);
+  }
+
+  const CharacterRecord CharacterRecorder::saveCurrentRecord() const {
+    return character_->GetRecord();
   }
 
 }

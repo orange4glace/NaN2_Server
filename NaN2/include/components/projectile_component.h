@@ -17,6 +17,8 @@ namespace nan2 {
     float speed_;
     int damage_;
 
+    int rewind_time_;
+
   public:
     ProjectileComponent(GameObject* go);
 
@@ -33,6 +35,9 @@ namespace nan2 {
 
     void set_damage(int damage);
     int damage() const;
+
+    void set_rewind_time(int val);
+    int rewind_time() const;
 
   };
 

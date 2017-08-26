@@ -7,7 +7,7 @@ namespace nan2 {
   Component(game_object) {
   }
 
-  ComponentType Living::type() const {
+  ComponentType Living::component_type() {
     return ComponentType::Living;
   }
 

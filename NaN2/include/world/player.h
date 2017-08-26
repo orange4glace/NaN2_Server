@@ -11,7 +11,9 @@ namespace nan2 {
     class Player {
 
         Proud::HostID id_;
-        Character character_;
+        Character* character_;
+
+        int recent_ping_;
 
     public:
         Player(Proud::HostID id);
@@ -19,6 +21,10 @@ namespace nan2 {
 
         Character* const character();
         Proud::HostID id() const;
+
+        void SendSnapshotsToRemote() const;
+
+        int GetRecentPing();
 
     };
 }

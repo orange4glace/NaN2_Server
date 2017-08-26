@@ -2,21 +2,25 @@
 #ifndef PROJECTILE_H_
 #define PROJECTILE_H_
 
-#include "game_object.h"
+#include "../../game_object.h"
 
-#include "../components/projectile_component.h"
-#include "../components/movable.h"
+#include "../../../components/movable.h"
 
 namespace nan2 {
 
   class Projectile : public GameObject {
 
   private:
-    ProjectileComponent projectile_component_;
     Placeable placeable_;
     Movable movable_;
 
+    int dir_;
+    int speed_;
+    int damage_;
+
     int player_id_;
+
+    int rewind_time_;
 
   public:
     Projectile(const Vector2& position, const Vector2& size,
@@ -33,6 +37,9 @@ namespace nan2 {
 
     void set_dir(int val);
     int dir() const;
+
+    void set_rewind_time(int val);
+    int rewind_time() const;
 
   };
 

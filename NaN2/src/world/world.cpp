@@ -35,8 +35,16 @@ namespace nan2 {
 
     // Check snapshot send timer
     snapshot_send_timer_ += dt;
-    if (snapshot_send_timer_ > 33) {
+    if (snapshot_send_timer_ > 30) {
       snapshot_send_timer_ = 0;
+      ProudServer::instance()->IteratePlayers([](Player* player) -> bool {
+        player->SendSnapshotsToRemote();
+        return true;
+      });
+    }
+
+    for (auto const &entry : rewindables_) {
+      entry.second->RecordCurrent();
     }
   }
 
@@ -45,7 +53,7 @@ namespace nan2 {
   }
 
   bool World::AddGameObject(GameObject* object) {
-    unsigned short network_id = 0;
+    uint16_t network_id = 0;
     int internal_id = AcquireInternalID();
     if (internal_id < 0) return false;
     if (object->is_network_object()) {
@@ -55,19 +63,47 @@ namespace nan2 {
     L_DEBUG << "Assign " << internal_id << " " << network_id << " " << object;
     object->AssignID(internal_id, network_id);
     object->InitializeComponents();
-    creatings_.emplace_back(object);
+    object->set_staging_state(StagingState::STAGING);
+    stagings_[object->internal_id()] = object;
+    return true;
   }
 
   void World::RemoveGameObject(GameObject* object) {
-
+    if (object->staging_state() == StagingState::NONE) return;
+    if (object->is_network_object()) {
+      auto network_id = object->network_id();
+      ReleaseNetworkID(network_id);
+    }
+    else if (object->staging_state() == StagingState::STAGING) {
+      stagings_.erase(object->internal_id());
+    }
+    else if (object->staging_state() == StagingState::STAGED) {
+      game_objects_.erase(object->internal_id());
+      if (object->updatable())
+        updatables_.erase(object->internal_id());
+      if (object->rewindable())
+        rewindables_.erase(object->internal_id());
+    }
+    object->OnDestroy();
+    delete object;
   }
 
   void World::StageGameObjects() {
-    for (GameObject* object : creatings_) {
+    for (auto& kv : stagings_) {
+      auto object = kv.second;
       game_objects_.insert({object->internal_id(), object});
       if (object->updatable())
         updatables_.insert({object->internal_id(), object});
+      if (object->rewindable())
+        rewindables_.insert({object->internal_id(), object});
+      object->set_staging_state(StagingState::STAGED);
     }
+    stagings_.clear();
+  }
+
+  int World::AcquireInternalID() {
+    if (next_internal_game_object_id_ == 2147483647) return -1;
+    return next_internal_game_object_id_++;
   }
 
   unsigned short World::AcquireNetworkID() {
@@ -77,13 +113,8 @@ namespace nan2 {
     return id;
   }
 
-  void World::ReleaseNetworkID(unsigned short id) {
+  void World::ReleaseNetworkID(uint16_t id) {
     network_id_pool_.push(id);
-  }
-
-  int World::AcquireInternalID() {
-    if (next_internal_game_object_id_ == 2147483647) return -1;
-    return next_internal_game_object_id_++;
   }
 
 }

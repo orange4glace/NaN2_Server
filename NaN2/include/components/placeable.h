@@ -20,7 +20,10 @@ namespace nan2 {
   public:
     Placeable(GameObject* go, const Vector2& position, const Vector2& size);
 
-    ComponentType type() const;
+    static ComponentType component_type();
+    inline ComponentType type() const override {
+      return ComponentType::Placeable;
+    }
 
     void set_position(const Vector2& position);
     void set_position(float x, float y);

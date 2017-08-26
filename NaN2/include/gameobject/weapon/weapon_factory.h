@@ -2,7 +2,7 @@
 #ifndef WEAPON_FACTORY_H_
 #define WEAPON_FACTORY_H_
 
-#include "projectile.h"
+#include "projectile/projectile.h"
 #include "projectile_weapon.h"
 
 namespace nan2 {
@@ -11,7 +11,7 @@ namespace nan2 {
 
   public:
 
-    static ProjectileWeapon* CreateProjectileWeapon();
+    static ProjectileWeapon* CreateProjectileWeapon(Character* character);
 
   };
 

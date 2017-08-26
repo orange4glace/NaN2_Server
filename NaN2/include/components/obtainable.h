@@ -13,7 +13,7 @@ namespace nan2 {
   public:
     Obtainable(GameObject* go);
 
-    ComponentType type() const;
+    static ComponentType type();
 
   };
 

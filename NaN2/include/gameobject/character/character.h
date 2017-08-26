@@ -8,8 +8,9 @@
 #include "../../components/placeable.h"
 #include "../../components/movable.h"
 
-#include "../weapon.h"
+#include "../weapon/weapon.h"
 
+#include "character_record.h"
 #include "character_recorder.h"
 
 #include "network/player_input_packet.h"
@@ -37,6 +38,9 @@ namespace nan2 {
 
     float speed_;
 
+    int update_chance_time_;
+    int last_acked_input_sequence_;
+
 
   public:
     Character(Player* player);
@@ -51,6 +55,8 @@ namespace nan2 {
 
     void AddInput(const PlayerInputPacket& packet);
      
+    const CharacterRecord GetRecord() const;
+    void ApplyRecord(const CharacterRecord& record);
     const LocalCharacterSnapshot GetLocalCharacterSnapshot() const;
     const RemoteCharacterSnapshot GetRemoteCharacterSnapshot() const;
     

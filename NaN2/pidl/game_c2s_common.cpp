@@ -3,7 +3,7 @@
 // Do not modify this file, but modify the source .pidl file.
 
 
-#include "player_input_common.h"
+#include "game_c2s_common.h"
 namespace GameC2S {
 
 

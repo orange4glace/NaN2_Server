@@ -21,7 +21,10 @@ namespace nan2 {
   public:
     Living(GameObject* go);
 
-    ComponentType type() const;
+    static ComponentType component_type();
+    inline ComponentType type() const override {
+      return ComponentType::Living;
+    }
 
     void RegisterZeroCallback(std::function<void(void)>&& f);
 

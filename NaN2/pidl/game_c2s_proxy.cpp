@@ -7,7 +7,7 @@
 // Do not modify this file, but modify the source .pidl file.
 
 
-#include "player_input_proxy.h"
+#include "game_c2s_proxy.h"
 
 namespace GameC2S {
 

@@ -38,14 +38,14 @@ namespace nan2 {
         std::map<int, GameObject*> updatables_;
         std::map<int, GameObject*> rewindables_;
 
-        std::vector<GameObject*> creatings_;
+        std::map<int, GameObject*> stagings_;
         std::vector<GameObject*> removings_;
 
         void StageGameObjects();
 
         int AcquireInternalID();
         unsigned short AcquireNetworkID();
-        void ReleaseNetworkID(unsigned short id);
+        void ReleaseNetworkID(uint16_t id);
 
     public:
         static World* instance();
@@ -63,14 +63,6 @@ namespace nan2 {
             for(auto const &entry : game_objects_) {
                 std::forward<Lambda>(lambda)(entry.second);
             }
-        }
-
-        typedef std::map<int, Player*>::iterator it_player;
-        inline it_player ItPlayersBegin() {
-            return players_.begin();
-        }
-        inline it_player ItPlayersEnd() {
-            return players_.end();
         }
 
     };

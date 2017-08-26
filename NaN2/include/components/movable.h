@@ -15,7 +15,10 @@ namespace nan2 {
   public:
     Movable(GameObject* go);
 
-    ComponentType type() const;
+    static ComponentType component_type();
+    inline ComponentType type() const override {
+      return ComponentType::Movable;
+    }
 
     void Awake();
 
@@ -27,14 +30,14 @@ namespace nan2 {
     // Collision callback function
     // bool Lambda1(GameObject* game_object)
     template <typename Lambda1, typename Lambda2>
-    void DiscreteMove252(int dir, int mdt, Lambda1&& condition, Lambda2&& collisionCallback);
+    void DiscreteMove252(int dir, float dd, Lambda1&& condition, Lambda2&& collisionCallback, int simulation_time = -1);
     template <typename Lambda1, typename Lambda2>
-    void DiscreteMove(float x, float y, Lambda1&& condition, Lambda2&& collisionCallback);
+    void DiscreteMove(float x, float y, Lambda1&& condition, Lambda2&& collisionCallback, int simulation_time = -1);
 
     template <typename Lambda1, typename Lambda2>
-    void ContinuousMove252(int dir, float dist, Lambda1&& condition, Lambda2&& collisionCallback);
+    void ContinuousMove252(int dir, float dist, Lambda1&& condition, Lambda2&& collisionCallback, int simulation_time = -1);
     template <typename Lambda1, typename Lambda2>
-    void ContinuousMove(float x, float y, Lambda1&& condition, Lambda2&& collisionCallback);
+    void ContinuousMove(float x, float y, Lambda1&& condition, Lambda2&& collisionCallback, int simulation_time = -1);
 
   };
 }

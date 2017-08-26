@@ -8,7 +8,7 @@ namespace nan2 {
   aabb_(position, size) {
   }
 
-  ComponentType Placeable::type() const {
+  ComponentType Placeable::component_type() {
     return ComponentType::Placeable;
   }
 

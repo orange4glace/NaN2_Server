@@ -8,10 +8,10 @@
 // Do not modify this file, but modify the source .pidl file.
 
   
-#include "player_input_stub.h"
+#include "game_c2s_stub.h"
 
 
-const unsigned char sz_player_input_stub_hRmi[] = 
+const unsigned char sz_game_c2s_stub_hRmi[] = 
 { 0x00, 0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xff, 0x00, 0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xff,
 0xaa, 0xbb, 0xcc, 0xdd, 0xff,0x99, 0xaa, 0xbb, 0xcc, 0x99, 0xaa, 0xdd, 0xff, 0x00 };   
 
@@ -24,7 +24,7 @@ namespace GameC2S {
 #ifndef __FreeBSD__ 
 		{
 			// unusable but required. you may ignore it, because it does not occur any worthless load.
-			unsigned char x = sz_player_input_stub_hRmi[0]; 
+			unsigned char x = sz_game_c2s_stub_hRmi[0]; 
 			x++; 
 		}
 #endif

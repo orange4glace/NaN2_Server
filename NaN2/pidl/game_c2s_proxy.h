@@ -8,7 +8,8 @@
 
 #pragma once
 
-#include "player_input_common.h"
+
+#include "game_c2s_common.h"
 
 namespace GameC2S {
 

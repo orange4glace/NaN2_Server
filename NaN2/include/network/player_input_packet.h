@@ -11,6 +11,7 @@ namespace nan2 {
   struct PlayerInputPacket {
 
     uint32_t dt;
+    int32_t sequence;
     uint8_t move_dir;
     uint8_t fire_dir;
 

@@ -39,16 +39,7 @@
     <ClInclude Include="include\components\placeable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\components\projectile_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\components\projectile_weapon_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\components\recorder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\components\weapon_component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\gameobject\character\character.h">
@@ -66,19 +57,7 @@
     <ClInclude Include="include\gameobject\game_object_type.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\gameobject\projectile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\gameobject\projectile_weapon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\gameobject\static_collider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\gameobject\weapon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\gameobject\weapon_factory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\logger\logger.h">
@@ -111,6 +90,30 @@
     <ClInclude Include="include\network\local_character_snapshot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\network\collection_marshaler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gameobject\staging_state.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\components\recorder_interface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gameobject\weapon\weapon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gameobject\weapon\projectile_weapon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gameobject\weapon\projectile\projectile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gameobject\game_object_base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gameobject\weapon\weapon_factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\components\component.cpp">
@@ -122,12 +125,6 @@
     <ClCompile Include="src\components\placeable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\components\projectile_component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\components\projectile_weapon_component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\gameobject\character\character.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -137,19 +134,7 @@
     <ClCompile Include="src\gameobject\game_object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\gameobject\projectile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gameobject\projectile_weapon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\gameobject\static_collider.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gameobject\weapon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gameobject\weapon_factory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\logger\logger.cpp">
@@ -180,6 +165,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\network\remote_character_snapshot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\recorder_interface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gameobject\character\character_record.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gameobject\weapon\projectile\projectile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gameobject\weapon\weapon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gameobject\weapon\projectile_weapon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gameobject\weapon\weapon_factory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

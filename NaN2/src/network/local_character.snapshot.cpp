@@ -10,7 +10,7 @@ namespace Proud {
   }
 
   CMessage& operator << (CMessage& a, const LocalCharacterSnapshot& packet) {
-    a << packet.pos_x << packet.pos_y << packet.hp;
+    a << packet.last_acked_input_sequence_ << packet.pos_x << packet.pos_y << packet.hp;
     return a;
   }
 

@@ -1,5 +1,9 @@
 // projectile.cpp
-#include "gameobject/projectile.h"
+#include "gameobject/weapon/projectile/projectile.h"
+
+#include "components/living.h"
+
+#include "world_time.h"
 
 namespace nan2 {
 
@@ -8,26 +12,34 @@ namespace nan2 {
   GameObject(GameObjectType::Projectile, true, true, false),
   placeable_(this, position, size),
   movable_(this),
-  projectile_component_(this) {
-
-    projectile_component_.set_dir(dir);
-    projectile_component_.set_speed(speed);
-    projectile_component_.set_damage(damage);
-
+  dir_(dir),
+  speed_(speed), 
+  damage_(damage) {
     placeable_.AddTargetLayer(Layer::StaticCollider);
 
     AddComponent(&placeable_);
     AddComponent(&movable_);
-    AddComponent(&projectile_component_);
   }
 
   Projectile::Projectile(const Projectile& copying) :
   Projectile(copying.placeable_.position(), copying.placeable_.size(),
-    copying.projectile_component_.dir(), copying.projectile_component_.speed(), copying.projectile_component_.damage()) {
+    copying.dir_, copying.speed_, copying.damage_) {
   }
 
   void Projectile::Update() {
-    projectile_component_.Update();
+    int dt = Time::delta_time();
+    L_DEBUG << "[Projectile] " << movable_.position();
+    movable_.ContinuousMove252(dir_, 33 * speed_,
+      [&](GameObject* go)-> bool {
+      return true;
+    },
+      [&](GameObject* go, Vector2 collision_point)-> bool {
+      Living* living = go->GetComponent<Living>();
+      if (living != nullptr) {
+        living->Subtract(damage_);
+      }
+      return true;
+    });
   }
 
   void Projectile::AddTargetLayer(int layer) {
@@ -47,11 +59,19 @@ namespace nan2 {
   }
 
   void Projectile::set_dir(int val) {
-    projectile_component_.set_dir(val);
+    dir_ = val;
   }
 
   int Projectile::dir() const {
-    return projectile_component_.dir();
+    return dir_;
+  }
+
+  void Projectile::set_rewind_time(int val) {
+    rewind_time_ = val;
+  }
+
+  int Projectile::rewind_time() const {
+    return rewind_time_;
   }
 
 }

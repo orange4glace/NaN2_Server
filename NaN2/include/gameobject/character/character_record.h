@@ -9,6 +9,8 @@ namespace nan2 {
   struct CharacterRecord {
     int hp;
     Vector2 position;
+
+    static CharacterRecord Interpolate(const CharacterRecord& a, const CharacterRecord& b, float t);
   };
 
 }

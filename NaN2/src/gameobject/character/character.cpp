@@ -2,7 +2,7 @@
 #include "gameobject/character/character.h"
 
 #include "world/player.h"
-#include "gameobject/weapon_factory.h"
+#include "gameobject/weapon/weapon_factory.h"
 
 #include "logger/logger.h"
 #include "world_time.h"
@@ -15,8 +15,9 @@ namespace nan2 {
   living_(this),
   placeable_(this, Vector2(-20, 5.0f), Vector2(10, 10)),
   movable_(this),
-  recorder_(this) {
-    weapon_ = WeaponFactory::CreateProjectileWeapon();
+  recorder_(this),
+  speed_(30.0f) {
+    weapon_ = WeaponFactory::CreateProjectileWeapon(this);
 
     AddComponent(&living_);
     AddComponent(&placeable_);
@@ -36,15 +37,17 @@ namespace nan2 {
     update_chance_time_ += Time::delta_time();
     while (!input_queue_.empty()) {
       auto& input = input_queue_.front();
-      if (update_chance_time_ < input.dt) continue;
+      if (update_chance_time_ < input.dt) break;
       update_chance_time_ -= input.dt;
-      movable_.DiscreteMove252(input.move_dir, input.dt,
+      float dd = (input.dt) / 1000.f * speed_;
+      movable_.DiscreteMove252(input.move_dir, dd,
         [](GameObject* object) -> bool {
         return true;
       },
         [](GameObject* object) -> bool {
         return true;
       });
+      last_acked_input_sequence_ = input.sequence;
       input_queue_.pop();
     }
   }
@@ -61,20 +64,34 @@ namespace nan2 {
     input_queue_.emplace(packet);
   }
 
+  const CharacterRecord Character::GetRecord() const {
+    return CharacterRecord{
+      living_.hp(),
+      movable_.position()
+    };
+  }
+
+  void Character::ApplyRecord(const CharacterRecord& record) {
+    living_.set_hp(record.hp);
+    movable_.set_position(record.position);
+  }
+
   const LocalCharacterSnapshot Character::GetLocalCharacterSnapshot() const {
     auto& pos = placeable_.position();
     return{
+      last_acked_input_sequence_,
       pos.x(),
       pos.y(),
-      living_.hp()
+      (uint8_t)living_.hp()
     };
   }
+
   const RemoteCharacterSnapshot Character::GetRemoteCharacterSnapshot() const {
     auto& pos = placeable_.position();
     return{
       pos.x(),
       pos.y(),
-      living_.hp()
+      (uint8_t)living_.hp()
     };
   }
 

@@ -9,12 +9,18 @@
 
 namespace nan2 {
 
+  class Character;
+
   class CharacterRecorder : public Recorder<CharacterRecord> {
 
-  public:
-    CharacterRecorder(GameObject* go);
+    Character* character_;
 
-    CharacterRecord GetInterpolatedData(int time);
+  protected:
+    void applyRecord(const CharacterRecord& record) override;
+    const CharacterRecord saveCurrentRecord() const override;
+
+  public:
+    CharacterRecorder(Character* character);
 
   };
 

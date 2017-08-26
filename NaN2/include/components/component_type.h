@@ -9,8 +9,9 @@ namespace nan2 {
     Placeable,
     Recorder,
     Living,
-    Projectile,
-    ProjectileWeapon
+    Weapon,
+    ProjectileWeapon,
+    Projectile
     
   };
 

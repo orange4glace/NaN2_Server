@@ -3,6 +3,7 @@
 #define PROUD_SERVER_H_
 
 #include <ProudNetServer.h>
+#include "collection_marshaler.h"
 
 #include "../world/player.h"
 #include "player_input_packet.h"
@@ -13,9 +14,9 @@
 #include "../pidl/game_s2c_proxy.h"
 #include "../pidl/game_s2c_stub.h"
 
-#include "../pidl/player_input_common.h"
-#include "../pidl/player_input_proxy.h"
-#include "../pidl/player_input_stub.h"
+#include "../pidl/game_c2s_common.h"
+#include "../pidl/game_c2s_proxy.h"
+#include "../pidl/game_c2s_stub.h"
 
 namespace nan2 {
 
@@ -28,6 +29,7 @@ namespace nan2 {
     static ProudServer* instance_;
 	
     ProudServer();
+    ~ProudServer();
 
     Proud::CNetServer* server_;
 	  Proud::CriticalSection cs_;
@@ -38,7 +40,9 @@ namespace nan2 {
     Players players_;
 
   public:
-    static const ProudServer* instance();
+    static ProudServer* const instance();
+
+    void Initialize();
 
 	  void Lock();
 	  void Unlock();
@@ -57,16 +61,16 @@ namespace nan2 {
     void OnP2PGroupRemoved(Proud::HostID group_id) override {}
 
     void OnError(Proud::ErrorInfo* e) override {
-
+      L_DEBUG_W << "Proud Error " << e->ToString().c_str() << endl;
     }
     void OnWarning(Proud::ErrorInfo* e) override {
-
+      L_DEBUG_W << "Proud Warning " << e->ToString().c_str() << endl;
     }
     void OnInformation(Proud::ErrorInfo* e) override {
-
+      L_DEBUG_W << "Proud Info "  << e->ToString().c_str() << endl;
     }
     void OnException(const Proud::Exception& e) override {
-
+      L_DEBUG << e.what() << endl;
     }
     void OnNoRmiProcessed(Proud::RmiID rmiID) override {
 
@@ -74,9 +78,17 @@ namespace nan2 {
 
 	
     Player* const GetPlayerByHostID(Proud::HostID host_id);
+    int GetPlayerPing(Player* player);
 
-    void SendCharacterSnapshots(Player* player,
-      LocalCharacterSnapshot local_character_snapshot, std::vector<RemoteCharacterSnapshot> remote_character_snapshots);
+    void SendCharacterSnapshots(const Player* const player,
+      const LocalCharacterSnapshot& local_character_snapshot, const std::vector<RemoteCharacterSnapshot>& remote_character_snapshots);
+
+    template<typename Lambda>
+    void IteratePlayers(Lambda&& lambda) {
+      for (auto const &entry : players_) {
+        std::forward<Lambda>(lambda)(entry.second);
+      }
+    }
   };
 
 }
