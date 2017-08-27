@@ -32,6 +32,7 @@ namespace nan2 {
     ~ProudServer();
 
     Proud::CNetServer* server_;
+    Proud::CThreadPool* thread_;
 	  Proud::CriticalSection cs_;
 	  Proud::CriticalSectionLock cs_lock_;
 
@@ -46,6 +47,8 @@ namespace nan2 {
 
 	  void Lock();
 	  void Unlock();
+
+    void Process();
 
     bool OnConnectionRequest(Proud::AddrPort client_addr, Proud::ByteArray& data, Proud::ByteArray& reply) override;
 	  void OnClientJoin(Proud::CNetClientInfo* client_info) override;

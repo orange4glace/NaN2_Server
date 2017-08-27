@@ -17,9 +17,18 @@ namespace GameS2C {
 	class Proxy : public ::Proud::IRmiProxy
 	{
 	public:
-	virtual bool PlayerSnapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::LocalCharacterSnapshot & local_character_snapshot, const std::vector<nan2::RemoteCharacterSnapshot> & remote_character_snapshot) PN_SEALED; 
-	virtual bool PlayerSnapshot ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const nan2::LocalCharacterSnapshot & local_character_snapshot, const std::vector<nan2::RemoteCharacterSnapshot> & remote_character_snapshot)   PN_SEALED;  
-static const PNTCHAR* RmiName_PlayerSnapshot;
+	virtual bool PlayerSnapshots ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::LocalCharacterSnapshot & local_character_snapshot, const std::vector<nan2::RemoteCharacterSnapshot> & remote_character_snapshot) PN_SEALED; 
+	virtual bool PlayerSnapshots ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const nan2::LocalCharacterSnapshot & local_character_snapshot, const std::vector<nan2::RemoteCharacterSnapshot> & remote_character_snapshot)   PN_SEALED;  
+	virtual bool JoinWorld ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const std::vector<Proud::HostID> & player_ids) PN_SEALED; 
+	virtual bool JoinWorld ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const std::vector<Proud::HostID> & player_ids)   PN_SEALED;  
+	virtual bool PlayerJoin ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID & player_id) PN_SEALED; 
+	virtual bool PlayerJoin ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const Proud::HostID & player_id)   PN_SEALED;  
+	virtual bool PlayerLeave ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID & player_id) PN_SEALED; 
+	virtual bool PlayerLeave ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const Proud::HostID & player_id)   PN_SEALED;  
+static const PNTCHAR* RmiName_PlayerSnapshots;
+static const PNTCHAR* RmiName_JoinWorld;
+static const PNTCHAR* RmiName_PlayerJoin;
+static const PNTCHAR* RmiName_PlayerLeave;
 static const PNTCHAR* RmiName_First;
 		Proxy()
 		{

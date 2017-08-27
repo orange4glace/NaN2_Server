@@ -6,7 +6,7 @@ namespace nan2 {
   StaticCollider::StaticCollider(const Vector2& position, const Vector2& size) : 
   GameObject(GameObjectType::Weapon, false, false, false),
   placeable_(this, position, size) {
-    placeable_.AddLayer(Layer::StaticCollider);
+    placeable_.AddLayer(Layer::STATIC_COLLIDER);
 
     AddComponent(&placeable_);
   }

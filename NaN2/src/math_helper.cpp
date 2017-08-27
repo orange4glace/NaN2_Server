@@ -30,13 +30,42 @@ namespace nan2 {
   }
 
   const Vector2& MathHelper::normal_dir_252(int x) const {
+    assert(x >= 0 && x < 256);
     if (x >= 252) return Vector2::ZERO;
     return vec_normal_252_[x];
   }
 
   float MathHelper::normal_angle_252(int x) const {
-    if (x >= 252) return 0;
+    assert(x >= 0 && x < 256);
     return normal_angle_252_[x];
+  }
+
+  int MathHelper::is_right_direction(int x) const {
+    assert(x >= 0 && x < 256);
+    return biased_direction(x) == x ? 1 : -1;
+  }
+
+  bool MathHelper::is_upper_direction(int x) const {
+    assert(x >= 0 && x < 256);
+    auto bdir = biased_direction(x);
+    return (bdir >= 190 && bdir < 252) ? false : true;
+  }
+
+  int MathHelper::biased_direction(int x) const {
+    assert(x >= 0 && x < 256);
+    if (x > 63 && x <= 189) {
+      return biased_direction_map_[x - 64];
+    }
+    else {
+      return x;
+    }
+  }
+
+  Vector2 MathHelper::RotateVector252(const Vector2& vec, int x) const {
+    assert(x >= 0 && x < 256);
+    float cos_ = cos252_[x];
+    float sin_ = sin252_[x];
+    return Vector2(vec.x() * cos_ - vec.y() * sin_, vec.x() * sin_ + vec.y() * cos_);
   }
 
   Vector2 MathHelper::RotateVector2(const Vector2& vec, float rad) const {

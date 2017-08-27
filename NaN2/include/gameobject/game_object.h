@@ -33,6 +33,8 @@ namespace nan2 {
 
   protected:
 
+    void registerRecorder(RecorderInterface* recorder);
+
   public:
     GameObject(GameObjectType type, bool updatable, bool rewindable, bool is_network_object);
 

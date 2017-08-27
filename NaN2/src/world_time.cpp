@@ -13,14 +13,17 @@ namespace nan2 {
 
   float Time::extra_delta_time_ = 0;
 
-  void Time::delta_time(float dt) {
-    dt += Time::extra_delta_time_;
-    Time::delta_time_ = dt;
-    Time::idelta_time_ = (int)(dt * 1000);
-    Time::extra_delta_time_ = dt - Time::delta_time_;
+  void Time::delta_time(int mdt) {
+    // dt += Time::extra_delta_time_;
+    Time::delta_time_ = mdt / 1000.f;
+    Time::idelta_time_ = mdt;
+    // Time::extra_delta_time_ = 0;
   }
   int Time::delta_time() {
     return Time::idelta_time_;
+  }
+  float Time::f_delta_time() {
+    return Time::delta_time_;
   }
   void Time::current_time(int t) {
     Time::current_time_ = t;

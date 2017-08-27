@@ -43,7 +43,7 @@ namespace GameS2C {
 					
 		switch((int)__rmiID) // case is to prevent from clang compile error
 		{
-			case Rmi_PlayerSnapshot:
+			case Rmi_PlayerSnapshots:
 				{
 					::Proud::RmiContext ctx;
 					ctx.m_rmiID = __rmiID;
@@ -56,7 +56,7 @@ namespace GameS2C {
 					
 					nan2::LocalCharacterSnapshot local_character_snapshot; __msg >> local_character_snapshot;
 					std::vector<nan2::RemoteCharacterSnapshot> remote_character_snapshot; __msg >> remote_character_snapshot;
-					m_core->PostCheckReadMessage(__msg,RmiName_PlayerSnapshot);
+					m_core->PostCheckReadMessage(__msg,RmiName_PlayerSnapshots);
 					
 			
 					if(m_enableNotifyCallFromStub && !m_internalUse)
@@ -68,19 +68,19 @@ namespace GameS2C {
 						parameterString += _PNT(", ");
 						::Proud::AppendTextOut(parameterString,remote_character_snapshot);	
 						
-						NotifyCallFromStub(remote, (::Proud::RmiID)Rmi_PlayerSnapshot, 
-							RmiName_PlayerSnapshot,parameterString);
+						NotifyCallFromStub(remote, (::Proud::RmiID)Rmi_PlayerSnapshots, 
+							RmiName_PlayerSnapshots,parameterString);
 			
 			#ifdef VIZAGENT
-						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_PlayerSnapshot, 
-							RmiName_PlayerSnapshot, parameterString);
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_PlayerSnapshots, 
+							RmiName_PlayerSnapshots, parameterString);
 			#endif
 					}
 					else if(!m_internalUse)
 					{
 			#ifdef VIZAGENT
-						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_PlayerSnapshot, 
-							RmiName_PlayerSnapshot, _PNT(""));
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_PlayerSnapshots, 
+							RmiName_PlayerSnapshots, _PNT(""));
 			#endif
 					}
 						
@@ -88,8 +88,8 @@ namespace GameS2C {
 					if(!m_internalUse && m_enableStubProfiling)
 					{
 						::Proud::BeforeRmiSummary summary;
-						summary.m_rmiID = (::Proud::RmiID)Rmi_PlayerSnapshot;
-						summary.m_rmiName = RmiName_PlayerSnapshot;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_PlayerSnapshots;
+						summary.m_rmiName = RmiName_PlayerSnapshots;
 						summary.m_hostID = remote;
 						summary.m_hostTag = hostTag;
 						BeforeRmiInvocation(summary);
@@ -98,19 +98,244 @@ namespace GameS2C {
 					}
 						
 					// Call this method.
-					bool __ret = PlayerSnapshot (remote,ctx , local_character_snapshot, remote_character_snapshot );
+					bool __ret = PlayerSnapshots (remote,ctx , local_character_snapshot, remote_character_snapshot );
 						
 					if(__ret==false)
 					{
 						// Error: RMI function that a user did not create has been called. 
-						m_core->ShowNotImplementedRmiWarning(RmiName_PlayerSnapshot);
+						m_core->ShowNotImplementedRmiWarning(RmiName_PlayerSnapshots);
 					}
 						
 					if(!m_internalUse && m_enableStubProfiling)
 					{
 						::Proud::AfterRmiSummary summary;
-						summary.m_rmiID = (::Proud::RmiID)Rmi_PlayerSnapshot;
-						summary.m_rmiName = RmiName_PlayerSnapshot;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_PlayerSnapshots;
+						summary.m_rmiName = RmiName_PlayerSnapshots;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						int64_t __t1;
+			
+						__t1 = ::Proud::GetPreciseCurrentTimeMs();
+			
+						summary.m_elapsedTime = (uint32_t)(__t1 - __t0);
+						AfterRmiInvocation(summary);
+					}
+				}
+				break;
+			case Rmi_JoinWorld:
+				{
+					::Proud::RmiContext ctx;
+					ctx.m_rmiID = __rmiID;
+					ctx.m_sentFrom=pa.GetRemoteHostID();
+					ctx.m_relayed=pa.IsRelayed();
+					ctx.m_hostTag = hostTag;
+					ctx.m_encryptMode = pa.GetEncryptMode();
+					ctx.m_compressMode = pa.GetCompressMode();
+					
+					
+					std::vector<Proud::HostID> player_ids; __msg >> player_ids;
+					m_core->PostCheckReadMessage(__msg,RmiName_JoinWorld);
+					
+			
+					if(m_enableNotifyCallFromStub && !m_internalUse)
+					{
+						::Proud::String parameterString;
+						
+						::Proud::AppendTextOut(parameterString,player_ids);	
+						
+						NotifyCallFromStub(remote, (::Proud::RmiID)Rmi_JoinWorld, 
+							RmiName_JoinWorld,parameterString);
+			
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_JoinWorld, 
+							RmiName_JoinWorld, parameterString);
+			#endif
+					}
+					else if(!m_internalUse)
+					{
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_JoinWorld, 
+							RmiName_JoinWorld, _PNT(""));
+			#endif
+					}
+						
+					int64_t __t0 = 0;
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::BeforeRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_JoinWorld;
+						summary.m_rmiName = RmiName_JoinWorld;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						BeforeRmiInvocation(summary);
+			
+						__t0 = ::Proud::GetPreciseCurrentTimeMs();
+					}
+						
+					// Call this method.
+					bool __ret = JoinWorld (remote,ctx , player_ids );
+						
+					if(__ret==false)
+					{
+						// Error: RMI function that a user did not create has been called. 
+						m_core->ShowNotImplementedRmiWarning(RmiName_JoinWorld);
+					}
+						
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::AfterRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_JoinWorld;
+						summary.m_rmiName = RmiName_JoinWorld;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						int64_t __t1;
+			
+						__t1 = ::Proud::GetPreciseCurrentTimeMs();
+			
+						summary.m_elapsedTime = (uint32_t)(__t1 - __t0);
+						AfterRmiInvocation(summary);
+					}
+				}
+				break;
+			case Rmi_PlayerJoin:
+				{
+					::Proud::RmiContext ctx;
+					ctx.m_rmiID = __rmiID;
+					ctx.m_sentFrom=pa.GetRemoteHostID();
+					ctx.m_relayed=pa.IsRelayed();
+					ctx.m_hostTag = hostTag;
+					ctx.m_encryptMode = pa.GetEncryptMode();
+					ctx.m_compressMode = pa.GetCompressMode();
+					
+					
+					Proud::HostID player_id; __msg >> player_id;
+					m_core->PostCheckReadMessage(__msg,RmiName_PlayerJoin);
+					
+			
+					if(m_enableNotifyCallFromStub && !m_internalUse)
+					{
+						::Proud::String parameterString;
+						
+						::Proud::AppendTextOut(parameterString,player_id);	
+						
+						NotifyCallFromStub(remote, (::Proud::RmiID)Rmi_PlayerJoin, 
+							RmiName_PlayerJoin,parameterString);
+			
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_PlayerJoin, 
+							RmiName_PlayerJoin, parameterString);
+			#endif
+					}
+					else if(!m_internalUse)
+					{
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_PlayerJoin, 
+							RmiName_PlayerJoin, _PNT(""));
+			#endif
+					}
+						
+					int64_t __t0 = 0;
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::BeforeRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_PlayerJoin;
+						summary.m_rmiName = RmiName_PlayerJoin;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						BeforeRmiInvocation(summary);
+			
+						__t0 = ::Proud::GetPreciseCurrentTimeMs();
+					}
+						
+					// Call this method.
+					bool __ret = PlayerJoin (remote,ctx , player_id );
+						
+					if(__ret==false)
+					{
+						// Error: RMI function that a user did not create has been called. 
+						m_core->ShowNotImplementedRmiWarning(RmiName_PlayerJoin);
+					}
+						
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::AfterRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_PlayerJoin;
+						summary.m_rmiName = RmiName_PlayerJoin;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						int64_t __t1;
+			
+						__t1 = ::Proud::GetPreciseCurrentTimeMs();
+			
+						summary.m_elapsedTime = (uint32_t)(__t1 - __t0);
+						AfterRmiInvocation(summary);
+					}
+				}
+				break;
+			case Rmi_PlayerLeave:
+				{
+					::Proud::RmiContext ctx;
+					ctx.m_rmiID = __rmiID;
+					ctx.m_sentFrom=pa.GetRemoteHostID();
+					ctx.m_relayed=pa.IsRelayed();
+					ctx.m_hostTag = hostTag;
+					ctx.m_encryptMode = pa.GetEncryptMode();
+					ctx.m_compressMode = pa.GetCompressMode();
+					
+					
+					Proud::HostID player_id; __msg >> player_id;
+					m_core->PostCheckReadMessage(__msg,RmiName_PlayerLeave);
+					
+			
+					if(m_enableNotifyCallFromStub && !m_internalUse)
+					{
+						::Proud::String parameterString;
+						
+						::Proud::AppendTextOut(parameterString,player_id);	
+						
+						NotifyCallFromStub(remote, (::Proud::RmiID)Rmi_PlayerLeave, 
+							RmiName_PlayerLeave,parameterString);
+			
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_PlayerLeave, 
+							RmiName_PlayerLeave, parameterString);
+			#endif
+					}
+					else if(!m_internalUse)
+					{
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_PlayerLeave, 
+							RmiName_PlayerLeave, _PNT(""));
+			#endif
+					}
+						
+					int64_t __t0 = 0;
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::BeforeRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_PlayerLeave;
+						summary.m_rmiName = RmiName_PlayerLeave;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						BeforeRmiInvocation(summary);
+			
+						__t0 = ::Proud::GetPreciseCurrentTimeMs();
+					}
+						
+					// Call this method.
+					bool __ret = PlayerLeave (remote,ctx , player_id );
+						
+					if(__ret==false)
+					{
+						// Error: RMI function that a user did not create has been called. 
+						m_core->ShowNotImplementedRmiWarning(RmiName_PlayerLeave);
+					}
+						
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::AfterRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_PlayerLeave;
+						summary.m_rmiName = RmiName_PlayerLeave;
 						summary.m_hostID = remote;
 						summary.m_hostTag = hostTag;
 						int64_t __t1;
@@ -133,11 +358,26 @@ __fail:
 		}
 	}
 	#ifdef USE_RMI_NAME_STRING
-	const PNTCHAR* Stub::RmiName_PlayerSnapshot =_PNT("PlayerSnapshot");
+	const PNTCHAR* Stub::RmiName_PlayerSnapshots =_PNT("PlayerSnapshots");
 	#else
-	const PNTCHAR* Stub::RmiName_PlayerSnapshot =_PNT("");
+	const PNTCHAR* Stub::RmiName_PlayerSnapshots =_PNT("");
 	#endif
-	const PNTCHAR* Stub::RmiName_First = RmiName_PlayerSnapshot;
+	#ifdef USE_RMI_NAME_STRING
+	const PNTCHAR* Stub::RmiName_JoinWorld =_PNT("JoinWorld");
+	#else
+	const PNTCHAR* Stub::RmiName_JoinWorld =_PNT("");
+	#endif
+	#ifdef USE_RMI_NAME_STRING
+	const PNTCHAR* Stub::RmiName_PlayerJoin =_PNT("PlayerJoin");
+	#else
+	const PNTCHAR* Stub::RmiName_PlayerJoin =_PNT("");
+	#endif
+	#ifdef USE_RMI_NAME_STRING
+	const PNTCHAR* Stub::RmiName_PlayerLeave =_PNT("PlayerLeave");
+	#else
+	const PNTCHAR* Stub::RmiName_PlayerLeave =_PNT("");
+	#endif
+	const PNTCHAR* Stub::RmiName_First = RmiName_PlayerSnapshots;
 
 }
 

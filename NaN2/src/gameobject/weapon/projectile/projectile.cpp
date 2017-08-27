@@ -9,13 +9,15 @@ namespace nan2 {
 
   Projectile::Projectile(const Vector2& position, const Vector2& size,
     int dir, float speed, int damage) : 
-  GameObject(GameObjectType::Projectile, true, true, false),
+  GameObject(GameObjectType::Projectile, true, false, false),
   placeable_(this, position, size),
   movable_(this),
   dir_(dir),
   speed_(speed), 
+  alive_time_(0),
   damage_(damage) {
-    placeable_.AddTargetLayer(Layer::StaticCollider);
+    placeable_.AddTargetLayer(Layer::STATIC_COLLIDER);
+    placeable_.AddTargetLayer(Layer::CHARACTER);
 
     AddComponent(&placeable_);
     AddComponent(&movable_);
@@ -27,9 +29,13 @@ namespace nan2 {
   }
 
   void Projectile::Update() {
-    int dt = Time::delta_time();
-    L_DEBUG << "[Projectile] " << movable_.position();
-    movable_.ContinuousMove252(dir_, 33 * speed_,
+    alive_time_ += Time::delta_time();
+    if (alive_time_ > 10 * 1000) {
+      World::instance()->RemoveGameObject(this);
+      return;
+    }
+    return;
+    movable_.ContinuousMove252(dir_, Time::f_delta_time() * speed_,
       [&](GameObject* go)-> bool {
       return true;
     },

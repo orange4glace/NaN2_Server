@@ -17,6 +17,7 @@ namespace nan2 {
     int dir_;
     int speed_;
     int damage_;
+    int alive_time_;
 
     int player_id_;
 

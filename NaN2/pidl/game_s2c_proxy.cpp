@@ -13,41 +13,140 @@ namespace GameS2C {
 
 
         
-	bool Proxy::PlayerSnapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::LocalCharacterSnapshot & local_character_snapshot, const std::vector<nan2::RemoteCharacterSnapshot> & remote_character_snapshot)	{
+	bool Proxy::PlayerSnapshots ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::LocalCharacterSnapshot & local_character_snapshot, const std::vector<nan2::RemoteCharacterSnapshot> & remote_character_snapshot)	{
 		::Proud::CMessage __msg;
 __msg.UseInternalBuffer();
 __msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
 
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_PlayerSnapshot;
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_PlayerSnapshots;
 __msg.Write(__msgid); 
 	
 __msg << local_character_snapshot;
 __msg << remote_character_snapshot;
 		
 		return RmiSend(&remote,1,rmiContext,__msg,
-			RmiName_PlayerSnapshot, (::Proud::RmiID)Rmi_PlayerSnapshot);
+			RmiName_PlayerSnapshots, (::Proud::RmiID)Rmi_PlayerSnapshots);
 	}
 
-	bool Proxy::PlayerSnapshot ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const nan2::LocalCharacterSnapshot & local_character_snapshot, const std::vector<nan2::RemoteCharacterSnapshot> & remote_character_snapshot)  	{
+	bool Proxy::PlayerSnapshots ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const nan2::LocalCharacterSnapshot & local_character_snapshot, const std::vector<nan2::RemoteCharacterSnapshot> & remote_character_snapshot)  	{
 		::Proud::CMessage __msg;
 __msg.UseInternalBuffer();
 __msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
 
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_PlayerSnapshot;
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_PlayerSnapshots;
 __msg.Write(__msgid); 
 	
 __msg << local_character_snapshot;
 __msg << remote_character_snapshot;
 		
 		return RmiSend(remotes,remoteCount,rmiContext,__msg,
-			RmiName_PlayerSnapshot, (::Proud::RmiID)Rmi_PlayerSnapshot);
+			RmiName_PlayerSnapshots, (::Proud::RmiID)Rmi_PlayerSnapshots);
+	}
+        
+	bool Proxy::JoinWorld ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const std::vector<Proud::HostID> & player_ids)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_JoinWorld;
+__msg.Write(__msgid); 
+	
+__msg << player_ids;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_JoinWorld, (::Proud::RmiID)Rmi_JoinWorld);
+	}
+
+	bool Proxy::JoinWorld ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const std::vector<Proud::HostID> & player_ids)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_JoinWorld;
+__msg.Write(__msgid); 
+	
+__msg << player_ids;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_JoinWorld, (::Proud::RmiID)Rmi_JoinWorld);
+	}
+        
+	bool Proxy::PlayerJoin ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID & player_id)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_PlayerJoin;
+__msg.Write(__msgid); 
+	
+__msg << player_id;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_PlayerJoin, (::Proud::RmiID)Rmi_PlayerJoin);
+	}
+
+	bool Proxy::PlayerJoin ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const Proud::HostID & player_id)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_PlayerJoin;
+__msg.Write(__msgid); 
+	
+__msg << player_id;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_PlayerJoin, (::Proud::RmiID)Rmi_PlayerJoin);
+	}
+        
+	bool Proxy::PlayerLeave ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID & player_id)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_PlayerLeave;
+__msg.Write(__msgid); 
+	
+__msg << player_id;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_PlayerLeave, (::Proud::RmiID)Rmi_PlayerLeave);
+	}
+
+	bool Proxy::PlayerLeave ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const Proud::HostID & player_id)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_PlayerLeave;
+__msg.Write(__msgid); 
+	
+__msg << player_id;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_PlayerLeave, (::Proud::RmiID)Rmi_PlayerLeave);
 	}
 #ifdef USE_RMI_NAME_STRING
-const PNTCHAR* Proxy::RmiName_PlayerSnapshot =_PNT("PlayerSnapshot");
+const PNTCHAR* Proxy::RmiName_PlayerSnapshots =_PNT("PlayerSnapshots");
 #else
-const PNTCHAR* Proxy::RmiName_PlayerSnapshot =_PNT("");
+const PNTCHAR* Proxy::RmiName_PlayerSnapshots =_PNT("");
 #endif
-const PNTCHAR* Proxy::RmiName_First = RmiName_PlayerSnapshot;
+#ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_JoinWorld =_PNT("JoinWorld");
+#else
+const PNTCHAR* Proxy::RmiName_JoinWorld =_PNT("");
+#endif
+#ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_PlayerJoin =_PNT("PlayerJoin");
+#else
+const PNTCHAR* Proxy::RmiName_PlayerJoin =_PNT("");
+#endif
+#ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_PlayerLeave =_PNT("PlayerLeave");
+#else
+const PNTCHAR* Proxy::RmiName_PlayerLeave =_PNT("");
+#endif
+const PNTCHAR* Proxy::RmiName_First = RmiName_PlayerSnapshots;
 
 }
 

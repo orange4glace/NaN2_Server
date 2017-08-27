@@ -6,7 +6,8 @@ namespace nan2 {
   enum StagingState {
     NONE,
     STAGING,
-    STAGED
+    STAGED,
+    REMOVING
   };
 }
 

@@ -6,7 +6,8 @@ namespace nan2 {
 
   namespace Layer {
     enum Layer {
-      StaticCollider
+      STATIC_COLLIDER,
+      CHARACTER
     };
   }
 

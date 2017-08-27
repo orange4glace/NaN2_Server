@@ -10,7 +10,7 @@ namespace Proud {
   }
 
   CMessage& operator << (CMessage& a, const RemoteCharacterSnapshot& packet) {
-    a << packet.pos_x << packet.pos_y << packet.hp;
+    a << packet.player_id << packet.pos_x << packet.pos_y << packet.hp;
     return a;
   }
 

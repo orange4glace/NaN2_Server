@@ -42,8 +42,7 @@ namespace nan2 {
 
   template <class T>
   void Recorder<T>::SaveCurrentRecord() {
-    auto record = saveCurrentRecord();
-    records_.emplace_back(std::pair<int, T>{ Time::current_time(), record });
+    records_.emplace_back(std::pair<int, T>{ Time::current_time(), saveCurrentRecord() });
   }
 
   template <class T>

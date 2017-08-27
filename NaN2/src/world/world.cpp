@@ -1,6 +1,7 @@
 // world.cpp
 #include "world/world.h"
 
+#include "world_time.h"
 #include "world/player.h"
 #include "network/proud_server.h"
 
@@ -28,14 +29,18 @@ namespace nan2 {
   }
 
   void World::Update(int dt) {
-    StageGameObjects();
+    Time::delta_time(dt);
+
+    stageGameObjects();
     for(auto const &entry : updatables_) {
-      entry.second->Update();
+      auto object = entry.second;
+      if (object->staging_state() == StagingState::REMOVING) continue;
+      object->Update();
     }
 
     // Check snapshot send timer
     snapshot_send_timer_ += dt;
-    if (snapshot_send_timer_ > 30) {
+    if (snapshot_send_timer_ > 100) {
       snapshot_send_timer_ = 0;
       ProudServer::instance()->IteratePlayers([](Player* player) -> bool {
         player->SendSnapshotsToRemote();
@@ -46,6 +51,7 @@ namespace nan2 {
     for (auto const &entry : rewindables_) {
       entry.second->RecordCurrent();
     }
+    removeGameObjects();
   }
 
   void World::FixedUpdate(int dt) {
@@ -78,17 +84,12 @@ namespace nan2 {
       stagings_.erase(object->internal_id());
     }
     else if (object->staging_state() == StagingState::STAGED) {
-      game_objects_.erase(object->internal_id());
-      if (object->updatable())
-        updatables_.erase(object->internal_id());
-      if (object->rewindable())
-        rewindables_.erase(object->internal_id());
+      object->set_staging_state(StagingState::REMOVING);
+      removings_.emplace_back(object);
     }
-    object->OnDestroy();
-    delete object;
   }
 
-  void World::StageGameObjects() {
+  void World::stageGameObjects() {
     for (auto& kv : stagings_) {
       auto object = kv.second;
       game_objects_.insert({object->internal_id(), object});
@@ -99,6 +100,19 @@ namespace nan2 {
       object->set_staging_state(StagingState::STAGED);
     }
     stagings_.clear();
+  }
+
+  void World::removeGameObjects() {
+    for (auto& object : removings_) {
+      game_objects_.erase(object->internal_id());
+      if (object->updatable())
+        updatables_.erase(object->internal_id());
+      if (object->rewindable())
+        rewindables_.erase(object->internal_id());
+      object->OnDestroy();
+      delete object;
+    }
+    removings_.clear();
   }
 
   int World::AcquireInternalID() {

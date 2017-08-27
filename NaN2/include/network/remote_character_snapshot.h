@@ -10,6 +10,7 @@ namespace nan2 {
 
   struct RemoteCharacterSnapshot {
 
+    Proud::HostID player_id;
     float pos_x;
     float pos_y;
     uint8_t hp;

@@ -20,8 +20,9 @@ namespace nan2 {
 
   public:
 
-    static void delta_time(float dt);
+    static void delta_time(int mdt);
     static int delta_time();
+    static float f_delta_time();
     static void current_time(int t);
     static int current_time();
     static void fixed_delta_time(int t);

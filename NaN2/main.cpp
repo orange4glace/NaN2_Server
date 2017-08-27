@@ -24,9 +24,8 @@ int main() {
   while (1) {
     std::chrono::high_resolution_clock::time_point cur_system_time(std::chrono::high_resolution_clock::now());
     std::chrono::duration<double, std::milli> time_span = cur_system_time - last_system_time;
-    server->Lock();
+    server->Process();
     world->Update(time_span.count());
-    server->Unlock();
     std::chrono::high_resolution_clock::time_point after_cur_system_time(std::chrono::high_resolution_clock::now());
     std::chrono::duration<double, std::milli> aft_time_span = after_cur_system_time - cur_system_time;
     int dt = aft_time_span.count();

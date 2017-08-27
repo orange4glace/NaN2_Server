@@ -9,10 +9,16 @@ namespace GameS2C {
 
 	::Proud::RmiID g_RmiIDList[] = {
                
-		Rmi_PlayerSnapshot,
+		Rmi_PlayerSnapshots,
+               
+		Rmi_JoinWorld,
+               
+		Rmi_PlayerJoin,
+               
+		Rmi_PlayerLeave,
 	};
 
-	int g_RmiIDListCount = 1;
+	int g_RmiIDListCount = 4;
 
 }
 

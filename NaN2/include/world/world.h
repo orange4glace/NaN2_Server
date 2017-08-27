@@ -41,7 +41,8 @@ namespace nan2 {
         std::map<int, GameObject*> stagings_;
         std::vector<GameObject*> removings_;
 
-        void StageGameObjects();
+        void stageGameObjects();
+        void removeGameObjects();
 
         int AcquireInternalID();
         unsigned short AcquireNetworkID();

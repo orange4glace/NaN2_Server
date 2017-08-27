@@ -13,7 +13,7 @@ namespace nan2 {
   GameObject(GameObjectType::Character, true, true, false),
   player_(player),
   living_(this),
-  placeable_(this, Vector2(-20, 5.0f), Vector2(10, 10)),
+  placeable_(this, Vector2(-20, 5.0f), Vector2(16, 20)),
   movable_(this),
   recorder_(this),
   speed_(30.0f) {
@@ -23,6 +23,12 @@ namespace nan2 {
     AddComponent(&placeable_);
     AddComponent(&movable_);
     AddComponent(&recorder_);
+
+    placeable_.AddLayer(Layer::CHARACTER);
+    placeable_.AddTargetLayer(Layer::STATIC_COLLIDER);
+    placeable_.AddTargetLayer(Layer::CHARACTER);
+
+    registerRecorder(static_cast<RecorderInterface*>(&recorder_));
   }
 
   Player* const Character::player() {
@@ -47,6 +53,11 @@ namespace nan2 {
         [](GameObject* object) -> bool {
         return true;
       });
+      if (input.fire_dir < 252) {
+        weapon_->set_dir(input.fire_dir);
+        weapon_->set_position(movable_.position() +  weapon_->CalculateCharacterWeaponPivot());
+        weapon_->Fire1();
+      }
       last_acked_input_sequence_ = input.sequence;
       input_queue_.pop();
     }
@@ -89,6 +100,7 @@ namespace nan2 {
   const RemoteCharacterSnapshot Character::GetRemoteCharacterSnapshot() const {
     auto& pos = placeable_.position();
     return{
+      player_->id(),
       pos.x(),
       pos.y(),
       (uint8_t)living_.hp()

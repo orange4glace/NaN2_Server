@@ -1,6 +1,8 @@
 // player_input_packet.cpp
 #include "network/player_input_packet.h"
 
+#include "logger\logger.h"
+
 namespace Proud {
   using namespace nan2;
 

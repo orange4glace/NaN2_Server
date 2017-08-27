@@ -1,5 +1,10 @@
+rename cs(std::vector<Proud::HostID>, System.Collections.Generic.List<Nettention.Proud.HostID>);
 rename cs(std::vector<nan2::RemoteCharacterSnapshot>, System.Collections.Generic.List<nan2.RemoteCharacterSnapshot>);
+rename cs(Proud::HostID, Nettention.Proud.HostID);
 
 [marshaler(cs)=nan2.ProudMarshaler] global GameS2C 6000 {
 	PlayerSnapshots([in] nan2::LocalCharacterSnapshot local_character_snapshot, [in] std::vector<nan2::RemoteCharacterSnapshot> remote_character_snapshot);
+	JoinWorld([in] std::vector<Proud::HostID> player_ids);
+	PlayerJoin([in] Proud::HostID player_id);
+	PlayerLeave([in] Proud::HostID player_id);
 }

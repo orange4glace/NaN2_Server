@@ -5,7 +5,9 @@ namespace nan2 {
 
   Placeable::Placeable(GameObject* game_object, const Vector2& position, const Vector2& size) :
   Component(game_object),
-  aabb_(position, size) {
+  aabb_(position, size),
+  layermask_(0),
+  target_layermask_(0) {
   }
 
   ComponentType Placeable::component_type() {

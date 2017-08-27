@@ -30,7 +30,8 @@ namespace nan2 {
 
   void Player::SendSnapshotsToRemote() const {
     std::vector<RemoteCharacterSnapshot> remotes;
-    ProudServer::instance()->IteratePlayers([&remotes](Player* player) -> bool {
+    ProudServer::instance()->IteratePlayers([&](Player* player) -> bool {
+      if (player->id() == id_) return true;
       remotes.emplace_back(player->character()->GetRemoteCharacterSnapshot());
       return true;
     });

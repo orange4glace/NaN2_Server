@@ -37,6 +37,10 @@ namespace nan2 {
     return nullptr;
   }
 
+  void GameObject::registerRecorder(RecorderInterface* recorder) {
+    recorder_ = recorder;
+  }
+
   void GameObject::Rewind(int time) {
     recorder_->Rewind(time);
   }
