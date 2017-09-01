@@ -23,6 +23,7 @@ namespace nan2 {
         Proud::HostID id() const;
 
         void SendSnapshotsToRemote() const;
+        void CleanSnapshot();
 
         int GetRecentPing();
 

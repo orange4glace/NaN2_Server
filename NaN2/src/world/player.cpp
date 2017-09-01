@@ -37,6 +37,10 @@ namespace nan2 {
     });
     ProudServer::instance()->SendCharacterSnapshots(this, character_->GetLocalCharacterSnapshot(), remotes);
   }
+  
+  void Player::CleanSnapshot() {
+    character_->CleanSnapshot();
+  }
 
   int Player::GetRecentPing() {
     auto ping = ProudServer::instance()->GetPlayerPing(this);

@@ -12,11 +12,11 @@ namespace nan2 {
   Character::Character(Player* player) : 
   GameObject(GameObjectType::Character, true, true, false),
   player_(player),
-  living_(this),
-  placeable_(this, Vector2(-20, 5.0f), Vector2(16, 20)),
+  living_(this, 30),
+  placeable_(this, Vector2(0, 0), Vector2(8, 20), Vector2(0, 3)),
   movable_(this),
   recorder_(this),
-  speed_(30.0f) {
+  speed_(60.0f) {
     weapon_ = WeaponFactory::CreateProjectileWeapon(this);
 
     AddComponent(&living_);
@@ -56,19 +56,19 @@ namespace nan2 {
       if (input.fire_dir < 252) {
         weapon_->set_dir(input.fire_dir);
         weapon_->set_position(movable_.position() +  weapon_->CalculateCharacterWeaponPivot());
-        weapon_->Fire1();
+        bool fired = weapon_->Fire1();
+
+        if (fired)
+          weapon_fire_snapshots_.push_back({
+            movable_.position().x(),
+            movable_.position().y(),
+            input.fire_dir,
+            Time::current_time()
+        });
       }
       last_acked_input_sequence_ = input.sequence;
       input_queue_.pop();
     }
-  }
-
-  void Character::Rewind(int time) {
-
-  }
-
-  void Character::Restore() {
-
   }
 
   void Character::AddInput(const PlayerInputPacket& packet) {
@@ -103,8 +103,13 @@ namespace nan2 {
       player_->id(),
       pos.x(),
       pos.y(),
-      (uint8_t)living_.hp()
+      (uint8_t)living_.hp(),
+      weapon_fire_snapshots_
     };
+  }
+
+  void Character::CleanSnapshot() {
+    weapon_fire_snapshots_.clear();
   }
 
 }

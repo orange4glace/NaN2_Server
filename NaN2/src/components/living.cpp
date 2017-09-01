@@ -3,8 +3,9 @@
 
 namespace nan2 {
 
-  Living::Living(GameObject* game_object) :
-  Component(game_object) {
+  Living::Living(GameObject* game_object, int hp) :
+  Component(game_object),
+  hp_(hp) {
   }
 
   ComponentType Living::component_type() {

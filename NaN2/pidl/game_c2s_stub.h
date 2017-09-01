@@ -21,15 +21,15 @@ namespace GameC2S {
 	{
 	public:
                
-		virtual bool PlayerInput ( ::Proud::HostID, ::Proud::RmiContext& , const nan2::PlayerInputPacket & )		{ 
+		virtual bool PlayerInput ( ::Proud::HostID, ::Proud::RmiContext& , const nan2::PlayerInputPacket  & )		{ 
 			return false;
 		} 
 
-#define DECRMI_GameC2S_PlayerInput bool PlayerInput ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::PlayerInputPacket & player_input_packet) PN_OVERRIDE
+#define DECRMI_GameC2S_PlayerInput bool PlayerInput ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::PlayerInputPacket  & player_input_packet) PN_OVERRIDE
 
-#define DEFRMI_GameC2S_PlayerInput(DerivedClass) bool DerivedClass::PlayerInput ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::PlayerInputPacket & player_input_packet)
-#define CALL_GameC2S_PlayerInput PlayerInput ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::PlayerInputPacket & player_input_packet)
-#define PARAM_GameC2S_PlayerInput ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::PlayerInputPacket & player_input_packet)
+#define DEFRMI_GameC2S_PlayerInput(DerivedClass) bool DerivedClass::PlayerInput ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::PlayerInputPacket  & player_input_packet)
+#define CALL_GameC2S_PlayerInput PlayerInput ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::PlayerInputPacket  & player_input_packet)
+#define PARAM_GameC2S_PlayerInput ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::PlayerInputPacket  & player_input_packet)
  
 		virtual bool ProcessReceivedMessage(::Proud::CReceivedMessage &pa, void* hostTag) PN_OVERRIDE;
 		static const PNTCHAR* RmiName_PlayerInput;
@@ -44,8 +44,8 @@ namespace GameC2S {
 	{
 	public:
                
-		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const nan2::PlayerInputPacket & ) > PlayerInput_Function;
-		virtual bool PlayerInput ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::PlayerInputPacket & player_input_packet) 
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const nan2::PlayerInputPacket  & ) > PlayerInput_Function;
+		virtual bool PlayerInput ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::PlayerInputPacket  & player_input_packet) 
 		{ 
 			if (PlayerInput_Function==nullptr) 
 				return true; 

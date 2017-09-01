@@ -11,6 +11,8 @@ namespace nan2 {
     Vector2 position;
 
     static CharacterRecord Interpolate(const CharacterRecord& a, const CharacterRecord& b, float t);
+
+    friend std::ostream& operator<<(std::ostream& os, const CharacterRecord& v);
   };
 
 }

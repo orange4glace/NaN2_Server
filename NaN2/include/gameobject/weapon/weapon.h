@@ -3,6 +3,7 @@
 #define WEAPON_H_
 
 #include "../game_object.h"
+#include "../../network/weapon_fire_snapshot.h"
 
 #include <nan2/math/vector2.h>
 
@@ -20,13 +21,15 @@ namespace nan2 {
     int dir_;
     Vector2 position_;
 
+    std::vector<WeaponFireSnapshot> fire_snapshots_;
+
   public:
     Weapon(Character* character);
 
     virtual void Update() {};
 
-    virtual void Fire1() {};
-    virtual void Fire2() {};
+    virtual bool Fire1();
+    virtual bool Fire2();
 
     virtual Vector2 CalculateCharacterWeaponPivot() const = 0;
 

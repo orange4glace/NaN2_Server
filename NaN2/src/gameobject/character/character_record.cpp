@@ -11,4 +11,8 @@ namespace nan2 {
     };
   }
 
+  std::ostream& operator<<(std::ostream& os, const CharacterRecord& record) {
+    os << "CharacterRecord(" << record.position << ", " << record.hp << ") ";
+    return os;
+  }
 }

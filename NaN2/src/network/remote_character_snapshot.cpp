@@ -1,6 +1,8 @@
 // remote_character_snapshot.cpp
 #include "network/remote_character_snapshot.h"
 
+#include "network/collection_marshaler.h"
+
 namespace Proud {
   using namespace nan2;
 
@@ -10,7 +12,7 @@ namespace Proud {
   }
 
   CMessage& operator << (CMessage& a, const RemoteCharacterSnapshot& packet) {
-    a << packet.player_id << packet.pos_x << packet.pos_y << packet.hp;
+    a << packet.player_id << packet.pos_x << packet.pos_y << packet.hp << packet.weapon_fire_snapshots;
     return a;
   }
 

@@ -27,7 +27,7 @@ namespace nan2 {
 
     void Update() override;
 
-    void Fire1() override;
+    bool Fire1() override;
 
     Vector2 CalculateCharacterWeaponPivot() const override;
 

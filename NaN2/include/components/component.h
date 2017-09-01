@@ -4,6 +4,8 @@
 
 #include "component_type.h"
 
+#include "logger/logger.h"
+
 namespace nan2 {
 
   // Forward declaration

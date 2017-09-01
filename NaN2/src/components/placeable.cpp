@@ -3,9 +3,11 @@
 
 namespace nan2 {
 
-  Placeable::Placeable(GameObject* game_object, const Vector2& position, const Vector2& size) :
+  Placeable::Placeable(GameObject* game_object, const Vector2& position, const Vector2& size, const Vector2& offset) :
   Component(game_object),
+  position_(position + offset),
   aabb_(position, size),
+  offset_(offset),
   layermask_(0),
   target_layermask_(0) {
   }
@@ -15,15 +17,17 @@ namespace nan2 {
   }
 
   void Placeable::set_position(const Vector2& position) {
-    aabb_.set_center(position);
+    position_ = position;
+    aabb_.set_center(position + offset_);
   }
 
   void Placeable::set_position(float x, float y) {
-    aabb_.set_center(Vector2(x, y));
+    position_ = Vector2(x, y);
+    aabb_.set_center(Vector2(x, y) + offset_);
   }
 
   const Vector2& Placeable::position() const {
-    return aabb_.center();
+    return position_;
   }
 
   void Placeable::set_size(const Vector2& val) {

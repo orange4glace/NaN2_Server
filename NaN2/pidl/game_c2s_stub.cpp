@@ -46,7 +46,6 @@ namespace GameC2S {
 			case Rmi_PlayerInput:
 				{
 					::Proud::RmiContext ctx;
-					ctx.m_rmiID = __rmiID;
 					ctx.m_sentFrom=pa.GetRemoteHostID();
 					ctx.m_relayed=pa.IsRelayed();
 					ctx.m_hostTag = hostTag;

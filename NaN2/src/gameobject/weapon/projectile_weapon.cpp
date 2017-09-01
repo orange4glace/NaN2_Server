@@ -20,14 +20,16 @@ namespace nan2 {
 
   }
 
-  void ProjectileWeapon::Fire1() {
+  bool ProjectileWeapon::Fire1() {
     Projectile* projectile = new Projectile(projectile_);
     Vector2 offset = MathHelper::instance().RotateVector252(fire_point_, MathHelper::instance().biased_direction(dir_));
     offset.set_x(offset.x() * MathHelper::instance().is_right_direction(dir_));
     Vector2 fire_point = position_ + offset;
     projectile->set_position(fire_point);
     projectile->set_dir(dir_);
+    projectile->set_rewind_time(character_->player()->GetRecentPing());
     World::instance()->AddGameObject(projectile);
+    return true;
   }
 
   Vector2 ProjectileWeapon::CalculateCharacterWeaponPivot() const {

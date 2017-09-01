@@ -19,7 +19,7 @@ namespace nan2 {
     void CallZeroCallbacks();
 
   public:
-    Living(GameObject* go);
+    Living(GameObject* go, int hp);
 
     static ComponentType component_type();
     inline ComponentType type() const override {

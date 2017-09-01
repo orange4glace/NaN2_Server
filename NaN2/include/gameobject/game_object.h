@@ -7,6 +7,8 @@
 #include "game_object_base.h"
 #include "../components/recorder_interface.h"
 
+#include "logger/logger.h"
+
 #include <vector>
 
 namespace nan2 {

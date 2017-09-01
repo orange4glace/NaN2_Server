@@ -30,7 +30,7 @@ namespace nan2 {
   template <typename Lambda1, typename Lambda2>
   void Movable::DiscreteMove252(int dir, float dd, Lambda1&& condition, Lambda2&& collisionCallback, int simulation_time) {
     Vector2 dv = MathHelper::instance().normal_dir_252(dir) * dd;
-    DiscreteMove(dv.x(), dv.y(), condition, collisionCallback);
+    DiscreteMove(dv.x(), dv.y(), condition, collisionCallback, simulation_time);
   }
 
   template <typename Lambda1, typename Lambda2>
@@ -56,7 +56,8 @@ namespace nan2 {
       Vector2 dv = AABB::SimpleAABB(placeable_->aabb(), t_placeable->aabb(), collided);
       placeable_->set_position(placeable_->position() + dv);
 
-      go->Restore();
+      if (go->rewindable() && simulation_time >= 0)
+        go->Restore();
       if (!collided) return true;
 
       return collisionCallback(go);
@@ -66,7 +67,7 @@ namespace nan2 {
   template <typename Lambda1, typename Lambda2>
   void Movable::ContinuousMove252(int dir, float dist, Lambda1&& condition, Lambda2&& collisionCallback, int simulation_time) {
     Vector2 dv = MathHelper::instance().normal_dir_252(dir) * dist;
-    ContinuousMove(dv.x(), dv.y(), condition, collisionCallback);
+    ContinuousMove(dv.x(), dv.y(), condition, collisionCallback, simulation_time);
   }
 
   template <typename Lambda1, typename Lambda2>
@@ -82,12 +83,14 @@ namespace nan2 {
 
       if (!placeable_->HasTargetLayers(t_placeable->layermask())) return true;
 
-      if (go->rewindable() && simulation_time >= 0)
+      if (go->rewindable() && simulation_time >= 0) {
         go->Rewind(simulation_time);
+      }
 
       if (!condition(go)) {
-        if (go->rewindable() && simulation_time >= 0)
+        if (go->rewindable() && simulation_time >= 0) {
           go->Restore();
+        }
         return true;
       }
 
@@ -97,7 +100,9 @@ namespace nan2 {
         dd *= r;
         coll_go = go;
       }
-      go->Restore();
+      if (go->rewindable() && simulation_time >= 0) {
+        go->Restore();
+      }
       return true;
     });
     placeable_->set_position(placeable_->position() + dd);

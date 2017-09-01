@@ -12,6 +12,13 @@ namespace nan2 {
     RecorderInterface(GameObject* go);
 
   public:
+    inline static ComponentType component_type() {
+      return ComponentType::Recorder;
+    }
+    inline ComponentType type() const override {
+      return ComponentType::Recorder;
+    }
+
     virtual void SaveCurrentRecord() = 0;
     virtual void Rewind(int time) = 0;
     virtual void Restore() = 0;

@@ -4,6 +4,8 @@
 
 #include <ProudNetServer.h>
 
+#include "weapon_fire_snapshot.h"
+
 #include <stdint.h>
 
 namespace nan2 {
@@ -14,6 +16,8 @@ namespace nan2 {
     float pos_x;
     float pos_y;
     uint8_t hp;
+
+    std::vector<WeaponFireSnapshot> weapon_fire_snapshots;
 
   };
 

@@ -5,6 +5,8 @@
 #include "world/player.h"
 #include "network/proud_server.h"
 
+#include "gameobject/static_collider.h"
+
 #include "logger/logger.h"
 
 namespace nan2 {
@@ -26,6 +28,9 @@ namespace nan2 {
     auto serv = ProudServer::instance();
     // Pool network ids
     for (int i = 1; i < 65536; i ++) network_id_pool_.push(i);
+
+    StaticCollider* sc = new StaticCollider(Vector2(50, 0), Vector2(20, 20));
+    AddGameObject(sc);
   }
 
   void World::Update(int dt) {
@@ -40,10 +45,14 @@ namespace nan2 {
 
     // Check snapshot send timer
     snapshot_send_timer_ += dt;
-    if (snapshot_send_timer_ > 100) {
+    if (snapshot_send_timer_ > 28) {
       snapshot_send_timer_ = 0;
       ProudServer::instance()->IteratePlayers([](Player* player) -> bool {
         player->SendSnapshotsToRemote();
+        return true;
+      });
+      ProudServer::instance()->IteratePlayers([](Player* player) -> bool {
+        player->CleanSnapshot();
         return true;
       });
     }
@@ -92,6 +101,7 @@ namespace nan2 {
   void World::stageGameObjects() {
     for (auto& kv : stagings_) {
       auto object = kv.second;
+      assert(!object->rewindable() || (object->rewindable() && object->GetComponent<RecorderInterface>() != nullptr));
       game_objects_.insert({object->internal_id(), object});
       if (object->updatable())
         updatables_.insert({object->internal_id(), object});

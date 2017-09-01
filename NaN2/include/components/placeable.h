@@ -13,12 +13,14 @@ namespace nan2 {
   class Placeable : public Component {
 
   private:
+    Vector2 position_;
     AABB aabb_;
+    Vector2 offset_;
     int layermask_;
     int target_layermask_;
 
   public:
-    Placeable(GameObject* go, const Vector2& position, const Vector2& size);
+    Placeable(GameObject* go, const Vector2& position, const Vector2& size, const Vector2& offset = Vector2(0, 0));
 
     static ComponentType component_type();
     inline ComponentType type() const override {

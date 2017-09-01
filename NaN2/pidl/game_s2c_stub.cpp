@@ -46,7 +46,6 @@ namespace GameS2C {
 			case Rmi_PlayerSnapshots:
 				{
 					::Proud::RmiContext ctx;
-					ctx.m_rmiID = __rmiID;
 					ctx.m_sentFrom=pa.GetRemoteHostID();
 					ctx.m_relayed=pa.IsRelayed();
 					ctx.m_hostTag = hostTag;
@@ -125,7 +124,6 @@ namespace GameS2C {
 			case Rmi_JoinWorld:
 				{
 					::Proud::RmiContext ctx;
-					ctx.m_rmiID = __rmiID;
 					ctx.m_sentFrom=pa.GetRemoteHostID();
 					ctx.m_relayed=pa.IsRelayed();
 					ctx.m_hostTag = hostTag;
@@ -200,7 +198,6 @@ namespace GameS2C {
 			case Rmi_PlayerJoin:
 				{
 					::Proud::RmiContext ctx;
-					ctx.m_rmiID = __rmiID;
 					ctx.m_sentFrom=pa.GetRemoteHostID();
 					ctx.m_relayed=pa.IsRelayed();
 					ctx.m_hostTag = hostTag;
@@ -275,7 +272,6 @@ namespace GameS2C {
 			case Rmi_PlayerLeave:
 				{
 					::Proud::RmiContext ctx;
-					ctx.m_rmiID = __rmiID;
 					ctx.m_sentFrom=pa.GetRemoteHostID();
 					ctx.m_relayed=pa.IsRelayed();
 					ctx.m_hostTag = hostTag;

@@ -2,6 +2,8 @@
 
 #include "world_time.h"
 
+#include "logger/logger.h"
+
 namespace nan2 {
 
   template <class T>
@@ -19,7 +21,7 @@ namespace nan2 {
     if (records_.size() == 0) return T();
     int st = 0, ed = records_.size() - 1;
     int mid;
-    while (st < ed) {
+    while (st <= ed) {
       mid = (st + ed) / 2;
       auto& pair = records_[mid];
       if (pair.first < time)

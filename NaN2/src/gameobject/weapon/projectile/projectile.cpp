@@ -34,7 +34,6 @@ namespace nan2 {
       World::instance()->RemoveGameObject(this);
       return;
     }
-    return;
     movable_.ContinuousMove252(dir_, Time::f_delta_time() * speed_,
       [&](GameObject* go)-> bool {
       return true;
@@ -45,7 +44,7 @@ namespace nan2 {
         living->Subtract(damage_);
       }
       return true;
-    });
+    }, Time::current_time() - 100);
   }
 
   void Projectile::AddTargetLayer(int layer) {

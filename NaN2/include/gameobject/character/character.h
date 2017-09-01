@@ -35,6 +35,7 @@ namespace nan2 {
     Weapon* weapon_;
 
     std::queue<PlayerInputPacket> input_queue_;
+    std::vector<WeaponFireSnapshot> weapon_fire_snapshots_;
 
     float speed_;
 
@@ -50,15 +51,13 @@ namespace nan2 {
     void FixedUpdate();
     void Update();
 
-    void Rewind(int time);
-    void Restore();
-
     void AddInput(const PlayerInputPacket& packet);
      
     const CharacterRecord GetRecord() const;
     void ApplyRecord(const CharacterRecord& record);
     const LocalCharacterSnapshot GetLocalCharacterSnapshot() const;
     const RemoteCharacterSnapshot GetRemoteCharacterSnapshot() const;
+    void CleanSnapshot();
     
   };
 

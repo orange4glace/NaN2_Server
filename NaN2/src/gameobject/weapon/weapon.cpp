@@ -10,6 +10,14 @@ namespace nan2 {
   character_(character) {
   }
 
+  bool Weapon::Fire1() {
+    return false;
+  }
+
+  bool Weapon::Fire2() {
+    return false;
+  }
+
   void Weapon::set_position(const Vector2& val) {
     position_ = val;
   }

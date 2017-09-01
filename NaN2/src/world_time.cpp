@@ -17,6 +17,7 @@ namespace nan2 {
     // dt += Time::extra_delta_time_;
     Time::delta_time_ = mdt / 1000.f;
     Time::idelta_time_ = mdt;
+    Time::current_time_ += mdt;
     // Time::extra_delta_time_ = 0;
   }
   int Time::delta_time() {

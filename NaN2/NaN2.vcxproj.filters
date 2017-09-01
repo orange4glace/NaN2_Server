@@ -114,6 +114,9 @@
     <ClInclude Include="include\gameobject\weapon\weapon_factory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\network\weapon_fire_snapshot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\components\component.cpp">
@@ -183,6 +186,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\gameobject\weapon\weapon_factory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\network\weapon_fire_snapshot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
