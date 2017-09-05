@@ -59,20 +59,20 @@ namespace nan2 {
   Vector2 AABB::ClosestPointOnBoundsToPoint(const Vector2& p) const {
       Vector2 b_ll = center_ - size_ / 2;
       Vector2 b_ur = center_ + size_ / 2;
-      float minDist = abs(p.x() - b_ll.x());
+      float minDist = std::abs(p.x() - b_ll.x());
       Vector2 ret(b_ll.x(), p.y());
-      if (abs(b_ur.x() - p.x()) < minDist) {
-          minDist = abs(b_ur.x() - p.x());
+      if (std::abs(b_ur.x() - p.x()) < minDist) {
+          minDist = std::abs(b_ur.x() - p.x());
           ret.set_x(b_ur.x());
           ret.set_y(p.y());
       }
-      if (abs(b_ur.y() - p.y()) < minDist) {
-          minDist = abs(b_ur.y() - p.y());
+      if (std::abs(b_ur.y() - p.y()) < minDist) {
+          minDist = std::abs(b_ur.y() - p.y());
           ret.set_x(p.x());
           ret.set_y(b_ur.y());
       }
-      if (abs(b_ll.y() - p.y()) < minDist) {
-          minDist = abs(b_ll.y() - p.y());
+      if (std::abs(b_ll.y() - p.y()) < minDist) {
+          minDist = std::abs(b_ll.y() - p.y());
           ret.set_x(p.x());
           ret.set_y(b_ll.y());
       }

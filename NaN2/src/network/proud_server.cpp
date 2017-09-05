@@ -45,6 +45,7 @@ namespace nan2 {
     Proud::Guid g_Version = Proud::Guid(guid);
     server_param.m_protocolVersion = g_Version;
     server_param.m_tcpPorts.Add(33334);
+    server_param.m_localNicAddr = Proud::String("192.168.0.23");
     server_->SetEventSink(this);
     server_->AttachProxy(&s2c_proxy_);
     server_->AttachStub((GameC2S::Stub*)this);
@@ -71,14 +72,15 @@ namespace nan2 {
   }
 
   void ProudServer::OnClientJoin(Proud::CNetClientInfo* client_info) {
+    L_DEBUG << "Client joined.";
     for (auto& pair : players_) {
-      auto p = pair.second;
+      auto p = pair.GetSecond();
       s2c_proxy_.PlayerJoin(p->id(), Proud::RmiContext::ReliableSend, client_info->m_HostID);
     }
 
     std::vector<Proud::HostID> player_ids;
     for (auto& player : players_)
-      player_ids.push_back(player.second->id());
+      player_ids.push_back(player.GetSecond()->id());
     s2c_proxy_.JoinWorld(client_info->m_HostID, Proud::RmiContext::ReliableSend, player_ids);
 
     Player* player = new Player(client_info->m_HostID);
@@ -91,7 +93,7 @@ namespace nan2 {
     players_.Remove(player->id());
 
     for (auto& pair : players_) {
-      auto p = pair.second;
+      auto p = pair.GetSecond();
       s2c_proxy_.PlayerLeave(p->id(), Proud::RmiContext::ReliableSend, player->id());
     }
     L_DEBUG << "Player " << player->id() << " has left. Current Players = " << players_.size();
