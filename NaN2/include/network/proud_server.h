@@ -89,7 +89,7 @@ namespace nan2 {
     template<typename Lambda>
     void IteratePlayers(Lambda&& lambda) {
       for (auto const &entry : players_) {
-        std::forward<Lambda>(lambda)(entry.second);
+        std::forward<Lambda>(lambda)(entry.GetSecond());
       }
     }
   };

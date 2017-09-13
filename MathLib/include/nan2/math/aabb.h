@@ -4,7 +4,7 @@
 
 #include "vector2.h"
 
-#include <math.h>
+#include <cmath>
 
 namespace nan2 {
 

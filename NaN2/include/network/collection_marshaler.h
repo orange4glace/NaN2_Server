@@ -32,7 +32,7 @@ namespace Proud
   {
     int size = (int)b.size();
     a << size;
-    for (std::vector<elem>::const_iterator i = b.begin(); i != b.end(); i++)
+    for (typename std::vector<elem>::const_iterator i = b.begin(); i != b.end(); i++)
     {
       a << (*i);
     }
@@ -41,7 +41,7 @@ namespace Proud
   template<typename elem>
   inline void AppendTextOut(String &a, std::vector<elem> &b)
   {
-    a += L"<vector>";
+    // a += L"<vector>";
   }
 }
 

@@ -17,8 +17,8 @@ namespace Proud {
   }
 
   void AppendTextOut(String& str, const RemoteCharacterSnapshot& packet) {
-    String f;
-    f.Format(L"{move_dir=%u, fire_dir=%u}", packet.pos_x, packet.pos_y, packet.hp);
-    str += f;
+    // String f;
+    // f.Format(L"{move_dir=%u, fire_dir=%u}", packet.pos_x, packet.pos_y, packet.hp);
+    // str += f;
   }
 }

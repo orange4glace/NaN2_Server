@@ -3,7 +3,7 @@
 
 #include "world_time.h"
 
-#include "logger\logger.h"
+#include "logger/logger.h"
 
 namespace Proud {
   using namespace nan2;
@@ -19,8 +19,8 @@ namespace Proud {
   }
 
   void AppendTextOut(String& str, const WeaponFireSnapshot& snapshot) {
-    String f;
-    f.Format(L"{move_dir=%f, fire_dir=%f, time=%f}", snapshot.pos_x, snapshot.pos_y, snapshot.time);
-    str += f;
+    // String f;
+    // f.Format(L"{move_dir=%f, fire_dir=%f, time=%f}", snapshot.pos_x, snapshot.pos_y, snapshot.time);
+    // str += f;
   }
 }
