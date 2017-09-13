@@ -41,8 +41,8 @@ namespace nan2 {
     server_param.m_externalNetWorkerThreadPool = thread_;
     server_param.m_externalUserWorkerThreadPool = thread_;
 
-    Proud::PNGUID guid = { 0x3ae33249, 0xecc6, 0x4980,{ 0xbc, 0x5d, 0x7b, 0xa, 0x99, 0x9c, 0x7, 0x39 } };
-    Proud::Guid g_Version = Proud::Guid(guid);
+	Proud::PNGUID guid = { 0x3ae33249, 0xecc6, 0x4980,{ 0xbc, 0x5d, 0x7b, 0xa, 0x99, 0x9c, 0x07, 0x39 } };
+	Proud::Guid g_Version = Proud::Guid(guid);
     server_param.m_protocolVersion = g_Version;
     server_param.m_tcpPorts.Add(33334);
     server_->SetEventSink(this);
