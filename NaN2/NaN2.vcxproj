@@ -161,6 +161,7 @@
     <ClInclude Include="include\gameobject\character\character.h" />
     <ClInclude Include="include\gameobject\character\character_record.h" />
     <ClInclude Include="include\gameobject\character\character_recorder.h" />
+    <ClInclude Include="include\gameobject\character\skill_slot.h" />
     <ClInclude Include="include\gameobject\game_object.h" />
     <ClInclude Include="include\gameobject\game_object_base.h" />
     <ClInclude Include="include\gameobject\game_object_type.h" />
@@ -179,6 +180,8 @@
     <ClInclude Include="include\network\proud_server.h" />
     <ClInclude Include="include\network\remote_character_snapshot.h" />
     <ClInclude Include="include\network\weapon_fire_snapshot.h" />
+    <ClInclude Include="include\skill\single_projectile_skill.h" />
+    <ClInclude Include="include\skill\skill.h" />
     <ClInclude Include="include\world\player.h" />
     <ClInclude Include="include\world\world.h" />
     <ClInclude Include="include\world_time.h" />
@@ -205,6 +208,8 @@
     <ClCompile Include="src\network\proud_server.cpp" />
     <ClCompile Include="src\network\remote_character_snapshot.cpp" />
     <ClCompile Include="src\network\weapon_fire_snapshot.cpp" />
+    <ClCompile Include="src\skill\single_projectile_skill.cpp" />
+    <ClCompile Include="src\skill\skill.cpp" />
     <ClCompile Include="src\world\player.cpp" />
     <ClCompile Include="src\world\world.cpp" />
     <ClCompile Include="src\world_time.cpp" />

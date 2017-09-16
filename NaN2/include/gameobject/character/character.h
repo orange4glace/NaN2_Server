@@ -9,6 +9,8 @@
 #include "../../components/movable.h"
 
 #include "../weapon/weapon.h"
+#include "../../skill/skill.h"
+#include "skill_slot.h"
 
 #include "character_record.h"
 #include "character_recorder.h"
@@ -33,6 +35,7 @@ namespace nan2 {
     CharacterRecorder recorder_;
 
     Weapon* weapon_;
+	std::map<int, Skill*> skills_;
 
     std::queue<PlayerInputPacket> input_queue_;
     std::vector<WeaponFireSnapshot> weapon_fire_snapshots_;
@@ -42,6 +45,8 @@ namespace nan2 {
     int update_chance_time_;
     int last_acked_input_sequence_;
 
+  protected:
+	  void SetSkill(SkillSlot id, Skill* const skill);
 
   public:
     Character(Player* player);
@@ -58,6 +63,8 @@ namespace nan2 {
     const LocalCharacterSnapshot GetLocalCharacterSnapshot() const;
     const RemoteCharacterSnapshot GetRemoteCharacterSnapshot() const;
     void CleanSnapshot();
+
+	Weapon* const weapon();
     
   };
 

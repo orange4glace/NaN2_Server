@@ -117,6 +117,15 @@
     <ClInclude Include="include\network\weapon_fire_snapshot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\skill\single_projectile_skill.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\skill\skill.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gameobject\character\skill_slot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\components\component.cpp">
@@ -189,6 +198,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\network\weapon_fire_snapshot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\skill\single_projectile_skill.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\skill\skill.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

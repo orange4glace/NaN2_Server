@@ -32,6 +32,7 @@ namespace nan2 {
     virtual bool Fire2();
 
     virtual Vector2 CalculateCharacterWeaponPivot() const = 0;
+	Vector2 GetFirePoint() const;
 
     void set_position(const Vector2& val);
     const Vector2& position() const;

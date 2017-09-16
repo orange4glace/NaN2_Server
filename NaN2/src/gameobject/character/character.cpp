@@ -31,6 +31,10 @@ namespace nan2 {
     registerRecorder(static_cast<RecorderInterface*>(&recorder_));
   }
 
+  void Character::SetSkill(SkillSlot slot, Skill* const skill) {
+	  skills_[slot] = skill;
+  }
+
   Player* const Character::player() {
     return player_;
   }
@@ -110,6 +114,10 @@ namespace nan2 {
 
   void Character::CleanSnapshot() {
     weapon_fire_snapshots_.clear();
+  }
+
+  Weapon* const Character::weapon() {
+	  return weapon_;
   }
 
 }
