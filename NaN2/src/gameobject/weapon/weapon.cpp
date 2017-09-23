@@ -18,10 +18,6 @@ namespace nan2 {
     return false;
   }
 
-  Vector2 Weapon::GetFirePoint() const {
-	  return Vector2::ZERO;
-  }
-
   void Weapon::set_position(const Vector2& val) {
     position_ = val;
   }

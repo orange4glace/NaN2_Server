@@ -12,6 +12,8 @@ namespace GameS2C {
     static const ::Proud::RmiID Rmi_PlayerJoin = (::Proud::RmiID)(6000+3);
                
     static const ::Proud::RmiID Rmi_PlayerLeave = (::Proud::RmiID)(6000+4);
+               
+    static const ::Proud::RmiID Rmi_SkillCasted = (::Proud::RmiID)(6000+5);
 
 	// List that has RMI ID.
 	extern ::Proud::RmiID g_RmiIDList[];

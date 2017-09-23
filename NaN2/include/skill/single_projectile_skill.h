@@ -16,7 +16,7 @@ namespace nan2 {
 
 		SingleProjectileSkill(Character* character, const Projectile& projectile);
 
-		void Cast() override;
+		bool Cast() override;
 
 	};
 

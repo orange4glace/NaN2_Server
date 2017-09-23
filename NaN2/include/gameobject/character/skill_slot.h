@@ -7,6 +7,7 @@ namespace nan2 {
 	namespace SkillSlot {
 
 		enum SkillSlot {
+			NONE,
 			PRIMARY,
 			SECONDARY,
 			SKILL1,

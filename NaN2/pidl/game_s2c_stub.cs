@@ -36,6 +36,11 @@ public BeforeRmiInvocationDelegate BeforeRmiInvocation = delegate(Nettention.Pro
 		{ 
 			return false;
 		};
+		public delegate bool SkillCastedDelegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, Nettention.Proud.HostID player_id, nan2.SkillCastSnapshot snapshot);  
+		public SkillCastedDelegate SkillCasted = delegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, Nettention.Proud.HostID player_id, nan2.SkillCastSnapshot snapshot)
+		{ 
+			return false;
+		};
 	public override bool ProcessReceivedMessage(Nettention.Proud.ReceivedMessage pa, Object hostTag) 
 	{
 		Nettention.Proud.HostID remote=pa.RemoteHostID;
@@ -52,18 +57,265 @@ public BeforeRmiInvocationDelegate BeforeRmiInvocation = delegate(Nettention.Pro
 					
 		switch(__rmiID)
 		{
-        case Common.PlayerSnapshots:
-            ProcessReceivedMessage_PlayerSnapshots(__msg, pa, hostTag, remote);
-            break;
-        case Common.JoinWorld:
-            ProcessReceivedMessage_JoinWorld(__msg, pa, hostTag, remote);
-            break;
-        case Common.PlayerJoin:
-            ProcessReceivedMessage_PlayerJoin(__msg, pa, hostTag, remote);
-            break;
-        case Common.PlayerLeave:
-            ProcessReceivedMessage_PlayerLeave(__msg, pa, hostTag, remote);
-            break;
+case Common.PlayerSnapshots:
+	{
+		Nettention.Proud.RmiContext ctx=new Nettention.Proud.RmiContext();
+		ctx.sentFrom=pa.RemoteHostID;
+		ctx.relayed=pa.IsRelayed;
+		ctx.hostTag=hostTag;
+		ctx.encryptMode = pa.EncryptMode;
+		ctx.compressMode = pa.CompressMode;
+			
+		nan2.LocalCharacterSnapshot local_character_snapshot; nan2.ProudMarshaler.Read(__msg,out local_character_snapshot);	
+System.Collections.Generic.List<nan2.RemoteCharacterSnapshot> remote_character_snapshot; nan2.ProudMarshaler.Read(__msg,out remote_character_snapshot);	
+core.PostCheckReadMessage(__msg, RmiName_PlayerSnapshots);
+		if(enableNotifyCallFromStub==true)
+		{
+			string parameterString="";
+			parameterString+=local_character_snapshot.ToString()+",";
+parameterString+=remote_character_snapshot.ToString()+",";
+			NotifyCallFromStub(Common.PlayerSnapshots, RmiName_PlayerSnapshots,parameterString);
+		}
+			
+		if(enableStubProfiling)
+		{
+			Nettention.Proud.BeforeRmiSummary summary = new Nettention.Proud.BeforeRmiSummary();
+			summary.rmiID = Common.PlayerSnapshots;
+			summary.rmiName = RmiName_PlayerSnapshots;
+			summary.hostID = remote;
+			summary.hostTag = hostTag;
+			BeforeRmiInvocation(summary);
+		}
+			
+		long t0 = Nettention.Proud.PreciseCurrentTime.GetTimeMs();
+			
+		// Call this method.
+		bool __ret=PlayerSnapshots (remote,ctx , local_character_snapshot, remote_character_snapshot );
+			
+		if(__ret==false)
+		{
+			// Error: RMI function that a user did not create has been called. 
+			core.ShowNotImplementedRmiWarning(RmiName_PlayerSnapshots);
+		}
+			
+		if(enableStubProfiling)
+		{
+			Nettention.Proud.AfterRmiSummary summary = new Nettention.Proud.AfterRmiSummary();
+			summary.rmiID = Common.PlayerSnapshots;
+			summary.rmiName = RmiName_PlayerSnapshots;
+			summary.hostID = remote;
+			summary.hostTag = hostTag;
+			summary.elapsedTime = Nettention.Proud.PreciseCurrentTime.GetTimeMs()-t0;
+			AfterRmiInvocation(summary);
+		}
+	}
+	break;
+case Common.JoinWorld:
+	{
+		Nettention.Proud.RmiContext ctx=new Nettention.Proud.RmiContext();
+		ctx.sentFrom=pa.RemoteHostID;
+		ctx.relayed=pa.IsRelayed;
+		ctx.hostTag=hostTag;
+		ctx.encryptMode = pa.EncryptMode;
+		ctx.compressMode = pa.CompressMode;
+			
+		System.Collections.Generic.List<Nettention.Proud.HostID> player_ids; nan2.ProudMarshaler.Read(__msg,out player_ids);	
+core.PostCheckReadMessage(__msg, RmiName_JoinWorld);
+		if(enableNotifyCallFromStub==true)
+		{
+			string parameterString="";
+			parameterString+=player_ids.ToString()+",";
+			NotifyCallFromStub(Common.JoinWorld, RmiName_JoinWorld,parameterString);
+		}
+			
+		if(enableStubProfiling)
+		{
+			Nettention.Proud.BeforeRmiSummary summary = new Nettention.Proud.BeforeRmiSummary();
+			summary.rmiID = Common.JoinWorld;
+			summary.rmiName = RmiName_JoinWorld;
+			summary.hostID = remote;
+			summary.hostTag = hostTag;
+			BeforeRmiInvocation(summary);
+		}
+			
+		long t0 = Nettention.Proud.PreciseCurrentTime.GetTimeMs();
+			
+		// Call this method.
+		bool __ret=JoinWorld (remote,ctx , player_ids );
+			
+		if(__ret==false)
+		{
+			// Error: RMI function that a user did not create has been called. 
+			core.ShowNotImplementedRmiWarning(RmiName_JoinWorld);
+		}
+			
+		if(enableStubProfiling)
+		{
+			Nettention.Proud.AfterRmiSummary summary = new Nettention.Proud.AfterRmiSummary();
+			summary.rmiID = Common.JoinWorld;
+			summary.rmiName = RmiName_JoinWorld;
+			summary.hostID = remote;
+			summary.hostTag = hostTag;
+			summary.elapsedTime = Nettention.Proud.PreciseCurrentTime.GetTimeMs()-t0;
+			AfterRmiInvocation(summary);
+		}
+	}
+	break;
+case Common.PlayerJoin:
+	{
+		Nettention.Proud.RmiContext ctx=new Nettention.Proud.RmiContext();
+		ctx.sentFrom=pa.RemoteHostID;
+		ctx.relayed=pa.IsRelayed;
+		ctx.hostTag=hostTag;
+		ctx.encryptMode = pa.EncryptMode;
+		ctx.compressMode = pa.CompressMode;
+			
+		Nettention.Proud.HostID player_id; nan2.ProudMarshaler.Read(__msg,out player_id);	
+core.PostCheckReadMessage(__msg, RmiName_PlayerJoin);
+		if(enableNotifyCallFromStub==true)
+		{
+			string parameterString="";
+			parameterString+=player_id.ToString()+",";
+			NotifyCallFromStub(Common.PlayerJoin, RmiName_PlayerJoin,parameterString);
+		}
+			
+		if(enableStubProfiling)
+		{
+			Nettention.Proud.BeforeRmiSummary summary = new Nettention.Proud.BeforeRmiSummary();
+			summary.rmiID = Common.PlayerJoin;
+			summary.rmiName = RmiName_PlayerJoin;
+			summary.hostID = remote;
+			summary.hostTag = hostTag;
+			BeforeRmiInvocation(summary);
+		}
+			
+		long t0 = Nettention.Proud.PreciseCurrentTime.GetTimeMs();
+			
+		// Call this method.
+		bool __ret=PlayerJoin (remote,ctx , player_id );
+			
+		if(__ret==false)
+		{
+			// Error: RMI function that a user did not create has been called. 
+			core.ShowNotImplementedRmiWarning(RmiName_PlayerJoin);
+		}
+			
+		if(enableStubProfiling)
+		{
+			Nettention.Proud.AfterRmiSummary summary = new Nettention.Proud.AfterRmiSummary();
+			summary.rmiID = Common.PlayerJoin;
+			summary.rmiName = RmiName_PlayerJoin;
+			summary.hostID = remote;
+			summary.hostTag = hostTag;
+			summary.elapsedTime = Nettention.Proud.PreciseCurrentTime.GetTimeMs()-t0;
+			AfterRmiInvocation(summary);
+		}
+	}
+	break;
+case Common.PlayerLeave:
+	{
+		Nettention.Proud.RmiContext ctx=new Nettention.Proud.RmiContext();
+		ctx.sentFrom=pa.RemoteHostID;
+		ctx.relayed=pa.IsRelayed;
+		ctx.hostTag=hostTag;
+		ctx.encryptMode = pa.EncryptMode;
+		ctx.compressMode = pa.CompressMode;
+			
+		Nettention.Proud.HostID player_id; nan2.ProudMarshaler.Read(__msg,out player_id);	
+core.PostCheckReadMessage(__msg, RmiName_PlayerLeave);
+		if(enableNotifyCallFromStub==true)
+		{
+			string parameterString="";
+			parameterString+=player_id.ToString()+",";
+			NotifyCallFromStub(Common.PlayerLeave, RmiName_PlayerLeave,parameterString);
+		}
+			
+		if(enableStubProfiling)
+		{
+			Nettention.Proud.BeforeRmiSummary summary = new Nettention.Proud.BeforeRmiSummary();
+			summary.rmiID = Common.PlayerLeave;
+			summary.rmiName = RmiName_PlayerLeave;
+			summary.hostID = remote;
+			summary.hostTag = hostTag;
+			BeforeRmiInvocation(summary);
+		}
+			
+		long t0 = Nettention.Proud.PreciseCurrentTime.GetTimeMs();
+			
+		// Call this method.
+		bool __ret=PlayerLeave (remote,ctx , player_id );
+			
+		if(__ret==false)
+		{
+			// Error: RMI function that a user did not create has been called. 
+			core.ShowNotImplementedRmiWarning(RmiName_PlayerLeave);
+		}
+			
+		if(enableStubProfiling)
+		{
+			Nettention.Proud.AfterRmiSummary summary = new Nettention.Proud.AfterRmiSummary();
+			summary.rmiID = Common.PlayerLeave;
+			summary.rmiName = RmiName_PlayerLeave;
+			summary.hostID = remote;
+			summary.hostTag = hostTag;
+			summary.elapsedTime = Nettention.Proud.PreciseCurrentTime.GetTimeMs()-t0;
+			AfterRmiInvocation(summary);
+		}
+	}
+	break;
+case Common.SkillCasted:
+	{
+		Nettention.Proud.RmiContext ctx=new Nettention.Proud.RmiContext();
+		ctx.sentFrom=pa.RemoteHostID;
+		ctx.relayed=pa.IsRelayed;
+		ctx.hostTag=hostTag;
+		ctx.encryptMode = pa.EncryptMode;
+		ctx.compressMode = pa.CompressMode;
+			
+		Nettention.Proud.HostID player_id; nan2.ProudMarshaler.Read(__msg,out player_id);	
+nan2.SkillCastSnapshot snapshot; nan2.ProudMarshaler.Read(__msg,out snapshot);	
+core.PostCheckReadMessage(__msg, RmiName_SkillCasted);
+		if(enableNotifyCallFromStub==true)
+		{
+			string parameterString="";
+			parameterString+=player_id.ToString()+",";
+parameterString+=snapshot.ToString()+",";
+			NotifyCallFromStub(Common.SkillCasted, RmiName_SkillCasted,parameterString);
+		}
+			
+		if(enableStubProfiling)
+		{
+			Nettention.Proud.BeforeRmiSummary summary = new Nettention.Proud.BeforeRmiSummary();
+			summary.rmiID = Common.SkillCasted;
+			summary.rmiName = RmiName_SkillCasted;
+			summary.hostID = remote;
+			summary.hostTag = hostTag;
+			BeforeRmiInvocation(summary);
+		}
+			
+		long t0 = Nettention.Proud.PreciseCurrentTime.GetTimeMs();
+			
+		// Call this method.
+		bool __ret=SkillCasted (remote,ctx , player_id, snapshot );
+			
+		if(__ret==false)
+		{
+			// Error: RMI function that a user did not create has been called. 
+			core.ShowNotImplementedRmiWarning(RmiName_SkillCasted);
+		}
+			
+		if(enableStubProfiling)
+		{
+			Nettention.Proud.AfterRmiSummary summary = new Nettention.Proud.AfterRmiSummary();
+			summary.rmiID = Common.SkillCasted;
+			summary.rmiName = RmiName_SkillCasted;
+			summary.hostID = remote;
+			summary.hostTag = hostTag;
+			summary.elapsedTime = Nettention.Proud.PreciseCurrentTime.GetTimeMs()-t0;
+			AfterRmiInvocation(summary);
+		}
+	}
+	break;
 		default:
 			 goto __fail;
 		}
@@ -74,208 +326,6 @@ __fail:
 			return false;
 	  }
 	}
-    void ProcessReceivedMessage_PlayerSnapshots(Nettention.Proud.Message __msg, Nettention.Proud.ReceivedMessage pa, Object hostTag, Nettention.Proud.HostID remote)
-    {
-        Nettention.Proud.RmiContext ctx = new Nettention.Proud.RmiContext();
-        ctx.sentFrom=pa.RemoteHostID;
-        ctx.relayed=pa.IsRelayed;
-        ctx.hostTag=hostTag;
-        ctx.encryptMode = pa.EncryptMode;
-        ctx.compressMode = pa.CompressMode;
-
-        nan2.LocalCharacterSnapshot local_character_snapshot; nan2.ProudMarshaler.Read(__msg,out local_character_snapshot);	
-System.Collections.Generic.List<nan2.RemoteCharacterSnapshot> remote_character_snapshot; nan2.ProudMarshaler.Read(__msg,out remote_character_snapshot);	
-core.PostCheckReadMessage(__msg, RmiName_PlayerSnapshots);
-        if(enableNotifyCallFromStub==true)
-        {
-        string parameterString = "";
-        parameterString+=local_character_snapshot.ToString()+",";
-parameterString+=remote_character_snapshot.ToString()+",";
-        NotifyCallFromStub(Common.PlayerSnapshots, RmiName_PlayerSnapshots,parameterString);
-        }
-
-        if(enableStubProfiling)
-        {
-        Nettention.Proud.BeforeRmiSummary summary = new Nettention.Proud.BeforeRmiSummary();
-        summary.rmiID = Common.PlayerSnapshots;
-        summary.rmiName = RmiName_PlayerSnapshots;
-        summary.hostID = remote;
-        summary.hostTag = hostTag;
-        BeforeRmiInvocation(summary);
-        }
-
-        long t0 = Nettention.Proud.PreciseCurrentTime.GetTimeMs();
-
-        // Call this method.
-        bool __ret =PlayerSnapshots (remote,ctx , local_character_snapshot, remote_character_snapshot );
-
-        if(__ret==false)
-        {
-        // Error: RMI function that a user did not create has been called. 
-        core.ShowNotImplementedRmiWarning(RmiName_PlayerSnapshots);
-        }
-
-        if(enableStubProfiling)
-        {
-        Nettention.Proud.AfterRmiSummary summary = new Nettention.Proud.AfterRmiSummary();
-        summary.rmiID = Common.PlayerSnapshots;
-        summary.rmiName = RmiName_PlayerSnapshots;
-        summary.hostID = remote;
-        summary.hostTag = hostTag;
-        summary.elapsedTime = Nettention.Proud.PreciseCurrentTime.GetTimeMs()-t0;
-        AfterRmiInvocation(summary);
-        }
-    }
-    void ProcessReceivedMessage_JoinWorld(Nettention.Proud.Message __msg, Nettention.Proud.ReceivedMessage pa, Object hostTag, Nettention.Proud.HostID remote)
-    {
-        Nettention.Proud.RmiContext ctx = new Nettention.Proud.RmiContext();
-        ctx.sentFrom=pa.RemoteHostID;
-        ctx.relayed=pa.IsRelayed;
-        ctx.hostTag=hostTag;
-        ctx.encryptMode = pa.EncryptMode;
-        ctx.compressMode = pa.CompressMode;
-
-        System.Collections.Generic.List<Nettention.Proud.HostID> player_ids; nan2.ProudMarshaler.Read(__msg,out player_ids);	
-core.PostCheckReadMessage(__msg, RmiName_JoinWorld);
-        if(enableNotifyCallFromStub==true)
-        {
-        string parameterString = "";
-        parameterString+=player_ids.ToString()+",";
-        NotifyCallFromStub(Common.JoinWorld, RmiName_JoinWorld,parameterString);
-        }
-
-        if(enableStubProfiling)
-        {
-        Nettention.Proud.BeforeRmiSummary summary = new Nettention.Proud.BeforeRmiSummary();
-        summary.rmiID = Common.JoinWorld;
-        summary.rmiName = RmiName_JoinWorld;
-        summary.hostID = remote;
-        summary.hostTag = hostTag;
-        BeforeRmiInvocation(summary);
-        }
-
-        long t0 = Nettention.Proud.PreciseCurrentTime.GetTimeMs();
-
-        // Call this method.
-        bool __ret =JoinWorld (remote,ctx , player_ids );
-
-        if(__ret==false)
-        {
-        // Error: RMI function that a user did not create has been called. 
-        core.ShowNotImplementedRmiWarning(RmiName_JoinWorld);
-        }
-
-        if(enableStubProfiling)
-        {
-        Nettention.Proud.AfterRmiSummary summary = new Nettention.Proud.AfterRmiSummary();
-        summary.rmiID = Common.JoinWorld;
-        summary.rmiName = RmiName_JoinWorld;
-        summary.hostID = remote;
-        summary.hostTag = hostTag;
-        summary.elapsedTime = Nettention.Proud.PreciseCurrentTime.GetTimeMs()-t0;
-        AfterRmiInvocation(summary);
-        }
-    }
-    void ProcessReceivedMessage_PlayerJoin(Nettention.Proud.Message __msg, Nettention.Proud.ReceivedMessage pa, Object hostTag, Nettention.Proud.HostID remote)
-    {
-        Nettention.Proud.RmiContext ctx = new Nettention.Proud.RmiContext();
-        ctx.sentFrom=pa.RemoteHostID;
-        ctx.relayed=pa.IsRelayed;
-        ctx.hostTag=hostTag;
-        ctx.encryptMode = pa.EncryptMode;
-        ctx.compressMode = pa.CompressMode;
-
-        Nettention.Proud.HostID player_id; nan2.ProudMarshaler.Read(__msg,out player_id);	
-core.PostCheckReadMessage(__msg, RmiName_PlayerJoin);
-        if(enableNotifyCallFromStub==true)
-        {
-        string parameterString = "";
-        parameterString+=player_id.ToString()+",";
-        NotifyCallFromStub(Common.PlayerJoin, RmiName_PlayerJoin,parameterString);
-        }
-
-        if(enableStubProfiling)
-        {
-        Nettention.Proud.BeforeRmiSummary summary = new Nettention.Proud.BeforeRmiSummary();
-        summary.rmiID = Common.PlayerJoin;
-        summary.rmiName = RmiName_PlayerJoin;
-        summary.hostID = remote;
-        summary.hostTag = hostTag;
-        BeforeRmiInvocation(summary);
-        }
-
-        long t0 = Nettention.Proud.PreciseCurrentTime.GetTimeMs();
-
-        // Call this method.
-        bool __ret =PlayerJoin (remote,ctx , player_id );
-
-        if(__ret==false)
-        {
-        // Error: RMI function that a user did not create has been called. 
-        core.ShowNotImplementedRmiWarning(RmiName_PlayerJoin);
-        }
-
-        if(enableStubProfiling)
-        {
-        Nettention.Proud.AfterRmiSummary summary = new Nettention.Proud.AfterRmiSummary();
-        summary.rmiID = Common.PlayerJoin;
-        summary.rmiName = RmiName_PlayerJoin;
-        summary.hostID = remote;
-        summary.hostTag = hostTag;
-        summary.elapsedTime = Nettention.Proud.PreciseCurrentTime.GetTimeMs()-t0;
-        AfterRmiInvocation(summary);
-        }
-    }
-    void ProcessReceivedMessage_PlayerLeave(Nettention.Proud.Message __msg, Nettention.Proud.ReceivedMessage pa, Object hostTag, Nettention.Proud.HostID remote)
-    {
-        Nettention.Proud.RmiContext ctx = new Nettention.Proud.RmiContext();
-        ctx.sentFrom=pa.RemoteHostID;
-        ctx.relayed=pa.IsRelayed;
-        ctx.hostTag=hostTag;
-        ctx.encryptMode = pa.EncryptMode;
-        ctx.compressMode = pa.CompressMode;
-
-        Nettention.Proud.HostID player_id; nan2.ProudMarshaler.Read(__msg,out player_id);	
-core.PostCheckReadMessage(__msg, RmiName_PlayerLeave);
-        if(enableNotifyCallFromStub==true)
-        {
-        string parameterString = "";
-        parameterString+=player_id.ToString()+",";
-        NotifyCallFromStub(Common.PlayerLeave, RmiName_PlayerLeave,parameterString);
-        }
-
-        if(enableStubProfiling)
-        {
-        Nettention.Proud.BeforeRmiSummary summary = new Nettention.Proud.BeforeRmiSummary();
-        summary.rmiID = Common.PlayerLeave;
-        summary.rmiName = RmiName_PlayerLeave;
-        summary.hostID = remote;
-        summary.hostTag = hostTag;
-        BeforeRmiInvocation(summary);
-        }
-
-        long t0 = Nettention.Proud.PreciseCurrentTime.GetTimeMs();
-
-        // Call this method.
-        bool __ret =PlayerLeave (remote,ctx , player_id );
-
-        if(__ret==false)
-        {
-        // Error: RMI function that a user did not create has been called. 
-        core.ShowNotImplementedRmiWarning(RmiName_PlayerLeave);
-        }
-
-        if(enableStubProfiling)
-        {
-        Nettention.Proud.AfterRmiSummary summary = new Nettention.Proud.AfterRmiSummary();
-        summary.rmiID = Common.PlayerLeave;
-        summary.rmiName = RmiName_PlayerLeave;
-        summary.hostID = remote;
-        summary.hostTag = hostTag;
-        summary.elapsedTime = Nettention.Proud.PreciseCurrentTime.GetTimeMs()-t0;
-        AfterRmiInvocation(summary);
-        }
-    }
 #if USE_RMI_NAME_STRING
 // RMI name declaration.
 // It is the unique pointer that indicates RMI name such as RMI profiler.
@@ -283,6 +333,7 @@ const string RmiName_PlayerSnapshots="PlayerSnapshots";
 const string RmiName_JoinWorld="JoinWorld";
 const string RmiName_PlayerJoin="PlayerJoin";
 const string RmiName_PlayerLeave="PlayerLeave";
+const string RmiName_SkillCasted="SkillCasted";
        
 const string RmiName_First = RmiName_PlayerSnapshots;
 #else
@@ -292,6 +343,7 @@ const string RmiName_PlayerSnapshots="";
 const string RmiName_JoinWorld="";
 const string RmiName_PlayerJoin="";
 const string RmiName_PlayerLeave="";
+const string RmiName_SkillCasted="";
        
 const string RmiName_First = "";
 #endif

@@ -7,7 +7,10 @@ namespace Proud {
   using namespace nan2;
 
   CMessage& operator >> (CMessage& a, PlayerInputPacket& packet) {
-    a >> packet.dt >> packet.sequence >> packet.move_dir >> packet.fire_dir;
+    bool skill_casted;
+    a >> packet.dt >> packet.sequence >> packet.move_dir >> packet.aim_dir >> skill_casted;
+    if (skill_casted) a >> packet.skill_type;
+    else packet.skill_type = -1;
     return a;
   }
 

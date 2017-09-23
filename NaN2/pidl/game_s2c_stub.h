@@ -60,12 +60,23 @@ namespace GameS2C {
 #define DEFRMI_GameS2C_PlayerLeave(DerivedClass) bool DerivedClass::PlayerLeave ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
 #define CALL_GameS2C_PlayerLeave PlayerLeave ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
 #define PARAM_GameS2C_PlayerLeave ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
+               
+		virtual bool SkillCasted ( ::Proud::HostID, ::Proud::RmiContext& , const Proud::HostID  & , const nan2::SkillCastSnapshot  & )		{ 
+			return false;
+		} 
+
+#define DECRMI_GameS2C_SkillCasted bool SkillCasted ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const nan2::SkillCastSnapshot  & snapshot) PN_OVERRIDE
+
+#define DEFRMI_GameS2C_SkillCasted(DerivedClass) bool DerivedClass::SkillCasted ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const nan2::SkillCastSnapshot  & snapshot)
+#define CALL_GameS2C_SkillCasted SkillCasted ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const nan2::SkillCastSnapshot  & snapshot)
+#define PARAM_GameS2C_SkillCasted ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const nan2::SkillCastSnapshot  & snapshot)
  
 		virtual bool ProcessReceivedMessage(::Proud::CReceivedMessage &pa, void* hostTag) PN_OVERRIDE;
 		static const PNTCHAR* RmiName_PlayerSnapshots;
 		static const PNTCHAR* RmiName_JoinWorld;
 		static const PNTCHAR* RmiName_PlayerJoin;
 		static const PNTCHAR* RmiName_PlayerLeave;
+		static const PNTCHAR* RmiName_SkillCasted;
 		static const PNTCHAR* RmiName_First;
 		virtual ::Proud::RmiID* GetRmiIDList() PN_OVERRIDE { return g_RmiIDList; }
 		virtual int GetRmiIDListCount() PN_OVERRIDE { return g_RmiIDListCount; }
@@ -110,6 +121,15 @@ namespace GameS2C {
 			if (PlayerLeave_Function==nullptr) 
 				return true; 
 			return PlayerLeave_Function(remote,rmiContext, player_id); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const Proud::HostID  & , const nan2::SkillCastSnapshot  & ) > SkillCasted_Function;
+		virtual bool SkillCasted ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const nan2::SkillCastSnapshot  & snapshot) 
+		{ 
+			if (SkillCasted_Function==nullptr) 
+				return true; 
+			return SkillCasted_Function(remote,rmiContext, player_id, snapshot); 
 		}
 
 	};

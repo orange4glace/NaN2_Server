@@ -13,7 +13,8 @@ namespace nan2 {
     uint32_t dt;
     int32_t sequence;
     uint8_t move_dir;
-    uint8_t fire_dir;
+    uint8_t aim_dir;
+	int32_t skill_type;
 
   };
 

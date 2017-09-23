@@ -119,6 +119,34 @@ nan2.ProudMarshaler.Write(__msg, player_id);
 	return RmiSend(remotes,rmiContext,__msg,
 		RmiName_PlayerLeave, Common.PlayerLeave);
 }
+public bool SkillCasted(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, Nettention.Proud.HostID player_id, nan2.SkillCastSnapshot snapshot)
+{
+	Nettention.Proud.Message __msg=new Nettention.Proud.Message();
+		__msg.SimplePacketMode = core.IsSimplePacketMode();
+		Nettention.Proud.RmiID __msgid= Common.SkillCasted;
+		__msg.Write(__msgid);
+		nan2.ProudMarshaler.Write(__msg, player_id);
+		nan2.ProudMarshaler.Write(__msg, snapshot);
+		
+	Nettention.Proud.HostID[] __list = new Nettention.Proud.HostID[1];
+	__list[0] = remote;
+		
+	return RmiSend(__list,rmiContext,__msg,
+		RmiName_SkillCasted, Common.SkillCasted);
+}
+
+public bool SkillCasted(Nettention.Proud.HostID[] remotes,Nettention.Proud.RmiContext rmiContext, Nettention.Proud.HostID player_id, nan2.SkillCastSnapshot snapshot)
+{
+	Nettention.Proud.Message __msg=new Nettention.Proud.Message();
+__msg.SimplePacketMode = core.IsSimplePacketMode();
+Nettention.Proud.RmiID __msgid= Common.SkillCasted;
+__msg.Write(__msgid);
+nan2.ProudMarshaler.Write(__msg, player_id);
+nan2.ProudMarshaler.Write(__msg, snapshot);
+		
+	return RmiSend(remotes,rmiContext,__msg,
+		RmiName_SkillCasted, Common.SkillCasted);
+}
 #if USE_RMI_NAME_STRING
 // RMI name declaration.
 // It is the unique pointer that indicates RMI name such as RMI profiler.
@@ -126,6 +154,7 @@ const string RmiName_PlayerSnapshots="PlayerSnapshots";
 const string RmiName_JoinWorld="JoinWorld";
 const string RmiName_PlayerJoin="PlayerJoin";
 const string RmiName_PlayerLeave="PlayerLeave";
+const string RmiName_SkillCasted="SkillCasted";
        
 const string RmiName_First = RmiName_PlayerSnapshots;
 #else
@@ -135,6 +164,7 @@ const string RmiName_PlayerSnapshots="";
 const string RmiName_JoinWorld="";
 const string RmiName_PlayerJoin="";
 const string RmiName_PlayerLeave="";
+const string RmiName_SkillCasted="";
        
 const string RmiName_First = "";
 #endif

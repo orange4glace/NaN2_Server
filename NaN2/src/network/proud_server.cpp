@@ -45,7 +45,7 @@ namespace nan2 {
 	Proud::Guid g_Version = Proud::Guid(guid);
     server_param.m_protocolVersion = g_Version;
     server_param.m_tcpPorts.Add(33334);
-    server_param.m_localNicAddr = Proud::String("192.168.0.23");
+    server_param.m_localNicAddr = Proud::String("192.168.0.19");
     server_->SetEventSink(this);
     server_->AttachProxy(&s2c_proxy_);
     server_->AttachStub((GameC2S::Stub*)this);
@@ -132,6 +132,10 @@ namespace nan2 {
   void ProudServer::SendCharacterSnapshots(const Player* const player,
     const LocalCharacterSnapshot& local_character_snapshot, const std::vector<RemoteCharacterSnapshot>& remote_character_snapshots) {
     s2c_proxy_.PlayerSnapshots(player->id(), Proud::RmiContext::UnreliableSend, local_character_snapshot, remote_character_snapshots);
+  }
+
+  void ProudServer::SendSkillCastSnapshot(const Player* const player, const SkillCastSnapshot& skill_cast_snapshot) {
+    s2c_proxy_.SkillCasted(player->id(), Proud::RmiContext::ReliableSend, player->id(), skill_cast_snapshot);
   }
 
   DEFRMI_GameC2S_PlayerInput(ProudServer) {

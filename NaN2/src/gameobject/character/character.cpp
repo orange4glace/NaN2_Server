@@ -3,9 +3,14 @@
 
 #include "world/player.h"
 #include "gameobject/weapon/weapon_factory.h"
+#include "skill/single_projectile_skill.h"
+#include "skill/instant_clear_skill.h"
+#include "network/skill_cast_snapshot.h"
 
 #include "logger/logger.h"
 #include "world_time.h"
+
+#include "network/proud_server.h"
 
 namespace nan2 {
 
@@ -28,7 +33,17 @@ namespace nan2 {
     placeable_.AddTargetLayer(Layer::STATIC_COLLIDER);
     placeable_.AddTargetLayer(Layer::CHARACTER);
 
+	SingleProjectileSkill* skill1 = new SingleProjectileSkill(this, Projectile(Vector2(0, 0), Vector2(0, 0), 0, 30.f, 10));
+    InstantClearSkill* skill2 = new InstantClearSkill(this);
+
+	SetSkill(SkillSlot::PRIMARY, skill1);
+    SetSkill(SkillSlot::SECONDARY, skill2);
+
     registerRecorder(static_cast<RecorderInterface*>(&recorder_));
+  }
+
+  Skill* const Character::GetSkill(SkillSlot slot) {
+	  return skills_[slot];
   }
 
   void Character::SetSkill(SkillSlot slot, Skill* const skill) {
@@ -57,6 +72,36 @@ namespace nan2 {
         [](GameObject* object) -> bool {
         return true;
       });
+	  weapon_->set_dir(input.aim_dir);
+      weapon_->set_position(movable_.position() + weapon_->CalculateCharacterWeaponPivot());
+
+	  if (input.skill_type != -1) {
+          L_DEBUG << "[Skill casted] Type = " << input.skill_type << ", Aim = " << (int)input.aim_dir;
+
+		  auto skill = GetSkill((SkillSlot)input.skill_type);
+		  auto fired = skill->Cast();
+
+          if (fired) {
+            if (skill->guaranteed()) {
+              ProudServer::instance()->SendSkillCastSnapshot(player_, SkillCastSnapshot{
+                input.skill_type,
+                0,
+                0,
+                0
+              });
+            }
+            else {
+              weapon_fire_snapshots_.push_back({
+                input.skill_type,
+                movable_.position().x(),
+                movable_.position().y(),
+                input.aim_dir,
+                Time::current_time()
+              });
+            }
+          }
+	  }
+	  /*
       if (input.fire_dir < 252) {
         weapon_->set_dir(input.fire_dir);
         weapon_->set_position(movable_.position() +  weapon_->CalculateCharacterWeaponPivot());
@@ -70,6 +115,7 @@ namespace nan2 {
             Time::current_time()
         });
       }
+	  */
       last_acked_input_sequence_ = input.sequence;
       input_queue_.pop();
     }

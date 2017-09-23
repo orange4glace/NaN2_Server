@@ -17,12 +17,14 @@ namespace GameS2C
 			public const Nettention.Proud.RmiID JoinWorld = (Nettention.Proud.RmiID)6000+2;
 			public const Nettention.Proud.RmiID PlayerJoin = (Nettention.Proud.RmiID)6000+3;
 			public const Nettention.Proud.RmiID PlayerLeave = (Nettention.Proud.RmiID)6000+4;
+			public const Nettention.Proud.RmiID SkillCasted = (Nettention.Proud.RmiID)6000+5;
 		// List that has RMI ID.
 		public static Nettention.Proud.RmiID[] RmiIDList = new Nettention.Proud.RmiID[] {
 			PlayerSnapshots,
 			JoinWorld,
 			PlayerJoin,
 			PlayerLeave,
+			SkillCasted,
 		};
 	}
 }

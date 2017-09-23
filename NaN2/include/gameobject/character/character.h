@@ -46,7 +46,8 @@ namespace nan2 {
     int last_acked_input_sequence_;
 
   protected:
-	  void SetSkill(SkillSlot id, Skill* const skill);
+	  Skill* const GetSkill(SkillSlot slot);
+	  void SetSkill(SkillSlot slot, Skill* const skill);
 
   public:
     Character(Player* player);

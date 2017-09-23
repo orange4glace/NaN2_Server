@@ -140,12 +140,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>./include;./src;../MathLib/include;$(PROUDNET_HOME)/include;$(BOOST_HOME);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../x64/Release;%BOOST_HOME%/lib64-msvc-14.0;%PROUDNET_HOME%/lib/x64/VS2015/Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>MathLib.lib;ProudNetServer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -179,7 +182,9 @@
     <ClInclude Include="include\network\player_input_packet.h" />
     <ClInclude Include="include\network\proud_server.h" />
     <ClInclude Include="include\network\remote_character_snapshot.h" />
+    <ClInclude Include="include\network\skill_cast_snapshot.h" />
     <ClInclude Include="include\network\weapon_fire_snapshot.h" />
+    <ClInclude Include="include\skill\instant_clear_skill.h" />
     <ClInclude Include="include\skill\single_projectile_skill.h" />
     <ClInclude Include="include\skill\skill.h" />
     <ClInclude Include="include\world\player.h" />
@@ -207,7 +212,9 @@
     <ClCompile Include="src\network\player_input_packet.cpp" />
     <ClCompile Include="src\network\proud_server.cpp" />
     <ClCompile Include="src\network\remote_character_snapshot.cpp" />
+    <ClCompile Include="src\network\skill_cast_snapshot.cpp" />
     <ClCompile Include="src\network\weapon_fire_snapshot.cpp" />
+    <ClCompile Include="src\skill\instant_clear_skill.cpp" />
     <ClCompile Include="src\skill\single_projectile_skill.cpp" />
     <ClCompile Include="src\skill\skill.cpp" />
     <ClCompile Include="src\world\player.cpp" />

@@ -10,6 +10,7 @@ namespace nan2 {
 
   struct WeaponFireSnapshot {
 
+    int skill_type;
     float pos_x;
     float pos_y;
     uint8_t dir;

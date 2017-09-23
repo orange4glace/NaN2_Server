@@ -29,6 +29,7 @@ namespace nan2 {
 
     bool Fire1() override;
 
+    Vector2 GetFirePoint() const override;
     Vector2 CalculateCharacterWeaponPivot() const override;
 
     void set_cooldown(int val);

@@ -7,4 +7,5 @@ rename cs(Proud::HostID, Nettention.Proud.HostID);
 	JoinWorld([in] std::vector<Proud::HostID> player_ids);
 	PlayerJoin([in] Proud::HostID player_id);
 	PlayerLeave([in] Proud::HostID player_id);
+	SkillCasted([in] Proud::HostID player_id, [in] nan2::SkillCastSnapshot snapshot);
 }

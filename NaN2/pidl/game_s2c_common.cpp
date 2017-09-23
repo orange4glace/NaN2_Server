@@ -16,9 +16,11 @@ namespace GameS2C {
 		Rmi_PlayerJoin,
                
 		Rmi_PlayerLeave,
+               
+		Rmi_SkillCasted,
 	};
 
-	int g_RmiIDListCount = 4;
+	int g_RmiIDListCount = 5;
 
 }
 

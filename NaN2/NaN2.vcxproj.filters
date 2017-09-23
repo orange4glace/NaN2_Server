@@ -126,6 +126,12 @@
     <ClInclude Include="include\gameobject\character\skill_slot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\network\skill_cast_snapshot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\skill\instant_clear_skill.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\components\component.cpp">
@@ -204,6 +210,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\skill\skill.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\network\skill_cast_snapshot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\skill\instant_clear_skill.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

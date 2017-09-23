@@ -122,6 +122,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>./include/nan2/math;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -134,6 +135,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\aabb.h" />
+    <ClInclude Include="include\nan2\math\aabb.h" />
+    <ClInclude Include="include\nan2\math\rect.h" />
+    <ClInclude Include="include\nan2\math\vector2.h" />
     <ClInclude Include="include\rect.h" />
     <ClInclude Include="include\vector2.h" />
   </ItemGroup>

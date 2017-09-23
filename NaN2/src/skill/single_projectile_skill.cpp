@@ -7,20 +7,22 @@
 namespace nan2 {
 
 	SingleProjectileSkill::SingleProjectileSkill(Character* character, const Projectile& projectile) :
-		Skill(character),
+		Skill(character, false),
 		projectile_(projectile) {
 
 	}
 
-	void SingleProjectileSkill::Cast() {
+	bool SingleProjectileSkill::Cast() {
 		int aim = character_->weapon()->dir();
 		Projectile* projectile = new Projectile(projectile_);
 		auto fire_point = character_->weapon()->GetFirePoint();
 		Vector2 offset = MathHelper::instance().RotateVector252(fire_point, MathHelper::instance().biased_direction(aim));
+        L_DEBUG << "[Projectile spawned] position = " << fire_point;
 		projectile->set_position(fire_point);
 		projectile->set_dir(aim);
 		projectile->set_rewind_time(character_->player()->GetRecentPing());
 		World::instance()->AddGameObject(projectile);
+		return true;
 	}
 
 } 

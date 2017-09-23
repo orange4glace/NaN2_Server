@@ -9,12 +9,15 @@ namespace nan2 {
 	class Skill {
 
 	protected:
-		Skill(Character* character);
+		Skill(Character* character, bool guaranteed);
 
 		Character* character_;
+        bool guaranteed_;
 
 	public:
-		virtual void Cast() = 0;
+		virtual bool Cast() = 0;
+
+        bool guaranteed() const;
 
 	};
 

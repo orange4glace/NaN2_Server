@@ -126,6 +126,36 @@ __msg << player_id;
 		return RmiSend(remotes,remoteCount,rmiContext,__msg,
 			RmiName_PlayerLeave, (::Proud::RmiID)Rmi_PlayerLeave);
 	}
+        
+	bool Proxy::SkillCasted ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID & player_id, const nan2::SkillCastSnapshot & snapshot)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_SkillCasted;
+__msg.Write(__msgid); 
+	
+__msg << player_id;
+__msg << snapshot;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_SkillCasted, (::Proud::RmiID)Rmi_SkillCasted);
+	}
+
+	bool Proxy::SkillCasted ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const Proud::HostID & player_id, const nan2::SkillCastSnapshot & snapshot)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_SkillCasted;
+__msg.Write(__msgid); 
+	
+__msg << player_id;
+__msg << snapshot;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_SkillCasted, (::Proud::RmiID)Rmi_SkillCasted);
+	}
 #ifdef USE_RMI_NAME_STRING
 const PNTCHAR* Proxy::RmiName_PlayerSnapshots =_PNT("PlayerSnapshots");
 #else
@@ -145,6 +175,11 @@ const PNTCHAR* Proxy::RmiName_PlayerJoin =_PNT("");
 const PNTCHAR* Proxy::RmiName_PlayerLeave =_PNT("PlayerLeave");
 #else
 const PNTCHAR* Proxy::RmiName_PlayerLeave =_PNT("");
+#endif
+#ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_SkillCasted =_PNT("SkillCasted");
+#else
+const PNTCHAR* Proxy::RmiName_SkillCasted =_PNT("");
 #endif
 const PNTCHAR* Proxy::RmiName_First = RmiName_PlayerSnapshots;
 

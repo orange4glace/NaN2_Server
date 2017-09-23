@@ -14,7 +14,7 @@ namespace Proud {
   }
 
   CMessage& operator << (CMessage& a, const WeaponFireSnapshot& snapshot) {
-    a << snapshot.pos_x << snapshot.pos_y << snapshot.dir << (Time::current_time() - snapshot.time);
+    a << snapshot.skill_type << snapshot.pos_x << snapshot.pos_y << snapshot.dir << (Time::current_time() - snapshot.time);
     return a;
   }
 

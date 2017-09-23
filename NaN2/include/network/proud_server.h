@@ -9,6 +9,7 @@
 #include "player_input_packet.h"
 #include "local_character_snapshot.h"
 #include "remote_character_snapshot.h"
+#include "skill_cast_snapshot.h"
 
 #include "../pidl/game_s2c_common.h"
 #include "../pidl/game_s2c_proxy.h"
@@ -85,6 +86,8 @@ namespace nan2 {
 
     void SendCharacterSnapshots(const Player* const player,
       const LocalCharacterSnapshot& local_character_snapshot, const std::vector<RemoteCharacterSnapshot>& remote_character_snapshots);
+
+    void SendSkillCastSnapshot(const Player* const player, const SkillCastSnapshot& skill_cast_snapshot);
 
     template<typename Lambda>
     void IteratePlayers(Lambda&& lambda) {
