@@ -45,7 +45,7 @@ namespace nan2 {
 	Proud::Guid g_Version = Proud::Guid(guid);
     server_param.m_protocolVersion = g_Version;
     server_param.m_tcpPorts.Add(33334);
-    server_param.m_localNicAddr = Proud::String("192.168.0.19");
+    // server_param.m_localNicAddr = Proud::String("192.168.0.19");
     server_->SetEventSink(this);
     server_->AttachProxy(&s2c_proxy_);
     server_->AttachStub((GameC2S::Stub*)this);
