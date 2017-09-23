@@ -33,10 +33,10 @@ namespace nan2 {
     placeable_.AddTargetLayer(Layer::STATIC_COLLIDER);
     placeable_.AddTargetLayer(Layer::CHARACTER);
 
-	SingleProjectileSkill* skill1 = new SingleProjectileSkill(this, Projectile(Vector2(0, 0), Vector2(0, 0), 0, 30.f, 10));
+	  SingleProjectileSkill* skill1 = new SingleProjectileSkill(this, Projectile(Vector2(0, 0), Vector2(0, 0), 0, 30.f, 2));
     InstantClearSkill* skill2 = new InstantClearSkill(this);
 
-	SetSkill(SkillSlot::PRIMARY, skill1);
+	  SetSkill(SkillSlot::PRIMARY, skill1);
     SetSkill(SkillSlot::SECONDARY, skill2);
 
     registerRecorder(static_cast<RecorderInterface*>(&recorder_));
