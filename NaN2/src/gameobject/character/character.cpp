@@ -72,50 +72,50 @@ namespace nan2 {
         [](GameObject* object) -> bool {
         return true;
       });
-	  weapon_->set_dir(input.aim_dir);
-      weapon_->set_position(movable_.position() + weapon_->CalculateCharacterWeaponPivot());
+  	  weapon_->set_dir(input.aim_dir);
+        weapon_->set_position(movable_.position() + weapon_->CalculateCharacterWeaponPivot());
 
-	  if (input.skill_type != -1) {
-          L_DEBUG << "[Skill casted] Type = " << input.skill_type << ", Aim = " << (int)input.aim_dir;
+  	  if (input.skill_type != -1) {
+        L_DEBUG << "[Skill casted] Type = " << input.skill_type << ", Aim = " << (int)input.aim_dir;
 
-		  auto skill = GetSkill((SkillSlot)input.skill_type);
-		  auto fired = skill->Cast();
+  		  auto skill = GetSkill((SkillSlot)input.skill_type);
+  		  auto fired = skill->Cast();
 
-          if (fired) {
-            if (skill->guaranteed()) {
-              ProudServer::instance()->SendSkillCastSnapshot(player_, SkillCastSnapshot{
-                input.skill_type,
-                0,
-                0,
-                0
-              });
-            }
-            else {
-              weapon_fire_snapshots_.push_back({
-                input.skill_type,
-                movable_.position().x(),
-                movable_.position().y(),
-                input.aim_dir,
-                Time::current_time()
-              });
-            }
+        if (fired) {
+          if (skill->guaranteed()) {
+            ProudServer::instance()->SendSkillCastSnapshot(player_, SkillCastSnapshot{
+              input.skill_type,
+              0,
+              0,
+              0
+            });
           }
-	  }
-	  /*
-      if (input.fire_dir < 252) {
-        weapon_->set_dir(input.fire_dir);
-        weapon_->set_position(movable_.position() +  weapon_->CalculateCharacterWeaponPivot());
-        bool fired = weapon_->Fire1();
+          else {
+            weapon_fire_snapshots_.push_back({
+              input.skill_type,
+              movable_.position().x(),
+              movable_.position().y(),
+              input.aim_dir,
+              Time::current_time()
+            });
+          }
+        }
+	    }
+	  
+  // if (input.fire_dir < 252) {
+  //   weapon_->set_dir(input.fire_dir);
+  //   weapon_->set_position(movable_.position() +  weapon_->CalculateCharacterWeaponPivot());
+  //   bool fired = weapon_->Fire1();
 
-        if (fired)
-          weapon_fire_snapshots_.push_back({
-            movable_.position().x(),
-            movable_.position().y(),
-            input.fire_dir,
-            Time::current_time()
-        });
-      }
-	  */
+  //   if (fired)
+  //     weapon_fire_snapshots_.push_back({
+  //       movable_.position().x(),
+  //       movable_.position().y(),
+  //       input.fire_dir,
+  //       Time::current_time()
+  //   });
+  // }
+	  
       last_acked_input_sequence_ = input.sequence;
       input_queue_.pop();
     }
