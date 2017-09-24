@@ -50,7 +50,6 @@ namespace nan2 {
 
   template <class T>
   void Recorder<T>::Rewind(int time) {
-    L_DEBUG << "Rewind " << time;
     current_record_ = saveCurrentRecord();
     auto data = getInterpolatedData(time);
     applyRecord(data);
