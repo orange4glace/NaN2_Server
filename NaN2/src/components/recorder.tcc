@@ -25,9 +25,9 @@ namespace nan2 {
       mid = (st + ed) / 2;
       auto& pair = records_[mid];
       if (pair.first < time)
-        ed = mid - 1;
-      else if (pair.first > time)
         st = mid + 1;
+      else if (pair.first > time)
+        ed = mid - 1;
       else
         return pair.second;
     }
@@ -38,6 +38,7 @@ namespace nan2 {
       return record_pair.second;
     }
     auto& next_record_pair = records_[mid + 1];
+    if (next_record_pair.first == record_pair.first) return record_pair.second;
     float t = (float)(next_record_pair.first - time) / (next_record_pair.first - record_pair.first);
     return T::Interpolate(record_pair.second, next_record_pair.second, t);
   }
@@ -49,6 +50,7 @@ namespace nan2 {
 
   template <class T>
   void Recorder<T>::Rewind(int time) {
+    L_DEBUG << "Rewind " << time;
     current_record_ = saveCurrentRecord();
     auto data = getInterpolatedData(time);
     applyRecord(data);

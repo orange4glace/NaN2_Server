@@ -135,7 +135,10 @@ namespace nan2 {
   }
 
   void ProudServer::SendSkillCastSnapshot(const Player* const player, const SkillCastSnapshot& skill_cast_snapshot) {
-    s2c_proxy_.SkillCasted(player->id(), Proud::RmiContext::ReliableSend, player->id(), skill_cast_snapshot);
+    for (auto& pair : players_) {
+      auto p = pair.GetSecond();
+      s2c_proxy_.SkillCasted(p->id(), Proud::RmiContext::ReliableSend, player->id(), skill_cast_snapshot);
+    }
   }
 
   DEFRMI_GameC2S_PlayerInput(ProudServer) {

@@ -17,7 +17,6 @@ namespace nan2 {
 		Projectile* projectile = new Projectile(projectile_);
 		auto fire_point = character_->weapon()->GetFirePoint();
 		Vector2 offset = MathHelper::instance().RotateVector252(fire_point, MathHelper::instance().biased_direction(aim));
-        L_DEBUG << "[Projectile spawned] position = " << fire_point;
 		projectile->set_position(fire_point);
 		projectile->set_dir(aim);
 		projectile->set_rewind_time(character_->player()->GetRecentPing());

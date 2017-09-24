@@ -43,7 +43,8 @@ namespace nan2 {
       if (living != nullptr) {
         living->Subtract(damage_);
       }
-      return true;
+      World::instance()->RemoveGameObject(this);
+      return false;
     }, Time::current_time() - 100);
   }
 
