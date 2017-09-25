@@ -8,26 +8,29 @@
 
 namespace nan2 {
 
-    class Player {
+using PlayerID = Proud::HostID;
 
-        Proud::HostID id_;
-        Character* character_;
+class Player {
 
-        int recent_ping_;
+    Proud::HostID id_;
+    Character* character_;
 
-    public:
-        Player(Proud::HostID id);
-        ~Player();
+    int recent_ping_;
 
-        Character* const character();
-        Proud::HostID id() const;
+public:
+    Player(PlayerID id);
+    ~Player();
 
-        void SendSnapshotsToRemote() const;
-        void CleanSnapshot();
+    Character* const character();
+    Proud::HostID id() const;
 
-        int GetRecentPing();
+    void SendSnapshotsToRemote() const;
+    void CleanSnapshot();
 
-    };
+    int GetRecentPing();
+
+};
+
 }
 
 #endif

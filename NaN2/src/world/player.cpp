@@ -9,7 +9,7 @@
 
 namespace nan2 {
 
-  Player::Player(Proud::HostID id) : 
+  Player::Player(PlayerID id) : 
   id_(id),
   recent_ping_(0) {
     character_ = new Character(this);

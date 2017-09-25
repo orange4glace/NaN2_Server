@@ -187,6 +187,12 @@
     <ClInclude Include="include\skill\instant_clear_skill.h" />
     <ClInclude Include="include\skill\single_projectile_skill.h" />
     <ClInclude Include="include\skill\skill.h" />
+    <ClInclude Include="include\world\module\module.h" />
+    <ClInclude Include="include\world\module\player_event_listener.h" />
+    <ClInclude Include="include\world\module\team_module\team.h" />
+    <ClInclude Include="include\world\module\team_module\module.h" />
+    <ClInclude Include="include\world\module\world_event_listener.h" />
+    <ClInclude Include="include\world\module\world_update_event_listener.h" />
     <ClInclude Include="include\world\player.h" />
     <ClInclude Include="include\world\world.h" />
     <ClInclude Include="include\world_time.h" />
