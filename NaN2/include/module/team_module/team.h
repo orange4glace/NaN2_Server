@@ -1,12 +1,12 @@
 // team.h
-#ifndef WORLD_MODULE_TEAM_MODULE_TEAM_H_
-#define WORLD_MODULE_TEAM_MODULE_TEAM_H_
+#ifndef MODULE_TEAM_MODULE_TEAM_H_
+#define MODULE_TEAM_MODULE_TEAM_H_
 
 #include "../../player.h"
 
 namespace nan2 {
 
-namespace world_module {
+namespace module {
 
 namespace team_module {
 
