@@ -139,7 +139,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DEBUG;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>./include;./src;../MathLib/include;$(PROUDNET_HOME)/include;$(BOOST_HOME);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -177,6 +177,8 @@
     <ClInclude Include="include\global.h" />
     <ClInclude Include="include\logger\logger.h" />
     <ClInclude Include="include\math_helper.h" />
+    <ClInclude Include="include\module\event_listener.h" />
+    <ClInclude Include="include\module\module_base.h" />
     <ClInclude Include="include\network\collection_marshaler.h" />
     <ClInclude Include="include\network\local_character_snapshot.h" />
     <ClInclude Include="include\network\player_input_packet.h" />
@@ -190,7 +192,7 @@
     <ClInclude Include="include\module\module.h" />
     <ClInclude Include="include\module\player_event_listener.h" />
     <ClInclude Include="include\module\team_module\team.h" />
-    <ClInclude Include="include\module\team_module\module.h" />
+    <ClInclude Include="include\module\team_module\team_module.h" />
     <ClInclude Include="include\module\world_event_listener.h" />
     <ClInclude Include="include\module\world_update_event_listener.h" />
     <ClInclude Include="include\world\player.h" />

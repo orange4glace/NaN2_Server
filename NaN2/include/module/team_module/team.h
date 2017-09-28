@@ -2,7 +2,7 @@
 #ifndef MODULE_TEAM_MODULE_TEAM_H_
 #define MODULE_TEAM_MODULE_TEAM_H_
 
-#include "../../player.h"
+#include "../../world/player.h"
 
 namespace nan2 {
 

@@ -13,7 +13,8 @@
 #include <utility>
 
 #include "../gameobject/game_object.h"
-
+#include "../module/module.h"
+#include "../module/event_listener.h"
 
 namespace nan2 {
 
@@ -64,6 +65,24 @@ namespace nan2 {
             for(auto const &entry : game_objects_) {
                 std::forward<Lambda>(lambda)(entry.second);
             }
+        }
+
+        template<class Module>
+        void ActivateModule() {
+#ifdef DEBUG
+          auto mod = Module::GetModule();
+          if (mod != nullptr) throw std::string("Module is already active. " + Module::name());
+#endif
+          Module::Activate();
+        }
+
+        template<class Module>
+        void DeactivateModule() {
+#ifdef DEBUG
+          auto mod = Module::GetModule();
+          if (mod == nullptr) throw std::string("Module is already inactive. " + Module::name());
+#endif
+          Module::Deactivate();
         }
 
     };
