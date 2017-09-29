@@ -7,6 +7,8 @@
 
 #include "gameobject/static_collider.h"
 
+#include "module/team_module/team_module.h"
+
 #include "logger/logger.h"
 
 namespace nan2 {
@@ -31,6 +33,8 @@ namespace nan2 {
 
     StaticCollider* sc = new StaticCollider(Vector2(50, 0), Vector2(20, 20));
     AddGameObject(sc);
+
+    ActivateModule<module::team_module::TeamModule>();
   }
 
   void World::Update(int dt) {

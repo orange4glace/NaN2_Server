@@ -23,18 +23,28 @@ protected:
     return Derived::GetName();
   }
 
-  virtual void initialize() = 0;
-  virtual void destroy() = 0;
-
 public:
   inline static Derived* Activate() {
     module_ = new Derived();
-    module_->initialize();
+#ifdef _DEBUG
+    if (module_ == nullptr)
+      throw std::string("Access to unactivated mod. " + Derived::GetName());
+    L_DEBUG << "Module " << Derived::GetName() << " Activated.";
+#endif
+    module_->Initialize(0);
+#ifdef _DEBUG
+    L_DEBUG << "Module " << Derived::GetName() << " Initialized.";
+#endif
     return module_;
   }
 
   inline static void Deactivate() {
-    module_->destroy();
+    module_->Destroy();
+#ifdef _DEBUG
+    if (module_ != nullptr)
+      throw std::string("Access to unactivated mod. " + Derived::GetName());
+    L_DEBUG << "Module " << Derived::GetName() << " Deactivated.";
+#endif
     delete module_;
   }
 
@@ -43,10 +53,21 @@ public:
   }
 
   inline static Derived* const GetModule() {
+#ifdef _DEBUG
+    if (module_ == nullptr) {
+      throw std::string("Access to unactivated mod. " + Derived::GetName());
+    }
+#endif
     return module_;
   }
 
+  virtual void Initialize(const void* args ...) = 0;
+  virtual void Destroy() = 0;
+
 };
+
+template<class Derived>
+Derived* Module<Derived>::module_ = nullptr;
 
 }
 

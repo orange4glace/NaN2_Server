@@ -69,19 +69,11 @@ namespace nan2 {
 
         template<class Module>
         void ActivateModule() {
-#ifdef DEBUG
-          auto mod = Module::GetModule();
-          if (mod != nullptr) throw std::string("Module is already active. " + Module::name());
-#endif
           Module::Activate();
         }
 
         template<class Module>
         void DeactivateModule() {
-#ifdef DEBUG
-          auto mod = Module::GetModule();
-          if (mod == nullptr) throw std::string("Module is already inactive. " + Module::name());
-#endif
           Module::Deactivate();
         }
 

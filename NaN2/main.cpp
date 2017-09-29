@@ -13,6 +13,10 @@
 using namespace nan2;
 
 int main() {
+#ifdef _DEBUG
+  L_DEBUG << "DEBUG";
+#endif
+
   // Initiate ProudServer
   ProudServer* server = ProudServer::instance();
   L_DEBUG << "1";

@@ -16,6 +16,7 @@
 #include <boost/log/trivial.hpp>
 
 #define L_DEBUG BOOST_LOG_TRIVIAL(debug)
+#define L_ERROR BOOST_LOG_TRIVIAL(debug)
 #define L_DEBUG_W BOOST_LOG(nan2::lg)
 
 namespace nan2 {

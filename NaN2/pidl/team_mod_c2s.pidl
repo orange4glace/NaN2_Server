@@ -1,0 +1,5 @@
+rename cs(Proud::HostID, Nettention.Proud.HostID);
+
+[marshaler(cs)=nan2.ProudMarshaler] global team_mod_s2c 8100 {
+	JoinTeam([in] int team);
+}

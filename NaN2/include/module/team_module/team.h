@@ -12,7 +12,9 @@ namespace team_module {
 
 class Team {
 
-  int id;
+  int id_;
+
+protected:
 
 public:
   Team(int id);

@@ -139,7 +139,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>DEBUG;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>./include;./src;../MathLib/include;$(PROUDNET_HOME)/include;$(BOOST_HOME);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -225,6 +225,7 @@
     <ClCompile Include="src\skill\instant_clear_skill.cpp" />
     <ClCompile Include="src\skill\single_projectile_skill.cpp" />
     <ClCompile Include="src\skill\skill.cpp" />
+    <ClCompile Include="src\module\team_module\team_module.cpp" />
     <ClCompile Include="src\world\player.cpp" />
     <ClCompile Include="src\world\world.cpp" />
     <ClCompile Include="src\world_time.cpp" />
