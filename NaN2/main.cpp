@@ -14,12 +14,11 @@ using namespace nan2;
 
 int main() {
 #ifdef _DEBUG
-  L_DEBUG << "DEBUG";
+  L_DEBUG << "DEBUG Mode";
 #endif
 
   // Initiate ProudServer
   ProudServer* server = ProudServer::instance();
-  L_DEBUG << "1";
   server->Initialize();
   World* world = World::instance();
 

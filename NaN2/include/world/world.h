@@ -30,8 +30,6 @@ namespace nan2 {
 
         int snapshot_send_timer_;
 
-        std::map<int, Player*> players_;
-
         int next_internal_game_object_id_;
         std::queue<unsigned short> network_id_pool_;
 
@@ -41,6 +39,8 @@ namespace nan2 {
 
         std::map<int, GameObject*> stagings_;
         std::vector<GameObject*> removings_;
+
+        void initialize();
 
         void stageGameObjects();
         void removeGameObjects();
@@ -68,8 +68,8 @@ namespace nan2 {
         }
 
         template<class Module>
-        void ActivateModule() {
-          Module::Activate();
+        void ActivateModule(void* args...) {
+          Module::Activate(args);
         }
 
         template<class Module>

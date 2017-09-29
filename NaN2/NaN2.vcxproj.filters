@@ -245,6 +245,9 @@
     <ClCompile Include="src\module\team_module\team_module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\module\team_module\team.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\components\movable.tcc" />

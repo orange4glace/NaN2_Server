@@ -19,7 +19,9 @@ namespace nan2 {
 
   World* World::instance() {
     if (instance_ == nullptr) {
+      L_DEBUG << "Init2" << instance_;
       instance_ = new World();
+      instance_->initialize();
     }
     return instance_;
   }
@@ -27,14 +29,19 @@ namespace nan2 {
   World::World() :
   next_internal_game_object_id_(0),
   snapshot_send_timer_(0) {
+  }
+
+  void World::initialize() {
+    L_DEBUG << "Init" << instance_;
     auto serv = ProudServer::instance();
     // Pool network ids
-    for (int i = 1; i < 65536; i ++) network_id_pool_.push(i);
+    for (int i = 1; i < 65536; i++) network_id_pool_.push(i);
 
     StaticCollider* sc = new StaticCollider(Vector2(50, 0), Vector2(20, 20));
     AddGameObject(sc);
 
-    ActivateModule<module::team_module::TeamModule>();
+    int teams = 5;
+    ActivateModule<module::team_module::TeamModule>((void*)&teams);
   }
 
   void World::Update(int dt) {

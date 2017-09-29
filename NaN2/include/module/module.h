@@ -24,14 +24,14 @@ protected:
   }
 
 public:
-  inline static Derived* Activate() {
+  inline static Derived* Activate(void* args...) {
     module_ = new Derived();
 #ifdef _DEBUG
     if (module_ == nullptr)
       throw std::string("Access to unactivated mod. " + Derived::GetName());
     L_DEBUG << "Module " << Derived::GetName() << " Activated.";
 #endif
-    module_->Initialize(0);
+    module_->Initialize(args);
 #ifdef _DEBUG
     L_DEBUG << "Module " << Derived::GetName() << " Initialized.";
 #endif

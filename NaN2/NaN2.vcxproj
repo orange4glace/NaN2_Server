@@ -216,6 +216,7 @@
     <ClCompile Include="src\gameobject\weapon\weapon_factory.cpp" />
     <ClCompile Include="src\logger\logger.cpp" />
     <ClCompile Include="src\math_helper.cpp" />
+    <ClCompile Include="src\module\team_module\team.cpp" />
     <ClCompile Include="src\network\local_character.snapshot.cpp" />
     <ClCompile Include="src\network\player_input_packet.cpp" />
     <ClCompile Include="src\network\proud_server.cpp" />

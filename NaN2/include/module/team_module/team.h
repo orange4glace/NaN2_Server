@@ -4,26 +4,33 @@
 
 #include "../../world/player.h"
 
+#include <map>
+
 namespace nan2 {
 
 namespace module {
 
 namespace team_module {
 
-class Team {
+using TeamID = int;
 
-  int id_;
+class Team {
+  friend class TeamModule;
+
+  TeamID id_;
+  std::map<PlayerID, Player* const> players_;
+
+  void addPlayer(Player* const player);
+  void removePlayer(Player* const player);
 
 protected:
 
 public:
-  Team(int id);
+  Team(TeamID id);
 
-  void AddPlayer(Player* player);
-  void RemovePlayer(Player* player);
   Player* const GetPlayer(PlayerID id) const;
 
-  int id() const;
+  TeamID id() const;
 
 };
 

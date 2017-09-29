@@ -9,6 +9,7 @@
 #include "team.h"
 
 #include <vector>
+#include <map>
 
 namespace nan2 {
 
@@ -20,6 +21,7 @@ class TeamModule : public Module<TeamModule> {
   friend class Module<TeamModule>;
 
   std::vector<Team> teams_;
+  std::map<Player*, Team*> player_team_map_;
 
 protected:
 
@@ -33,7 +35,11 @@ public:
   void Initialize(const void* args ...) override;
   void Destroy() override;
 
-  Team* const GetTeam(int id);
+  void AddPlayer(Team* const team, Player* const player);
+  void RemovePlayer(Team* const team, Player* const player);
+
+  Team* const GetTeam(TeamID id);
+  Team* const GetTeam(Player* player);
 
 };
 
