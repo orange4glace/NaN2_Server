@@ -156,6 +156,12 @@
     <ClInclude Include="include\module\team_module\team_module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\module\ctf_module\ctf_modue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\module\ctf_module\gameobject\flag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\components\component.cpp">
@@ -246,6 +252,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\module\team_module\team.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\ctf_module\ctf_module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\ctf_module\gameobject\flag.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

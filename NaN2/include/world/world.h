@@ -67,6 +67,17 @@ namespace nan2 {
             }
         }
 
+        template<class TGameObject, typename Lambda>
+        void IterateGameObjects(Lambda&& lambda) {
+          // Must be improved later with
+          // <GameObject>::Type()
+          for (auto const &entry : game_objects_) {
+            if (TGameObject* casted = dynamic_cast<TGameObject*>(entry.second)) {
+              if (!std::forward<Lambda>(lambda)(casted)) break;
+            }
+          }
+        }
+
         template<class Module>
         void ActivateModule(void* args...) {
           Module::Activate(args);

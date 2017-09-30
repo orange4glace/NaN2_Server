@@ -177,6 +177,8 @@
     <ClInclude Include="include\global.h" />
     <ClInclude Include="include\logger\logger.h" />
     <ClInclude Include="include\math_helper.h" />
+    <ClInclude Include="include\module\ctf_module\ctf_modue.h" />
+    <ClInclude Include="include\module\ctf_module\gameobject\flag.h" />
     <ClInclude Include="include\module\event_listener.h" />
     <ClInclude Include="include\module\module_base.h" />
     <ClInclude Include="include\network\collection_marshaler.h" />
@@ -216,6 +218,8 @@
     <ClCompile Include="src\gameobject\weapon\weapon_factory.cpp" />
     <ClCompile Include="src\logger\logger.cpp" />
     <ClCompile Include="src\math_helper.cpp" />
+    <ClCompile Include="src\module\ctf_module\ctf_module.cpp" />
+    <ClCompile Include="src\module\ctf_module\gameobject\flag.cpp" />
     <ClCompile Include="src\module\team_module\team.cpp" />
     <ClCompile Include="src\network\local_character.snapshot.cpp" />
     <ClCompile Include="src\network\player_input_packet.cpp" />

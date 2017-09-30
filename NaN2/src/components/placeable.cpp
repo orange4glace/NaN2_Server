@@ -78,6 +78,12 @@ namespace nan2 {
     return ((target_layermask_ & layermask) > 0);
   }
 
+  bool Placeable::Intersect(Placeable* const other) const {
+    bool collided;
+    AABB::SimpleAABB(aabb_, other->aabb_, collided);
+    return collided;
+  }
+
   const AABB& Placeable::aabb() const {
     return aabb_;
   }
