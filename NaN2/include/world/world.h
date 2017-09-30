@@ -14,7 +14,6 @@
 
 #include "../gameobject/game_object.h"
 #include "../module/module.h"
-#include "../module/event_listener.h"
 
 namespace nan2 {
 

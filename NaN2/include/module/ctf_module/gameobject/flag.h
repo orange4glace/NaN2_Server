@@ -9,13 +9,15 @@
 
 #include "../../team_module/team.h"
 
+#include "../../event_listener/world_event_listener.h"
+
 namespace nan2 {
 
 namespace module {
 
 namespace ctf_module {
 
-class Flag : public GameObject {
+class Flag : public GameObject, public event_listener::WorldEventListener {
 
   Placeable placeable_;
   Movable movable_;
@@ -35,6 +37,9 @@ public:
   void Detach();
 
   void Update() override;
+
+  void OnGameObjectStaged(GameObject* const go) override;
+  void OnGameObjectRemoved(GameObject* const go) override;
 
 };
 

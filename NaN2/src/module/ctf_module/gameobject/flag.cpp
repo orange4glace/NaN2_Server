@@ -8,7 +8,7 @@ namespace module {
 namespace ctf_module {
 
 Flag::Flag(team_module::Team* const team, const Vector2& position) :
-GameObject((GameObjectType)0, true, true, true),
+GameObject((GameObjectType)0, true, false, true),
 placeable_(this, position, Vector2(0, 0), Vector2::ZERO),
 movable_(this),
 team_(team),
@@ -52,6 +52,14 @@ void Flag::Update() {
       return true;
     });
   }
+}
+
+void Flag::OnGameObjectStaged(GameObject* const go) {
+  L_DEBUG << "[Flag] Game Object Staged Event";
+}
+
+void Flag::OnGameObjectRemoved(GameObject* const go) {
+
 }
 
 }

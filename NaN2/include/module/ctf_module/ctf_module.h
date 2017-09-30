@@ -6,7 +6,8 @@
 
 #include "../module.h"
 #include "../team_module/team_module.h"
-#include "../player_event_listener.h"
+
+#include "gameobject/flag.h"
 
 namespace nan2 {
 

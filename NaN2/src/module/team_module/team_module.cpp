@@ -12,9 +12,9 @@ TeamModule::TeamModule() : Module<TeamModule>() {
 }
 
 void TeamModule::Initialize(const void* args ...) {
-  int team_num = *(int*)args;
-  L_DEBUG << "Team Module initialized with # of teams = " << team_num;
-  for (int i = 0; i < team_num; i ++)
+  num_of_teams_ = *(int*)args;
+  L_DEBUG << "Team Module initialized with # of teams = " << num_of_teams_;
+  for (int i = 0; i < num_of_teams_; i ++)
     teams_.emplace_back(Team(i));
 }
 
@@ -55,6 +55,10 @@ Team* const TeamModule::GetTeam(Player* player) {
     throw std::string("[TeamModule] player_team_map no player. " + player->id());
 #endif
   return player_team_map_.at(player);
+}
+
+int TeamModule::num_of_teams() const {
+  return num_of_teams_;
 }
 
 }

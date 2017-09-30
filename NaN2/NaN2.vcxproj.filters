@@ -138,28 +138,28 @@
     <ClInclude Include="include\module\module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\module\player_event_listener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\module\world_event_listener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\module\world_update_event_listener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\module\event_listener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\module\module_base.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\module\team_module\team_module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\module\ctf_module\ctf_modue.h">
+    <ClInclude Include="include\module\ctf_module\gameobject\flag.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\module\ctf_module\gameobject\flag.h">
+    <ClInclude Include="include\module\event_listener\event_listener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\module\event_listener\player_event_listener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\module\event_listener\world_event_listener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\module\event_listener\world_update_event_listener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\module\ctf_module\ctf_module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

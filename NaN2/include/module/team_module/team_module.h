@@ -4,7 +4,7 @@
 
 #include "../module.h"
 #include "../../world/player.h"
-#include "../player_event_listener.h"
+#include "../event_listener/player_event_listener.h"
 
 #include "team.h"
 
@@ -19,6 +19,8 @@ namespace team_module {
 
 class TeamModule : public Module<TeamModule> {
   friend class Module<TeamModule>;
+
+  int num_of_teams_;
 
   std::vector<Team> teams_;
   std::map<Player*, Team*> player_team_map_;
@@ -40,6 +42,8 @@ public:
 
   Team* const GetTeam(TeamID id);
   Team* const GetTeam(Player* player);
+
+  int num_of_teams() const;
 
 };
 

@@ -10,12 +10,25 @@ namespace nan2 {
 
 namespace module {
 
-class WorldEventListener : EventListener {
+namespace event_listener {
+
+class WorldEventListener : EventListener<WorldEventListener> {
 
   virtual void OnGameObjectStaged(GameObject* const go) = 0;
   virtual void OnGameObjectRemoved(GameObject* const go) = 0;
 
+public:
+  static void GameObjectStaged(GameObject* const go) {
+    for (auto li : listeners_) li->OnGameObjectStaged(go);
+  }
+
+  static void GameObjectRemoved(GameObject* const go) {
+    for (auto li : listeners_) li->OnGameObjectRemoved(go);
+  }
+
 };
+
+}
 
 }
 

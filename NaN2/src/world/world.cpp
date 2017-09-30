@@ -5,9 +5,12 @@
 #include "world/player.h"
 #include "network/proud_server.h"
 
+#include "module/event_listener/world_event_listener.h"
+
 #include "gameobject/static_collider.h"
 
 #include "module/team_module/team_module.h"
+#include "module/ctf_module/ctf_module.h"
 
 #include "logger/logger.h"
 
@@ -42,6 +45,7 @@ namespace nan2 {
 
     int teams = 5;
     ActivateModule<module::team_module::TeamModule>((void*)&teams);
+    ActivateModule<module::ctf_module::CTFModule>(nullptr);
   }
 
   void World::Update(int dt) {
@@ -119,6 +123,7 @@ namespace nan2 {
       if (object->rewindable())
         rewindables_.insert({object->internal_id(), object});
       object->set_staging_state(StagingState::STAGED);
+      module::event_listener::WorldEventListener::GameObjectStaged(object);
     }
     stagings_.clear();
   }
@@ -131,6 +136,7 @@ namespace nan2 {
       if (object->rewindable())
         rewindables_.erase(object->internal_id());
       object->OnDestroy();
+      module::event_listener::WorldEventListener::GameObjectRemoved(object);
       delete object;
     }
     removings_.clear();

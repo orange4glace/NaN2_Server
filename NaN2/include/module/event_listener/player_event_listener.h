@@ -4,18 +4,22 @@
 
 #include "event_listener.h"
 
-#include "../world/player.h"
+#include "../../world/player.h"
 
 namespace nan2 {
 
 namespace module {
 
-class PlayerEventListener : EventListener {
-  
+namespace event_listener {
+
+class PlayerEventListener : EventListener<PlayerEventListener> {
+
   virtual void OnPlayerJoin(Player* const player) = 0;
   virtual void OnPlayerLeave(Player* const player) = 0;
 
 };
+
+}
 
 }
 

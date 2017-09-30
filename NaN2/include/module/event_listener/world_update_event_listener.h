@@ -4,17 +4,21 @@
 
 #include "event_listener.h"
 
-#include "../world/player.h"
+#include "../../world/player.h"
 
 namespace nan2 {
 
 namespace module {
 
-class WorldUpdateEventListener : EventListener {
+namespace event_listener {
+
+class WorldUpdateEventListener : EventListener<WorldUpdateEventListener> {
 
   virtual void OnUpdate(int dt) = 0;
 
 };
+
+}
 
 }
 

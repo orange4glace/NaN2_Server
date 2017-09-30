@@ -177,9 +177,9 @@
     <ClInclude Include="include\global.h" />
     <ClInclude Include="include\logger\logger.h" />
     <ClInclude Include="include\math_helper.h" />
-    <ClInclude Include="include\module\ctf_module\ctf_modue.h" />
+    <ClInclude Include="include\module\ctf_module\ctf_module.h" />
     <ClInclude Include="include\module\ctf_module\gameobject\flag.h" />
-    <ClInclude Include="include\module\event_listener.h" />
+    <ClInclude Include="include\module\event_listener\event_listener.h" />
     <ClInclude Include="include\module\module_base.h" />
     <ClInclude Include="include\network\collection_marshaler.h" />
     <ClInclude Include="include\network\local_character_snapshot.h" />
@@ -192,11 +192,11 @@
     <ClInclude Include="include\skill\single_projectile_skill.h" />
     <ClInclude Include="include\skill\skill.h" />
     <ClInclude Include="include\module\module.h" />
-    <ClInclude Include="include\module\player_event_listener.h" />
+    <ClInclude Include="include\module\event_listener\player_event_listener.h" />
     <ClInclude Include="include\module\team_module\team.h" />
     <ClInclude Include="include\module\team_module\team_module.h" />
-    <ClInclude Include="include\module\world_event_listener.h" />
-    <ClInclude Include="include\module\world_update_event_listener.h" />
+    <ClInclude Include="include\module\event_listener\world_event_listener.h" />
+    <ClInclude Include="include\module\event_listener\world_update_event_listener.h" />
     <ClInclude Include="include\world\player.h" />
     <ClInclude Include="include\world\world.h" />
     <ClInclude Include="include\world_time.h" />
