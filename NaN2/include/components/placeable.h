@@ -48,6 +48,7 @@ namespace nan2 {
     bool HasTargetLayers(int layermask);
 
     bool Intersect(Placeable* const other) const;
+    bool Contain(const Vector2& point) const;
 
     const AABB& aabb() const;
   };

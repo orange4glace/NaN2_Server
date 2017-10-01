@@ -14,8 +14,8 @@ namespace event_listener {
 
 class WorldEventListener : public EventListener<WorldEventListener> {
 
-  virtual void OnGameObjectStaged(GameObject* const go) = 0;
-  virtual void OnGameObjectRemoved(GameObject* const go) = 0;
+  virtual void OnGameObjectStaged(GameObject* const go) {};
+  virtual void OnGameObjectRemoved(GameObject* const go) {};
 
 public:
   static void GameObjectStaged(GameObject* const go) {

@@ -111,4 +111,8 @@ namespace nan2 {
     }
   }
 
+  inline void Movable::MoveTo(const Vector2& position) {
+    placeable_->set_position(position);
+  }
+
 }

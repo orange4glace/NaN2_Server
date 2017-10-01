@@ -84,6 +84,10 @@ namespace nan2 {
     return collided;
   }
 
+  bool Placeable::Contain(const Vector2& point) const {
+    return aabb_.ContainsPoint(point);
+  }
+
   const AABB& Placeable::aabb() const {
     return aabb_;
   }

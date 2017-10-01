@@ -1,6 +1,6 @@
 // module.h
 #ifndef MODULE_CTF_MODULE_FLAG_H_
-#define MODULE_CTF_MODULE_FLAG_H
+#define MODULE_CTF_MODULE_FLAG_H_
 
 #include "../../../gameobject/game_object.h"
 
@@ -10,6 +10,7 @@
 #include "../../team_module/team.h"
 
 #include "../../event_listener/world_event_listener.h"
+#include "../../event_listener/character_event_listener.h"
 
 namespace nan2 {
 
@@ -17,7 +18,8 @@ namespace module {
 
 namespace ctf_module {
 
-class Flag : public GameObject, public event_listener::WorldEventListener {
+class Flag : public GameObject,
+  public event_listener::CharacterEventListener {
 
   Placeable placeable_;
   Movable movable_;
@@ -25,6 +27,7 @@ class Flag : public GameObject, public event_listener::WorldEventListener {
   team_module::Team* team_;
   Vector2 base_position_;
 
+  bool returned_;
   Player* attached_player_;
 
 public:
@@ -33,13 +36,14 @@ public:
   void base_position(const Vector2& position);
   const Vector2& base_position() const;
 
-  void Attach(Player* const player);
+  void Attach(Character* const character);
   void Detach();
+  void Return(Character* const character);
+  void Score();
 
   void Update() override;
 
-  void OnGameObjectStaged(GameObject* const go) override;
-  void OnGameObjectRemoved(GameObject* const go) override;
+  void OnCharacterDeath(Character* const character) override;
 
 };
 

@@ -39,6 +39,8 @@ namespace nan2 {
     template <typename Lambda1, typename Lambda2>
     void ContinuousMove(float x, float y, Lambda1&& condition, Lambda2&& collisionCallback, int simulation_time = -1);
 
+    inline void MoveTo(const Vector2& position);
+
   };
 }
 

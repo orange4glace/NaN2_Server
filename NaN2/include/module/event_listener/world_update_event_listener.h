@@ -14,7 +14,7 @@ namespace event_listener {
 
 class WorldUpdateEventListener : public EventListener<WorldUpdateEventListener> {
 
-  virtual void OnUpdate(int dt) = 0;
+  virtual void OnUpdate(int dt) {};
 
 };
 
