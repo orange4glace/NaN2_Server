@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-namespace ctf_mod_s2c {
+namespace CTFModS2C {
 
 
 	//Message ID that replies to each RMI method. 

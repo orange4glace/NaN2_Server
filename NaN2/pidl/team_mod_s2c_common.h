@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-namespace team_mod_s2c {
+namespace TeamModS2C {
 
 
 	//Message ID that replies to each RMI method. 

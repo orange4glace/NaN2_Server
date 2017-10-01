@@ -9,7 +9,7 @@
 
 #include "team_mod_c2s_proxy.h"
 
-namespace team_mod_s2c {
+namespace TeamModC2S {
 
 
         

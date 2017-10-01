@@ -2,7 +2,7 @@ rename cs(std::vector<Proud::HostID>, System.Collections.Generic.List<Nettention
 rename cs(nan2::module::ctf_module::Snapshot, nan2::module::CTFModule::Snapshot);
 rename cs(Proud::HostID, Nettention.Proud.HostID);
 
-[marshaler(cs)=nan2.ProudMarshaler] global ctf_mod_s2c 7000 {
+[marshaler(cs)=nan2.ProudMarshaler] global CTFModS2C 7000 {
 	Snapshot([in] nan2::module::ctf_module::Snapshot snapshot);
 	FlagCaptured([in] Proud::HostID player_id);
 	FlagDropped([in] Proud::HostID player_id, [in] float pos_x, [in] float pos_y);

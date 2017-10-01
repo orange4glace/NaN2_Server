@@ -14,7 +14,7 @@
 #include "ctf_mod_s2c_common.h"
 
      
-namespace ctf_mod_s2c {
+namespace CTFModS2C {
 
 
 	class Stub : public ::Proud::IRmiStub
@@ -25,51 +25,51 @@ namespace ctf_mod_s2c {
 			return false;
 		} 
 
-#define DECRMI_ctf_mod_s2c_Snapshot bool Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::module::ctf_module::Snapshot  & snapshot) PN_OVERRIDE
+#define DECRMI_CTFModS2C_Snapshot bool Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::module::ctf_module::Snapshot  & snapshot) PN_OVERRIDE
 
-#define DEFRMI_ctf_mod_s2c_Snapshot(DerivedClass) bool DerivedClass::Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::module::ctf_module::Snapshot  & snapshot)
-#define CALL_ctf_mod_s2c_Snapshot Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::module::ctf_module::Snapshot  & snapshot)
-#define PARAM_ctf_mod_s2c_Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::module::ctf_module::Snapshot  & snapshot)
+#define DEFRMI_CTFModS2C_Snapshot(DerivedClass) bool DerivedClass::Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::module::ctf_module::Snapshot  & snapshot)
+#define CALL_CTFModS2C_Snapshot Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::module::ctf_module::Snapshot  & snapshot)
+#define PARAM_CTFModS2C_Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::module::ctf_module::Snapshot  & snapshot)
                
 		virtual bool FlagCaptured ( ::Proud::HostID, ::Proud::RmiContext& , const Proud::HostID  & )		{ 
 			return false;
 		} 
 
-#define DECRMI_ctf_mod_s2c_FlagCaptured bool FlagCaptured ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id) PN_OVERRIDE
+#define DECRMI_CTFModS2C_FlagCaptured bool FlagCaptured ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id) PN_OVERRIDE
 
-#define DEFRMI_ctf_mod_s2c_FlagCaptured(DerivedClass) bool DerivedClass::FlagCaptured ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
-#define CALL_ctf_mod_s2c_FlagCaptured FlagCaptured ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
-#define PARAM_ctf_mod_s2c_FlagCaptured ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
+#define DEFRMI_CTFModS2C_FlagCaptured(DerivedClass) bool DerivedClass::FlagCaptured ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
+#define CALL_CTFModS2C_FlagCaptured FlagCaptured ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
+#define PARAM_CTFModS2C_FlagCaptured ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
                
 		virtual bool FlagDropped ( ::Proud::HostID, ::Proud::RmiContext& , const Proud::HostID  & , const float  & , const float  & )		{ 
 			return false;
 		} 
 
-#define DECRMI_ctf_mod_s2c_FlagDropped bool FlagDropped ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const float  & pos_x, const float  & pos_y) PN_OVERRIDE
+#define DECRMI_CTFModS2C_FlagDropped bool FlagDropped ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const float  & pos_x, const float  & pos_y) PN_OVERRIDE
 
-#define DEFRMI_ctf_mod_s2c_FlagDropped(DerivedClass) bool DerivedClass::FlagDropped ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const float  & pos_x, const float  & pos_y)
-#define CALL_ctf_mod_s2c_FlagDropped FlagDropped ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const float  & pos_x, const float  & pos_y)
-#define PARAM_ctf_mod_s2c_FlagDropped ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const float  & pos_x, const float  & pos_y)
+#define DEFRMI_CTFModS2C_FlagDropped(DerivedClass) bool DerivedClass::FlagDropped ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const float  & pos_x, const float  & pos_y)
+#define CALL_CTFModS2C_FlagDropped FlagDropped ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const float  & pos_x, const float  & pos_y)
+#define PARAM_CTFModS2C_FlagDropped ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const float  & pos_x, const float  & pos_y)
                
 		virtual bool FlagReturned ( ::Proud::HostID, ::Proud::RmiContext& , const Proud::HostID  & )		{ 
 			return false;
 		} 
 
-#define DECRMI_ctf_mod_s2c_FlagReturned bool FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id) PN_OVERRIDE
+#define DECRMI_CTFModS2C_FlagReturned bool FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id) PN_OVERRIDE
 
-#define DEFRMI_ctf_mod_s2c_FlagReturned(DerivedClass) bool DerivedClass::FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
-#define CALL_ctf_mod_s2c_FlagReturned FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
-#define PARAM_ctf_mod_s2c_FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
+#define DEFRMI_CTFModS2C_FlagReturned(DerivedClass) bool DerivedClass::FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
+#define CALL_CTFModS2C_FlagReturned FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
+#define PARAM_CTFModS2C_FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
                
 		virtual bool Scored ( ::Proud::HostID, ::Proud::RmiContext& , const Proud::HostID  & )		{ 
 			return false;
 		} 
 
-#define DECRMI_ctf_mod_s2c_Scored bool Scored ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id) PN_OVERRIDE
+#define DECRMI_CTFModS2C_Scored bool Scored ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id) PN_OVERRIDE
 
-#define DEFRMI_ctf_mod_s2c_Scored(DerivedClass) bool DerivedClass::Scored ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
-#define CALL_ctf_mod_s2c_Scored Scored ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
-#define PARAM_ctf_mod_s2c_Scored ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
+#define DEFRMI_CTFModS2C_Scored(DerivedClass) bool DerivedClass::Scored ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
+#define CALL_CTFModS2C_Scored Scored ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
+#define PARAM_CTFModS2C_Scored ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
  
 		virtual bool ProcessReceivedMessage(::Proud::CReceivedMessage &pa, void* hostTag) PN_OVERRIDE;
 		static const PNTCHAR* RmiName_Snapshot;

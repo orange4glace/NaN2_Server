@@ -9,7 +9,7 @@
 using System;
 using System.Net;
 
-namespace team_mod_s2c
+namespace TeamModC2S
 {
 	internal class Proxy:Nettention.Proud.RmiProxy
 	{

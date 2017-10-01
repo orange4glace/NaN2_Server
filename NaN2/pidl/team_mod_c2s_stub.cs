@@ -9,7 +9,7 @@
 using System;
 using System.Net;	     
 
-namespace team_mod_s2c
+namespace TeamModC2S
 {
 	internal class Stub:Nettention.Proud.RmiStub
 	{

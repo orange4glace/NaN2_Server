@@ -16,7 +16,7 @@ const unsigned char sz_team_mod_s2c_stub_hRmi[] =
 0xaa, 0xbb, 0xcc, 0xdd, 0xff,0x99, 0xaa, 0xbb, 0xcc, 0x99, 0xaa, 0xdd, 0xff, 0x00 };   
 
 
-namespace team_mod_s2c {
+namespace TeamModS2C {
 
 
 	bool Stub::ProcessReceivedMessage(::Proud::CReceivedMessage &pa, void* hostTag) 

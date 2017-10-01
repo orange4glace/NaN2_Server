@@ -9,7 +9,7 @@
 using System;
 using System.Net;	     
 
-namespace ctf_mod_s2c
+namespace CTFModS2C
 {
 	internal class Stub:Nettention.Proud.RmiStub
 	{

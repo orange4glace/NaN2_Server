@@ -4,7 +4,7 @@
 
 
 #include "ctf_mod_s2c_common.h"
-namespace ctf_mod_s2c {
+namespace CTFModS2C {
 
 
 	::Proud::RmiID g_RmiIDList[] = {

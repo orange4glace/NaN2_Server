@@ -8,7 +8,7 @@
 // Do not modify this file, but modify the source .pidl file.
 
 using System;
-namespace team_mod_s2c
+namespace TeamModS2C
 {
 	internal class Common
 	{

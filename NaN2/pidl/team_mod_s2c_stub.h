@@ -14,7 +14,7 @@
 #include "team_mod_s2c_common.h"
 
      
-namespace team_mod_s2c {
+namespace TeamModS2C {
 
 
 	class Stub : public ::Proud::IRmiStub
@@ -25,21 +25,21 @@ namespace team_mod_s2c {
 			return false;
 		} 
 
-#define DECRMI_team_mod_s2c_Snapshot bool Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::module::team_module::Snapshot  & snapshot) PN_OVERRIDE
+#define DECRMI_TeamModS2C_Snapshot bool Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::module::team_module::Snapshot  & snapshot) PN_OVERRIDE
 
-#define DEFRMI_team_mod_s2c_Snapshot(DerivedClass) bool DerivedClass::Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::module::team_module::Snapshot  & snapshot)
-#define CALL_team_mod_s2c_Snapshot Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::module::team_module::Snapshot  & snapshot)
-#define PARAM_team_mod_s2c_Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::module::team_module::Snapshot  & snapshot)
+#define DEFRMI_TeamModS2C_Snapshot(DerivedClass) bool DerivedClass::Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::module::team_module::Snapshot  & snapshot)
+#define CALL_TeamModS2C_Snapshot Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::module::team_module::Snapshot  & snapshot)
+#define PARAM_TeamModS2C_Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const nan2::module::team_module::Snapshot  & snapshot)
                
 		virtual bool TeamJoined ( ::Proud::HostID, ::Proud::RmiContext& , const Proud::HostID  & , const int  & )		{ 
 			return false;
 		} 
 
-#define DECRMI_team_mod_s2c_TeamJoined bool TeamJoined ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const int  & team) PN_OVERRIDE
+#define DECRMI_TeamModS2C_TeamJoined bool TeamJoined ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const int  & team) PN_OVERRIDE
 
-#define DEFRMI_team_mod_s2c_TeamJoined(DerivedClass) bool DerivedClass::TeamJoined ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const int  & team)
-#define CALL_team_mod_s2c_TeamJoined TeamJoined ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const int  & team)
-#define PARAM_team_mod_s2c_TeamJoined ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const int  & team)
+#define DEFRMI_TeamModS2C_TeamJoined(DerivedClass) bool DerivedClass::TeamJoined ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const int  & team)
+#define CALL_TeamModS2C_TeamJoined TeamJoined ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const int  & team)
+#define PARAM_TeamModS2C_TeamJoined ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const int  & team)
  
 		virtual bool ProcessReceivedMessage(::Proud::CReceivedMessage &pa, void* hostTag) PN_OVERRIDE;
 		static const PNTCHAR* RmiName_Snapshot;

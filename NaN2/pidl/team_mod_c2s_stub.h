@@ -14,7 +14,7 @@
 #include "team_mod_c2s_common.h"
 
      
-namespace team_mod_s2c {
+namespace TeamModC2S {
 
 
 	class Stub : public ::Proud::IRmiStub
@@ -25,11 +25,11 @@ namespace team_mod_s2c {
 			return false;
 		} 
 
-#define DECRMI_team_mod_s2c_JoinTeam bool JoinTeam ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & team) PN_OVERRIDE
+#define DECRMI_TeamModC2S_JoinTeam bool JoinTeam ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & team) PN_OVERRIDE
 
-#define DEFRMI_team_mod_s2c_JoinTeam(DerivedClass) bool DerivedClass::JoinTeam ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & team)
-#define CALL_team_mod_s2c_JoinTeam JoinTeam ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & team)
-#define PARAM_team_mod_s2c_JoinTeam ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & team)
+#define DEFRMI_TeamModC2S_JoinTeam(DerivedClass) bool DerivedClass::JoinTeam ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & team)
+#define CALL_TeamModC2S_JoinTeam JoinTeam ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & team)
+#define PARAM_TeamModC2S_JoinTeam ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & team)
  
 		virtual bool ProcessReceivedMessage(::Proud::CReceivedMessage &pa, void* hostTag) PN_OVERRIDE;
 		static const PNTCHAR* RmiName_JoinTeam;

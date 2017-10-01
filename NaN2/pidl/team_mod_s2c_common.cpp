@@ -4,7 +4,7 @@
 
 
 #include "team_mod_s2c_common.h"
-namespace team_mod_s2c {
+namespace TeamModS2C {
 
 
 	::Proud::RmiID g_RmiIDList[] = {

@@ -9,7 +9,7 @@
 
 #include "ctf_mod_s2c_proxy.h"
 
-namespace ctf_mod_s2c {
+namespace CTFModS2C {
 
 
         

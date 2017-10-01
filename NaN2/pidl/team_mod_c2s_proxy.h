@@ -11,7 +11,7 @@
 
 #include "team_mod_c2s_common.h"
 
-namespace team_mod_s2c {
+namespace TeamModC2S {
 
 
 	class Proxy : public ::Proud::IRmiProxy

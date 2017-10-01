@@ -1,7 +1,7 @@
 rename cs(nan2::module::team_module::Snapshot, nan2::module::TeamModule::Snapshot);
 rename cs(Proud::HostID, Nettention.Proud.HostID);
 
-[marshaler(cs)=nan2.ProudMarshaler] global team_mod_s2c 8000 {
+[marshaler(cs)=nan2.ProudMarshaler] global TeamModS2C 8000 {
 	Snapshot([in] nan2::module::team_module::Snapshot snapshot);
 	TeamJoined([in] Proud::HostID player_id, [in] int team);
 }

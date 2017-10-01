@@ -16,7 +16,7 @@ const unsigned char sz_ctf_mod_s2c_stub_hRmi[] =
 0xaa, 0xbb, 0xcc, 0xdd, 0xff,0x99, 0xaa, 0xbb, 0xcc, 0x99, 0xaa, 0xdd, 0xff, 0x00 };   
 
 
-namespace ctf_mod_s2c {
+namespace CTFModS2C {
 
 
 	bool Stub::ProcessReceivedMessage(::Proud::CReceivedMessage &pa, void* hostTag) 
