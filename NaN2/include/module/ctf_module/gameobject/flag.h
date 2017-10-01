@@ -4,8 +4,8 @@
 
 #include "../../../gameobject/game_object.h"
 
-#include "../../../components/placeable.h";
-#include "../../../components/movable.h";
+#include "../../../components/placeable.h"
+#include "../../../components/movable.h"
 
 #include "../../team_module/team.h"
 

@@ -12,7 +12,7 @@ namespace module {
 
 namespace event_listener {
 
-class WorldEventListener : EventListener<WorldEventListener> {
+class WorldEventListener : public EventListener<WorldEventListener> {
 
   virtual void OnGameObjectStaged(GameObject* const go) = 0;
   virtual void OnGameObjectRemoved(GameObject* const go) = 0;

@@ -12,7 +12,7 @@ namespace module {
 
 namespace event_listener {
 
-class PlayerEventListener : EventListener<PlayerEventListener> {
+class PlayerEventListener : public EventListener<PlayerEventListener> {
 
   virtual void OnPlayerJoin(Player* const player) = 0;
   virtual void OnPlayerLeave(Player* const player) = 0;

@@ -12,7 +12,7 @@ namespace module {
 
 namespace event_listener {
 
-class WorldUpdateEventListener : EventListener<WorldUpdateEventListener> {
+class WorldUpdateEventListener : public EventListener<WorldUpdateEventListener> {
 
   virtual void OnUpdate(int dt) = 0;
 

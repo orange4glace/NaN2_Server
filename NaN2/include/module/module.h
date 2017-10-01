@@ -4,6 +4,8 @@
 
 #include "module_base.h"
 
+#include "../logger/logger.h"
+
 #include <string>
 
 namespace nan2 {
