@@ -25,13 +25,10 @@ namespace CTFModS2C {
 	virtual bool FlagDropped ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const Proud::HostID & player_id, const float & pos_x, const float & pos_y)   PN_SEALED;  
 	virtual bool FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID & player_id) PN_SEALED; 
 	virtual bool FlagReturned ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const Proud::HostID & player_id)   PN_SEALED;  
-	virtual bool Scored ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID & player_id) PN_SEALED; 
-	virtual bool Scored ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const Proud::HostID & player_id)   PN_SEALED;  
 static const PNTCHAR* RmiName_Snapshot;
 static const PNTCHAR* RmiName_FlagCaptured;
 static const PNTCHAR* RmiName_FlagDropped;
 static const PNTCHAR* RmiName_FlagReturned;
-static const PNTCHAR* RmiName_Scored;
 static const PNTCHAR* RmiName_First;
 		Proxy()
 		{

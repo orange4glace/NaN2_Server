@@ -21,8 +21,14 @@ namespace TeamModS2C {
 	virtual bool Snapshot ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const nan2::module::team_module::Snapshot & snapshot)   PN_SEALED;  
 	virtual bool TeamJoined ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID & player_id, const int & team) PN_SEALED; 
 	virtual bool TeamJoined ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const Proud::HostID & player_id, const int & team)   PN_SEALED;  
+	virtual bool TeamLeft ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID & player_id, const int & team) PN_SEALED; 
+	virtual bool TeamLeft ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const Proud::HostID & player_id, const int & team)   PN_SEALED;  
+	virtual bool Scored ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & team, const int & score) PN_SEALED; 
+	virtual bool Scored ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & team, const int & score)   PN_SEALED;  
 static const PNTCHAR* RmiName_Snapshot;
 static const PNTCHAR* RmiName_TeamJoined;
+static const PNTCHAR* RmiName_TeamLeft;
+static const PNTCHAR* RmiName_Scored;
 static const PNTCHAR* RmiName_First;
 		Proxy()
 		{

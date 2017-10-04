@@ -12,9 +12,13 @@ namespace TeamModS2C {
 		Rmi_Snapshot,
                
 		Rmi_TeamJoined,
+               
+		Rmi_TeamLeft,
+               
+		Rmi_Scored,
 	};
 
-	int g_RmiIDListCount = 2;
+	int g_RmiIDListCount = 4;
 
 }
 

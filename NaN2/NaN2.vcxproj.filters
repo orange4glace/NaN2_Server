@@ -171,6 +171,9 @@
     <ClInclude Include="include\module\ctf_module\team_info.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\module\team_module\snapshot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\components\component.cpp">

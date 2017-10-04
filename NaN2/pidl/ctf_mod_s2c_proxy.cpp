@@ -128,34 +128,6 @@ __msg << player_id;
 		return RmiSend(remotes,remoteCount,rmiContext,__msg,
 			RmiName_FlagReturned, (::Proud::RmiID)Rmi_FlagReturned);
 	}
-        
-	bool Proxy::Scored ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID & player_id)	{
-		::Proud::CMessage __msg;
-__msg.UseInternalBuffer();
-__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
-
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Scored;
-__msg.Write(__msgid); 
-	
-__msg << player_id;
-		
-		return RmiSend(&remote,1,rmiContext,__msg,
-			RmiName_Scored, (::Proud::RmiID)Rmi_Scored);
-	}
-
-	bool Proxy::Scored ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const Proud::HostID & player_id)  	{
-		::Proud::CMessage __msg;
-__msg.UseInternalBuffer();
-__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
-
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Scored;
-__msg.Write(__msgid); 
-	
-__msg << player_id;
-		
-		return RmiSend(remotes,remoteCount,rmiContext,__msg,
-			RmiName_Scored, (::Proud::RmiID)Rmi_Scored);
-	}
 #ifdef USE_RMI_NAME_STRING
 const PNTCHAR* Proxy::RmiName_Snapshot =_PNT("Snapshot");
 #else
@@ -175,11 +147,6 @@ const PNTCHAR* Proxy::RmiName_FlagDropped =_PNT("");
 const PNTCHAR* Proxy::RmiName_FlagReturned =_PNT("FlagReturned");
 #else
 const PNTCHAR* Proxy::RmiName_FlagReturned =_PNT("");
-#endif
-#ifdef USE_RMI_NAME_STRING
-const PNTCHAR* Proxy::RmiName_Scored =_PNT("Scored");
-#else
-const PNTCHAR* Proxy::RmiName_Scored =_PNT("");
 #endif
 const PNTCHAR* Proxy::RmiName_First = RmiName_Snapshot;
 

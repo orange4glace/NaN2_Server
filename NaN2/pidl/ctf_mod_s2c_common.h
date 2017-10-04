@@ -12,8 +12,6 @@ namespace CTFModS2C {
     static const ::Proud::RmiID Rmi_FlagDropped = (::Proud::RmiID)(7000+3);
                
     static const ::Proud::RmiID Rmi_FlagReturned = (::Proud::RmiID)(7000+4);
-               
-    static const ::Proud::RmiID Rmi_Scored = (::Proud::RmiID)(7000+5);
 
 	// List that has RMI ID.
 	extern ::Proud::RmiID g_RmiIDList[];

@@ -184,6 +184,7 @@
     <ClInclude Include="include\module\event_listener\character_event_listener.h" />
     <ClInclude Include="include\module\event_listener\event_listener.h" />
     <ClInclude Include="include\module\module_base.h" />
+    <ClInclude Include="include\module\team_module\snapshot.h" />
     <ClInclude Include="include\network\collection_marshaler.h" />
     <ClInclude Include="include\network\local_character_snapshot.h" />
     <ClInclude Include="include\network\player_input_packet.h" />

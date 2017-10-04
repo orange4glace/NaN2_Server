@@ -17,6 +17,10 @@ class PlayerEventListener : public EventListener<PlayerEventListener> {
   virtual void OnPlayerJoin(Player* const player) {};
   virtual void OnPlayerLeave(Player* const player) {};
 
+public:
+  inline PlayerEventListener() : EventListener<PlayerEventListener>() {}
+  inline PlayerEventListener(Priority priority) : EventListener<PlayerEventListener>(priority) {}
+
 };
 
 }

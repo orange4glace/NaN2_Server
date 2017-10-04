@@ -20,6 +20,8 @@ class Team {
   TeamID id_;
   std::map<PlayerID, Player* const> players_;
 
+  int score_;
+
   void addPlayer(Player* const player);
   void removePlayer(Player* const player);
 
@@ -29,6 +31,9 @@ public:
   Team(TeamID id);
 
   Player* const GetPlayer(PlayerID id) const;
+  void AddScore(int score);
+  void SetScore(int score);
+  int score() const;
 
   TeamID id() const;
 

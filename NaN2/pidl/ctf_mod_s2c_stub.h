@@ -60,23 +60,12 @@ namespace CTFModS2C {
 #define DEFRMI_CTFModS2C_FlagReturned(DerivedClass) bool DerivedClass::FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
 #define CALL_CTFModS2C_FlagReturned FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
 #define PARAM_CTFModS2C_FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
-               
-		virtual bool Scored ( ::Proud::HostID, ::Proud::RmiContext& , const Proud::HostID  & )		{ 
-			return false;
-		} 
-
-#define DECRMI_CTFModS2C_Scored bool Scored ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id) PN_OVERRIDE
-
-#define DEFRMI_CTFModS2C_Scored(DerivedClass) bool DerivedClass::Scored ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
-#define CALL_CTFModS2C_Scored Scored ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
-#define PARAM_CTFModS2C_Scored ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
  
 		virtual bool ProcessReceivedMessage(::Proud::CReceivedMessage &pa, void* hostTag) PN_OVERRIDE;
 		static const PNTCHAR* RmiName_Snapshot;
 		static const PNTCHAR* RmiName_FlagCaptured;
 		static const PNTCHAR* RmiName_FlagDropped;
 		static const PNTCHAR* RmiName_FlagReturned;
-		static const PNTCHAR* RmiName_Scored;
 		static const PNTCHAR* RmiName_First;
 		virtual ::Proud::RmiID* GetRmiIDList() PN_OVERRIDE { return g_RmiIDList; }
 		virtual int GetRmiIDListCount() PN_OVERRIDE { return g_RmiIDListCount; }
@@ -121,15 +110,6 @@ namespace CTFModS2C {
 			if (FlagReturned_Function==nullptr) 
 				return true; 
 			return FlagReturned_Function(remote,rmiContext, player_id); 
-		}
-
-               
-		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const Proud::HostID  & ) > Scored_Function;
-		virtual bool Scored ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id) 
-		{ 
-			if (Scored_Function==nullptr) 
-				return true; 
-			return Scored_Function(remote,rmiContext, player_id); 
 		}
 
 	};

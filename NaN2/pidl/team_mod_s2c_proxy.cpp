@@ -70,6 +70,66 @@ __msg << team;
 		return RmiSend(remotes,remoteCount,rmiContext,__msg,
 			RmiName_TeamJoined, (::Proud::RmiID)Rmi_TeamJoined);
 	}
+        
+	bool Proxy::TeamLeft ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID & player_id, const int & team)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_TeamLeft;
+__msg.Write(__msgid); 
+	
+__msg << player_id;
+__msg << team;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_TeamLeft, (::Proud::RmiID)Rmi_TeamLeft);
+	}
+
+	bool Proxy::TeamLeft ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const Proud::HostID & player_id, const int & team)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_TeamLeft;
+__msg.Write(__msgid); 
+	
+__msg << player_id;
+__msg << team;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_TeamLeft, (::Proud::RmiID)Rmi_TeamLeft);
+	}
+        
+	bool Proxy::Scored ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & team, const int & score)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Scored;
+__msg.Write(__msgid); 
+	
+__msg << team;
+__msg << score;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_Scored, (::Proud::RmiID)Rmi_Scored);
+	}
+
+	bool Proxy::Scored ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & team, const int & score)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Scored;
+__msg.Write(__msgid); 
+	
+__msg << team;
+__msg << score;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_Scored, (::Proud::RmiID)Rmi_Scored);
+	}
 #ifdef USE_RMI_NAME_STRING
 const PNTCHAR* Proxy::RmiName_Snapshot =_PNT("Snapshot");
 #else
@@ -79,6 +139,16 @@ const PNTCHAR* Proxy::RmiName_Snapshot =_PNT("");
 const PNTCHAR* Proxy::RmiName_TeamJoined =_PNT("TeamJoined");
 #else
 const PNTCHAR* Proxy::RmiName_TeamJoined =_PNT("");
+#endif
+#ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_TeamLeft =_PNT("TeamLeft");
+#else
+const PNTCHAR* Proxy::RmiName_TeamLeft =_PNT("");
+#endif
+#ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_Scored =_PNT("Scored");
+#else
+const PNTCHAR* Proxy::RmiName_Scored =_PNT("");
 #endif
 const PNTCHAR* Proxy::RmiName_First = RmiName_Snapshot;
 

@@ -16,11 +16,9 @@ namespace CTFModS2C {
 		Rmi_FlagDropped,
                
 		Rmi_FlagReturned,
-               
-		Rmi_Scored,
 	};
 
-	int g_RmiIDListCount = 5;
+	int g_RmiIDListCount = 4;
 
 }
 

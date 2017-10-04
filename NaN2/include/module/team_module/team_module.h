@@ -6,6 +6,11 @@
 #include "../../world/player.h"
 #include "../event_listener/player_event_listener.h"
 
+#include "snapshot.h"
+
+#include "../../../pidl/team_mod_s2c_common.h"
+#include "../../../pidl/team_mod_s2c_proxy.h"
+
 #include "team.h"
 
 #include <vector>
@@ -17,13 +22,19 @@ namespace module {
 
 namespace team_module {
 
-class TeamModule : public Module<TeamModule> {
+class TeamModule : public Module<TeamModule>,
+  public event_listener::PlayerEventListener {
   friend class Module<TeamModule>;
 
   int num_of_teams_;
 
+  TeamModS2C::Proxy proxy_;
+
   std::vector<Team> teams_;
   std::map<Player*, Team*> player_team_map_;
+
+  void OnPlayerJoin(Player* const player) override;
+  void OnPlayerLeave(Player* const player) override;
 
 protected:
 
@@ -42,6 +53,9 @@ public:
 
   Team* const GetTeam(TeamID id);
   Team* const GetTeam(Player* player);
+
+  const TeamModS2C::Proxy& proxy() const;
+  //const TeamModC2S::Stub& stub() const;
 
   int num_of_teams() const;
 

@@ -18,6 +18,9 @@ class WorldEventListener : public EventListener<WorldEventListener> {
   virtual void OnGameObjectRemoved(GameObject* const go) {};
 
 public:
+  inline WorldEventListener() : EventListener<WorldEventListener>() {}
+  inline WorldEventListener(Priority priority) : EventListener<WorldEventListener>(priority) {}
+
   static void GameObjectStaged(GameObject* const go) {
     for (auto li : listeners_) li->OnGameObjectStaged(go);
   }

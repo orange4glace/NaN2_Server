@@ -7,6 +7,8 @@
 #include "../module.h"
 #include "../team_module/team_module.h"
 
+#include "../event_listener/player_event_listener.h"
+
 #include "../../network/proud_server.h"
 #include "snapshot.h"
 #include "../../../pidl/ctf_mod_s2c_common.h"
@@ -24,13 +26,16 @@ namespace module {
 
 namespace ctf_module {
 
-class CTFModule : public Module<CTFModule> {
+class CTFModule : public Module<CTFModule>,
+  public event_listener::PlayerEventListener {
   friend class Module<CTFModule>;
 
   CTFModS2C::Proxy proxy_;
   CTFModS2C::Stub stub_;
 
   std::map<const team_module::Team* const, TeamInfo> team_infos_;
+
+  void OnPlayerJoin(Player* const player) override;
 
 protected:
 
@@ -49,7 +54,6 @@ public:
   void ProxyFlagCaptured(const Flag* const flag, const Player* const player);
   void ProxyFlagDropped(const Flag* const flag, const Player* const player, const Vector2& position);
   void ProxyFlagReturned(const Flag* const flag, const Player* const player);
-  void ProxyScored(const Player* const player);
 
 };
 

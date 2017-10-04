@@ -16,6 +16,10 @@ class WorldUpdateEventListener : public EventListener<WorldUpdateEventListener> 
 
   virtual void OnUpdate(int dt) {};
 
+public:
+  inline WorldUpdateEventListener() : EventListener<WorldUpdateEventListener>() {}
+  inline WorldUpdateEventListener(Priority priority) : EventListener<WorldUpdateEventListener>(priority) {}
+
 };
 
 }

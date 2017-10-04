@@ -63,7 +63,7 @@ void Flag::Score() {
 #endif
   returned_ = true;
   movable_.MoveTo(base_position_);
-  CTFModule::GetModule()->ProxyScored(attached_player_);
+  team_->AddScore(1);
   attached_player_ = nullptr;
 }
 

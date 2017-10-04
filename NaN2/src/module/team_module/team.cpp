@@ -1,6 +1,9 @@
 // team.cpp
 #include "module/team_module/team.h"
 
+#include "module/team_module/team_module.h"
+#include "network/proud_server.h"
+
 namespace nan2 {
 
 namespace module {
@@ -34,6 +37,18 @@ Player* const Team::GetPlayer(PlayerID id) const {
     throw std::string("[Team] No player, " + id);
 #endif
   return players_.at(id);
+}
+
+void Team::AddScore(int score) {
+  auto proxy = team_module::TeamModule::GetModule()->proxy();
+  ProudServer::instance()->IteratePlayers([&](Player* const p) -> bool {
+    proxy.Scored(p->id(), Proud::RmiContext::ReliableSend, id_, score);
+    return true;
+  });
+}
+
+int Team::score() const {
+  return score_;
 }
 
 TeamID Team::id() const {

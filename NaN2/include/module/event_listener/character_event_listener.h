@@ -18,6 +18,9 @@ class CharacterEventListener : public EventListener<CharacterEventListener> {
   virtual void OnCharacterDeath(Character* const character) {};
 
 public:
+  inline CharacterEventListener() : EventListener<CharacterEventListener>() {}
+  inline CharacterEventListener(Priority priority) : EventListener<CharacterEventListener>(priority) {}
+
   static void CharacterSpawn(Character* const character) {
     for (auto li : listeners_) li->OnCharacterSpawn(character);
   }

@@ -21,17 +21,16 @@ struct Snapshot {
 }
 
 namespace Proud {
-using namespace nan2::module::ctf_module;
 
-inline CMessage& operator >> (CMessage& a, Snapshot& packet) {
+inline CMessage& operator >> (CMessage& a, nan2::module::ctf_module::Snapshot& packet) {
   return a;
 }
 
-inline CMessage& operator << (CMessage& a, const Snapshot& packet) {
+inline CMessage& operator << (CMessage& a, const nan2::module::ctf_module::Snapshot& packet) {
   return a;
 }
 
-inline void AppendTextOut(String& str, const Snapshot& packet) {
+inline void AppendTextOut(String& str, const nan2::module::ctf_module::Snapshot& packet) {
 
 }
 

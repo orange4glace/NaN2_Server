@@ -7,5 +7,4 @@ rename cs(Proud::HostID, Nettention.Proud.HostID);
 	FlagCaptured([in] Proud::HostID player_id);
 	FlagDropped([in] Proud::HostID player_id, [in] float pos_x, [in] float pos_y);
 	FlagReturned([in] Proud::HostID player_id);
-	Scored([in] Proud::HostID player_id);
 }
