@@ -46,10 +46,17 @@ namespace nan2 {
     int teams = 5;
     ActivateModule<module::team_module::TeamModule>((void*)&teams);
     ActivateModule<module::ctf_module::CTFModule>(nullptr);
+
+    scheduler_.Interval(2000, []()->void {
+      L_DEBUG << "Interval 500";
+    });
   }
 
   void World::Update(int dt) {
     Time::delta_time(dt);
+
+    // Update and run scheduler
+    scheduler_.Update(Time::current_time());
 
     stageGameObjects();
     for(auto const &entry : updatables_) {

@@ -12,6 +12,7 @@
 
 #include <utility>
 
+#include "scheduler.h"
 #include "../gameobject/game_object.h"
 #include "../module/module.h"
 
@@ -26,6 +27,7 @@ namespace nan2 {
         static World* instance_;
 
         std::chrono::high_resolution_clock::time_point last_system_time_;
+        Scheduler scheduler_;
 
         int snapshot_send_timer_;
 
@@ -52,6 +54,10 @@ namespace nan2 {
         static World* instance();
 
         World();
+
+        inline Scheduler& scheduler() {
+          return scheduler_;
+        }
 
         void Update(int dt);
         void FixedUpdate(int dt);

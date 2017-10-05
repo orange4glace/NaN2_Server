@@ -202,6 +202,7 @@
     <ClInclude Include="include\module\event_listener\world_event_listener.h" />
     <ClInclude Include="include\module\event_listener\world_update_event_listener.h" />
     <ClInclude Include="include\world\player.h" />
+    <ClInclude Include="include\world\scheduler.h" />
     <ClInclude Include="include\world\world.h" />
     <ClInclude Include="include\world_time.h" />
   </ItemGroup>
@@ -236,6 +237,7 @@
     <ClCompile Include="src\skill\skill.cpp" />
     <ClCompile Include="src\module\team_module\team_module.cpp" />
     <ClCompile Include="src\world\player.cpp" />
+    <ClCompile Include="src\world\scheduler.cpp" />
     <ClCompile Include="src\world\world.cpp" />
     <ClCompile Include="src\world_time.cpp" />
   </ItemGroup>

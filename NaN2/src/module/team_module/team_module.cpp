@@ -40,6 +40,7 @@ void TeamModule::OnPlayerJoin(Player* const player) {
   }
   ProudServer::instance()->IteratePlayers([&](Player* const p) -> bool {
     proxy_.Snapshot(p->id(), Proud::RmiContext::ReliableSend, snapshot);
+    return true;
   });
 }
 
