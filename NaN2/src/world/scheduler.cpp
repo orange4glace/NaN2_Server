@@ -13,7 +13,7 @@ int Scheduler::Timeout(int time, std::function<void()>&& functor, void* owner) {
   int task_id = next_task_id_++;
   int dtime = Time::current_time() + time;
   tasks_.emplace(SchedulerTask(owner, task_id, dtime, time, functor, 1));
-  owner_map_.at(owner).insert(task_id);
+  owner_map_[owner].insert(task_id);
   return task_id;
 }
 
@@ -21,7 +21,7 @@ int Scheduler::Interval(int time, std::function<void()>&& functor, void* owner, 
   int task_id = next_task_id_++;
   int dtime = Time::current_time() + time;
   tasks_.emplace(SchedulerTask(owner, task_id, dtime, time, functor, repeat));
-  owner_map_.at(owner).insert(task_id);
+  owner_map_[owner].insert(task_id);
   return task_id;
 }
 
@@ -34,8 +34,7 @@ void Scheduler::Update(int time) {
       tasks_.pop();
       cnt++;
       if (removes_.count(task.id)) continue;
-      assert(owner_map_.at(task.owner).count(task.id));
-      owner_map_.at(task.owner).erase(task.id);
+      assert(owner_map_[task.owner].count(task.id));
       task.functor();
       if (task.repeat != 1) {
         task.repeat--;
@@ -43,6 +42,7 @@ void Scheduler::Update(int time) {
         task.dtime = Time::current_time() + task.time;
         tasks_.emplace(task);
       }
+      else owner_map_.at(task.owner).erase(task.id);
     }
     else break;
   }
