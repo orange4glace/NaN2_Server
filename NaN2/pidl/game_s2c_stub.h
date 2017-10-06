@@ -70,6 +70,26 @@ namespace GameS2C {
 #define DEFRMI_GameS2C_SkillCasted(DerivedClass) bool DerivedClass::SkillCasted ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const nan2::SkillCastSnapshot  & snapshot)
 #define CALL_GameS2C_SkillCasted SkillCasted ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const nan2::SkillCastSnapshot  & snapshot)
 #define PARAM_GameS2C_SkillCasted ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const nan2::SkillCastSnapshot  & snapshot)
+               
+		virtual bool CharacterSpawned ( ::Proud::HostID, ::Proud::RmiContext& , const Proud::HostID  & , const nan2::Vector2  & )		{ 
+			return false;
+		} 
+
+#define DECRMI_GameS2C_CharacterSpawned bool CharacterSpawned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const nan2::Vector2  & position) PN_OVERRIDE
+
+#define DEFRMI_GameS2C_CharacterSpawned(DerivedClass) bool DerivedClass::CharacterSpawned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const nan2::Vector2  & position)
+#define CALL_GameS2C_CharacterSpawned CharacterSpawned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const nan2::Vector2  & position)
+#define PARAM_GameS2C_CharacterSpawned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const nan2::Vector2  & position)
+               
+		virtual bool CharacterDied ( ::Proud::HostID, ::Proud::RmiContext& , const Proud::HostID  & )		{ 
+			return false;
+		} 
+
+#define DECRMI_GameS2C_CharacterDied bool CharacterDied ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id) PN_OVERRIDE
+
+#define DEFRMI_GameS2C_CharacterDied(DerivedClass) bool DerivedClass::CharacterDied ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
+#define CALL_GameS2C_CharacterDied CharacterDied ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
+#define PARAM_GameS2C_CharacterDied ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
  
 		virtual bool ProcessReceivedMessage(::Proud::CReceivedMessage &pa, void* hostTag) PN_OVERRIDE;
 		static const PNTCHAR* RmiName_PlayerSnapshots;
@@ -77,6 +97,8 @@ namespace GameS2C {
 		static const PNTCHAR* RmiName_PlayerJoin;
 		static const PNTCHAR* RmiName_PlayerLeave;
 		static const PNTCHAR* RmiName_SkillCasted;
+		static const PNTCHAR* RmiName_CharacterSpawned;
+		static const PNTCHAR* RmiName_CharacterDied;
 		static const PNTCHAR* RmiName_First;
 		virtual ::Proud::RmiID* GetRmiIDList() PN_OVERRIDE { return g_RmiIDList; }
 		virtual int GetRmiIDListCount() PN_OVERRIDE { return g_RmiIDListCount; }
@@ -130,6 +152,24 @@ namespace GameS2C {
 			if (SkillCasted_Function==nullptr) 
 				return true; 
 			return SkillCasted_Function(remote,rmiContext, player_id, snapshot); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const Proud::HostID  & , const nan2::Vector2  & ) > CharacterSpawned_Function;
+		virtual bool CharacterSpawned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const nan2::Vector2  & position) 
+		{ 
+			if (CharacterSpawned_Function==nullptr) 
+				return true; 
+			return CharacterSpawned_Function(remote,rmiContext, player_id, position); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const Proud::HostID  & ) > CharacterDied_Function;
+		virtual bool CharacterDied ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id) 
+		{ 
+			if (CharacterDied_Function==nullptr) 
+				return true; 
+			return CharacterDied_Function(remote,rmiContext, player_id); 
 		}
 
 	};

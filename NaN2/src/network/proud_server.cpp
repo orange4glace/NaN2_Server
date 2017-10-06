@@ -141,6 +141,17 @@ namespace nan2 {
     }
   }
 
+  void ProudServer::ProxyCharacterSpawned(const Character* const character, const Vector2& position) {
+    for (auto& pair : players_) {
+      auto p = pair.GetSecond();
+      s2c_proxy_;
+    }
+  }
+
+  void ProudServer::ProxyCharacterDied(const Character* const character) {
+
+  }
+
   DEFRMI_GameC2S_PlayerInput(ProudServer) {
     auto player = GetPlayerByHostID(remote);
     if (!player) return true;

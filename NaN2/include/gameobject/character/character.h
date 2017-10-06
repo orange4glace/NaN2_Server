@@ -45,12 +45,16 @@ namespace nan2 {
     int update_chance_time_;
     int last_acked_input_sequence_;
 
+    bool alive_;
+    bool revivable_;
+
   protected:
 	  Skill* const GetSkill(SkillSlot slot);
 	  void SetSkill(SkillSlot slot, Skill* const skill);
 
   public:
     Character(Player* player);
+    ~Character();
 
     Player* const player();
 
@@ -65,7 +69,9 @@ namespace nan2 {
     const RemoteCharacterSnapshot GetRemoteCharacterSnapshot() const;
     void CleanSnapshot();
 
+
 	Weapon* const weapon();
+    void revivable(bool value);
     
   };
 

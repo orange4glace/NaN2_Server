@@ -1,5 +1,6 @@
 rename cs(std::vector<Proud::HostID>, System.Collections.Generic.List<Nettention.Proud.HostID>);
 rename cs(std::vector<nan2::RemoteCharacterSnapshot>, System.Collections.Generic.List<nan2.RemoteCharacterSnapshot>);
+rename cs(nan2::Vector2, UnityEngine.Vector2);
 rename cs(Proud::HostID, Nettention.Proud.HostID);
 
 [marshaler(cs)=nan2.ProudMarshaler] global GameS2C 6000 {
@@ -8,4 +9,7 @@ rename cs(Proud::HostID, Nettention.Proud.HostID);
 	PlayerJoin([in] Proud::HostID player_id);
 	PlayerLeave([in] Proud::HostID player_id);
 	SkillCasted([in] Proud::HostID player_id, [in] nan2::SkillCastSnapshot snapshot);
+
+    CharacterSpawned([in] Proud::HostID player_id, [in] nan2::Vector2 position);
+    CharacterDied([in] Proud::HostID player_id);
 }

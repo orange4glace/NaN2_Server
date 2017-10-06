@@ -27,11 +27,17 @@ namespace GameS2C {
 	virtual bool PlayerLeave ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const Proud::HostID & player_id)   PN_SEALED;  
 	virtual bool SkillCasted ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID & player_id, const nan2::SkillCastSnapshot & snapshot) PN_SEALED; 
 	virtual bool SkillCasted ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const Proud::HostID & player_id, const nan2::SkillCastSnapshot & snapshot)   PN_SEALED;  
+	virtual bool CharacterSpawned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID & player_id, const nan2::Vector2 & position) PN_SEALED; 
+	virtual bool CharacterSpawned ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const Proud::HostID & player_id, const nan2::Vector2 & position)   PN_SEALED;  
+	virtual bool CharacterDied ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID & player_id) PN_SEALED; 
+	virtual bool CharacterDied ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const Proud::HostID & player_id)   PN_SEALED;  
 static const PNTCHAR* RmiName_PlayerSnapshots;
 static const PNTCHAR* RmiName_JoinWorld;
 static const PNTCHAR* RmiName_PlayerJoin;
 static const PNTCHAR* RmiName_PlayerLeave;
 static const PNTCHAR* RmiName_SkillCasted;
+static const PNTCHAR* RmiName_CharacterSpawned;
+static const PNTCHAR* RmiName_CharacterDied;
 static const PNTCHAR* RmiName_First;
 		Proxy()
 		{

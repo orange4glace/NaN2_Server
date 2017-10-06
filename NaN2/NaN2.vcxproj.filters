@@ -177,6 +177,9 @@
     <ClInclude Include="include\world\scheduler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\network\marshaler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\components\component.cpp">

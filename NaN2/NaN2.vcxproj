@@ -187,6 +187,7 @@
     <ClInclude Include="include\module\team_module\snapshot.h" />
     <ClInclude Include="include\network\collection_marshaler.h" />
     <ClInclude Include="include\network\local_character_snapshot.h" />
+    <ClInclude Include="include\network\marshaler.h" />
     <ClInclude Include="include\network\player_input_packet.h" />
     <ClInclude Include="include\network\proud_server.h" />
     <ClInclude Include="include\network\remote_character_snapshot.h" />

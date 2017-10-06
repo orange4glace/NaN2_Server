@@ -21,7 +21,9 @@ namespace nan2 {
   placeable_(this, Vector2(0, 0), Vector2(8, 20), Vector2(0, 3)),
   movable_(this),
   recorder_(this),
-  speed_(60.0f) {
+  speed_(60.0f),
+  alive_(true),
+  revivable_(false) {
     weapon_ = WeaponFactory::CreateProjectileWeapon(this);
 
     AddComponent(&living_);
@@ -40,6 +42,10 @@ namespace nan2 {
     SetSkill(SkillSlot::SECONDARY, skill2);
 
     registerRecorder(static_cast<RecorderInterface*>(&recorder_));
+  }
+
+  Character::~Character() {
+    World::instance()->scheduler().RemoveSchedule(this);
   }
 
   Skill* const Character::GetSkill(SkillSlot slot) {
@@ -64,57 +70,59 @@ namespace nan2 {
       auto& input = input_queue_.front();
       if (update_chance_time_ < input.dt) break;
       update_chance_time_ -= input.dt;
-      float dd = (input.dt) / 1000.f * speed_;
-      movable_.DiscreteMove252(input.move_dir, dd,
-        [](GameObject* object) -> bool {
-        return true;
-      },
-        [](GameObject* object) -> bool {
-        return true;
-      });
-  	  weapon_->set_dir(input.aim_dir);
+
+      if (living_.hp()) {
+        float dd = (input.dt) / 1000.f * speed_;
+        movable_.DiscreteMove252(input.move_dir, dd,
+          [](GameObject* object) -> bool {
+          return true;
+        },
+          [](GameObject* object) -> bool {
+          return true;
+        });
+        weapon_->set_dir(input.aim_dir);
         weapon_->set_position(movable_.position() + weapon_->CalculateCharacterWeaponPivot());
 
-  	  if (input.skill_type != -1) {
-        L_DEBUG << "[Skill casted] Type = " << input.skill_type << ", Aim = " << (int)input.aim_dir;
+        if (input.skill_type != -1) {
+          L_DEBUG << "[Skill casted] Type = " << input.skill_type << ", Aim = " << (int)input.aim_dir;
 
-  		  auto skill = GetSkill((SkillSlot)input.skill_type);
-  		  auto fired = skill->Cast();
+          auto skill = GetSkill((SkillSlot)input.skill_type);
+          auto fired = skill->Cast();
 
-        if (fired) {
-          if (skill->guaranteed()) {
-            ProudServer::instance()->SendSkillCastSnapshot(player_, SkillCastSnapshot{
-              input.skill_type,
-              0,
-              0,
-              0
-            });
-          }
-          else {
-            weapon_fire_snapshots_.push_back({
-              input.skill_type,
-              movable_.position().x(),
-              movable_.position().y(),
-              input.aim_dir,
-              Time::current_time()
-            });
+          if (fired) {
+            if (skill->guaranteed()) {
+              ProudServer::instance()->SendSkillCastSnapshot(player_, SkillCastSnapshot{
+                input.skill_type,
+                0,
+                0,
+                0
+              });
+            }
+            else {
+              weapon_fire_snapshots_.push_back({
+                input.skill_type,
+                movable_.position().x(),
+                movable_.position().y(),
+                input.aim_dir,
+                Time::current_time()
+              });
+            }
           }
         }
-	    }
-	  
-  // if (input.fire_dir < 252) {
-  //   weapon_->set_dir(input.fire_dir);
-  //   weapon_->set_position(movable_.position() +  weapon_->CalculateCharacterWeaponPivot());
-  //   bool fired = weapon_->Fire1();
-
-  //   if (fired)
-  //     weapon_fire_snapshots_.push_back({
-  //       movable_.position().x(),
-  //       movable_.position().y(),
-  //       input.fire_dir,
-  //       Time::current_time()
-  //   });
-  // }
+      }
+      else {
+        if (alive_) {
+          alive_ = false;
+          ProudServer::instance()->ProxyCharacterDied(this);
+          if (revivable_) {
+            World::instance()->scheduler().Timeout(5000, [this]() -> void {
+              living_.set_hp(30);
+              alive_ = true;
+              ProudServer::instance()->ProxyCharacterSpawned(this, placeable_.position());
+            }, this);
+          }
+        }
+      }
 	  
       last_acked_input_sequence_ = input.sequence;
       input_queue_.pop();
@@ -164,6 +172,10 @@ namespace nan2 {
 
   Weapon* const Character::weapon() {
 	  return weapon_;
+  }
+
+  void Character::revivable(bool value) {
+    revivable_ = value;
   }
 
 }

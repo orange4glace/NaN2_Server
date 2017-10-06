@@ -156,6 +156,64 @@ __msg << snapshot;
 		return RmiSend(remotes,remoteCount,rmiContext,__msg,
 			RmiName_SkillCasted, (::Proud::RmiID)Rmi_SkillCasted);
 	}
+        
+	bool Proxy::CharacterSpawned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID & player_id, const nan2::Vector2 & position)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_CharacterSpawned;
+__msg.Write(__msgid); 
+	
+__msg << player_id;
+__msg << position;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_CharacterSpawned, (::Proud::RmiID)Rmi_CharacterSpawned);
+	}
+
+	bool Proxy::CharacterSpawned ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const Proud::HostID & player_id, const nan2::Vector2 & position)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_CharacterSpawned;
+__msg.Write(__msgid); 
+	
+__msg << player_id;
+__msg << position;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_CharacterSpawned, (::Proud::RmiID)Rmi_CharacterSpawned);
+	}
+        
+	bool Proxy::CharacterDied ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID & player_id)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_CharacterDied;
+__msg.Write(__msgid); 
+	
+__msg << player_id;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_CharacterDied, (::Proud::RmiID)Rmi_CharacterDied);
+	}
+
+	bool Proxy::CharacterDied ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const Proud::HostID & player_id)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_CharacterDied;
+__msg.Write(__msgid); 
+	
+__msg << player_id;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_CharacterDied, (::Proud::RmiID)Rmi_CharacterDied);
+	}
 #ifdef USE_RMI_NAME_STRING
 const PNTCHAR* Proxy::RmiName_PlayerSnapshots =_PNT("PlayerSnapshots");
 #else
@@ -180,6 +238,16 @@ const PNTCHAR* Proxy::RmiName_PlayerLeave =_PNT("");
 const PNTCHAR* Proxy::RmiName_SkillCasted =_PNT("SkillCasted");
 #else
 const PNTCHAR* Proxy::RmiName_SkillCasted =_PNT("");
+#endif
+#ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_CharacterSpawned =_PNT("CharacterSpawned");
+#else
+const PNTCHAR* Proxy::RmiName_CharacterSpawned =_PNT("");
+#endif
+#ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_CharacterDied =_PNT("CharacterDied");
+#else
+const PNTCHAR* Proxy::RmiName_CharacterDied =_PNT("");
 #endif
 const PNTCHAR* Proxy::RmiName_First = RmiName_PlayerSnapshots;
 

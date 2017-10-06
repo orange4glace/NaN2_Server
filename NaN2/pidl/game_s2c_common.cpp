@@ -18,9 +18,13 @@ namespace GameS2C {
 		Rmi_PlayerLeave,
                
 		Rmi_SkillCasted,
+               
+		Rmi_CharacterSpawned,
+               
+		Rmi_CharacterDied,
 	};
 
-	int g_RmiIDListCount = 5;
+	int g_RmiIDListCount = 7;
 
 }
 

@@ -4,6 +4,7 @@
 
 #include <ProudNetServer.h>
 #include "collection_marshaler.h"
+#include "marshaler.h"
 
 #include "../world/player.h"
 #include "player_input_packet.h"
@@ -88,6 +89,9 @@ namespace nan2 {
       const LocalCharacterSnapshot& local_character_snapshot, const std::vector<RemoteCharacterSnapshot>& remote_character_snapshots);
 
     void SendSkillCastSnapshot(const Player* const player, const SkillCastSnapshot& skill_cast_snapshot);
+
+    void ProxyCharacterSpawned(const Character* const character, const Vector2& position);
+    void ProxyCharacterDied(const Character* const character);
 
     template<typename Lambda>
     void IteratePlayers(Lambda&& lambda) {
