@@ -180,7 +180,7 @@
     <ClInclude Include="include\module\ctf_module\ctf_module.h" />
     <ClInclude Include="include\module\ctf_module\gameobject\flag.h" />
     <ClInclude Include="include\module\ctf_module\snapshot.h" />
-    <ClInclude Include="include\module\ctf_module\team_info.h" />
+    <ClInclude Include="include\module\ctf_module\team_data.h" />
     <ClInclude Include="include\module\event_listener\character_event_listener.h" />
     <ClInclude Include="include\module\event_listener\event_listener.h" />
     <ClInclude Include="include\module\module_base.h" />

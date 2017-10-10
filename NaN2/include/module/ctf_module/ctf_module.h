@@ -15,7 +15,7 @@
 #include "../../../pidl/ctf_mod_s2c_proxy.h"
 #include "../../../pidl/ctf_mod_s2c_stub.h"
 
-#include "team_info.h"
+#include "team_data.h"
 #include "gameobject/flag.h"
 
 #include <map>
@@ -33,7 +33,7 @@ class CTFModule : public Module<CTFModule>,
   CTFModS2C::Proxy proxy_;
   CTFModS2C::Stub stub_;
 
-  std::map<const team_module::Team* const, TeamInfo> team_infos_;
+  std::map<const team_module::Team* const, TeamData> team_infos_;
 
   void OnPlayerJoin(Player* const player) override;
 
@@ -49,7 +49,7 @@ public:
   void Initialize(const void* args ...) override;
   void Destroy() override;
 
-  const TeamInfo& team_info(const team_module::Team* const team) const;
+  const TeamData& team_data(const team_module::Team* const team) const;
 
   void ProxyFlagCaptured(const Flag* const flag, const Player* const player);
   void ProxyFlagDropped(const Flag* const flag, const Player* const player, const Vector2& position);

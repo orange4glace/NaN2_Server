@@ -45,6 +45,10 @@ public:
 
   void OnCharacterDeath(Character* const character) override;
 
+  const Vector2& position() const;
+  bool returned() const;
+  const Player* const attached_player() const;
+
 };
 
 }

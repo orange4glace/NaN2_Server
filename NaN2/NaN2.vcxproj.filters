@@ -168,9 +168,6 @@
     <ClInclude Include="include\module\event_listener\character_event_listener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\module\ctf_module\team_info.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\module\team_module\snapshot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -178,6 +175,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\network\marshaler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\module\ctf_module\team_data.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

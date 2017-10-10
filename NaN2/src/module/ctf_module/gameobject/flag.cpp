@@ -87,8 +87,8 @@ void Flag::Update() {
   else {
     auto character = attached_player_->character();
     auto team = team_module::TeamModule::GetModule()->GetTeam(attached_player_);
-    auto team_info = CTFModule::GetModule()->team_info(team);
-    if (placeable_.Contain(team_info.base_point)) {
+    auto team_data = CTFModule::GetModule()->team_data(team);
+    if (placeable_.Contain(team_data.base_point)) {
       Score();
     }
   }
@@ -97,6 +97,18 @@ void Flag::Update() {
 void Flag::OnCharacterDeath(Character* const character) {
   if (attached_player_->character() == character)
     Detach();
+}
+
+const Vector2& Flag::position() const {
+  return placeable_.position();
+}
+
+bool Flag::returned() const {
+  return returned_;
+}
+
+const Player* const Flag::attached_player() const {
+  return attached_player_;
 }
 
 }
