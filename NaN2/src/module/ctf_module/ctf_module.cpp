@@ -24,6 +24,7 @@ void CTFModule::Initialize(const void* args ...) {
     World::instance()->AddGameObject(flag);
     team_infos_[team].team_id = i;
     team_infos_[team].flag = flag;
+    team_infos_[team].base_point = Vector2::ZERO;
   }
 };
 
@@ -35,7 +36,7 @@ void CTFModule::Destroy() {
 void CTFModule::OnPlayerJoin(Player* const player) {
   Snapshot snapshot;
   for (auto team_data_pair : team_infos_) {
-    auto team_data = team_data_pair.second;
+    auto& team_data = team_data_pair.second;
     snapshot.team_data_snapshots.emplace_back(TeamDataSnapshot{});
     auto& team_data_snapshot = snapshot.team_data_snapshots.back();
     team_data_snapshot.team_id = team_data.team_id;
@@ -56,6 +57,16 @@ void CTFModule::OnPlayerJoin(Player* const player) {
     proxy_.Snapshot(p->id(), Proud::RmiContext::ReliableSend, snapshot);
     return true;
   });
+}
+
+void CTFModule::OnPlayerLeave(Player* const player) {
+  // Check is attached player
+  for (auto team_data_pair : team_infos_) {
+    auto& team_data = team_data_pair.second;
+    if (team_data.flag->attached_player() == player) {
+      team_data.flag->Detach();
+    }
+  }
 }
 
 const TeamData& CTFModule::team_data(const team_module::Team* const team) const {

@@ -90,8 +90,8 @@ namespace nan2 {
 
     void SendSkillCastSnapshot(const Player* const player, const SkillCastSnapshot& skill_cast_snapshot);
 
-    void ProxyCharacterSpawned(const Character* const character, const Vector2& position);
-    void ProxyCharacterDied(const Character* const character);
+    void ProxyCharacterSpawned(Character* const character, const Vector2& position);
+    void ProxyCharacterDied(Character* const character);
 
     template<typename Lambda>
     void IteratePlayers(Lambda&& lambda) {

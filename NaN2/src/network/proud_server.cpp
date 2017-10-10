@@ -9,6 +9,8 @@
 #include "../pidl/game_c2s_proxy.cpp"
 #include "../pidl/game_c2s_stub.cpp"
 
+#include "module/event_listener/player_event_listener.h"
+
 #include "logger/logger.h"
 
 namespace nan2 {
@@ -86,10 +88,15 @@ namespace nan2 {
     Player* player = new Player(client_info->m_HostID);
     players_.Add(client_info->m_HostID, player);
 
+    module::event_listener::PlayerEventListener::PlayerJoin(player);
+
     L_DEBUG << "Player " << player->id() << " has joined. Current Players = " << players_.size();
   }
   void ProudServer::OnClientLeave(Proud::CNetClientInfo* client_info, Proud::ErrorInfo* error_info, const Proud::ByteArray& comment) {
     auto player = GetPlayerByHostID(client_info->m_HostID);
+
+    module::event_listener::PlayerEventListener::PlayerLeave(player);
+
     players_.Remove(player->id());
 
     for (auto& pair : players_) {
@@ -141,15 +148,18 @@ namespace nan2 {
     }
   }
 
-  void ProudServer::ProxyCharacterSpawned(const Character* const character, const Vector2& position) {
+  void ProudServer::ProxyCharacterSpawned(Character* const character, const Vector2& position) {
     for (auto& pair : players_) {
       auto p = pair.GetSecond();
-      s2c_proxy_;
+      s2c_proxy_.CharacterSpawned(p->id(), Proud::RmiContext::ReliableSend, character->player()->id(), position);
     }
   }
 
-  void ProudServer::ProxyCharacterDied(const Character* const character) {
-
+  void ProudServer::ProxyCharacterDied(Character* const character) {
+    for (auto& pair : players_) {
+      auto p = pair.GetSecond();
+      s2c_proxy_.CharacterDied(p->id(), Proud::RmiContext::ReliableSend, character->player()->id());
+    }
   }
 
   DEFRMI_GameC2S_PlayerInput(ProudServer) {

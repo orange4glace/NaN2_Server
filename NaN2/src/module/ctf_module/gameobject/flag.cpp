@@ -12,7 +12,7 @@ namespace ctf_module {
 
 Flag::Flag(team_module::Team* const team, const Vector2& position) :
 GameObject((GameObjectType)0, true, false, true),
-placeable_(this, position, Vector2(0, 0), Vector2::ZERO),
+placeable_(this, position, Vector2(20, 20), Vector2::ZERO),
 movable_(this),
 team_(team),
 base_position_(position),
@@ -37,6 +37,7 @@ void Flag::Attach(Character* const character) {
   returned_ = false;
   CTFModule::GetModule()->ProxyFlagCaptured(this, character->player());
   attached_player_ = character->player();
+  L_DEBUG << "[Flag team_id = " << team_->id() << "] Attached to player " << character->player()->id();
 }
 
 void Flag::Detach() {
@@ -48,12 +49,14 @@ void Flag::Detach() {
   movable_.MoveTo(pos);
   attached_player_ = nullptr;
   CTFModule::GetModule()->ProxyFlagDropped(this, attached_player_, pos);
+  L_DEBUG << "[Flag team_id = " << team_->id() << "] Detached";
 }
 
 void Flag::Return(Character* const character) {
   returned_ = true;
   movable_.MoveTo(base_position_);
   CTFModule::GetModule()->ProxyFlagReturned(this, character->player());
+  L_DEBUG << "[Flag team_id = " << team_->id() << "] Returned by player " << character->player()->id();
 }
 
 void Flag::Score() {
@@ -61,9 +64,11 @@ void Flag::Score() {
   if (attached_player_ == nullptr)
     throw std::string("[Flag] Try to score while not attached.");
 #endif
+  auto attached_player_team = team_module::TeamModule::GetModule()->GetTeam(attached_player_);
   returned_ = true;
   movable_.MoveTo(base_position_);
-  team_->AddScore(1);
+  attached_player_team->AddScore(1);
+  L_DEBUG << "[Flag team_id = " << team_->id() << "] is scored to team " << attached_player_team << " by player " << attached_player_->id();
   attached_player_ = nullptr;
 }
 

@@ -36,6 +36,7 @@ class CTFModule : public Module<CTFModule>,
   std::map<const team_module::Team* const, TeamData> team_infos_;
 
   void OnPlayerJoin(Player* const player) override;
+  void OnPlayerLeave(Player* const player) override;
 
 protected:
 

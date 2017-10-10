@@ -30,6 +30,10 @@ void TeamModule::Destroy() {
 
 void TeamModule::OnPlayerJoin(Player* const player) {
   Snapshot snapshot;
+
+  // For test
+  AddPlayer(GetTeam(player->id() % 2), player);
+
   for (auto team : teams_) {
     snapshot.team_snapshots.emplace_back(TeamSnapshot{});
     auto& team_snapshot = snapshot.team_snapshots.back();
@@ -45,7 +49,8 @@ void TeamModule::OnPlayerJoin(Player* const player) {
 }
 
 void TeamModule::OnPlayerLeave(Player* const player) {
-
+  auto team = GetTeam(player);
+  RemovePlayer(team, player);
 }
 
 void TeamModule::AddPlayer(Team* const team, Player* const player) {
@@ -55,6 +60,10 @@ void TeamModule::AddPlayer(Team* const team, Player* const player) {
     throw std::string("[TeamModule] player_team_map duplicated player. " + player->id());
 #endif
   player_team_map_.insert({ player, team });
+  ProudServer::instance()->IteratePlayers([&](Player* const p) -> bool {
+    proxy_.TeamJoined(p->id(), Proud::RmiContext::ReliableSend, player->id(), team->id());
+    return true;
+  });
   L_DEBUG << "[TeamModule] Player added, Team = " << team->id() << ", Player = " << player->id();
 }
 
@@ -65,6 +74,10 @@ void TeamModule::RemovePlayer(Team* const team, Player* const player) {
     throw std::string("[TeamModule] player_team_map no player. " + player->id());
 #endif
   player_team_map_.erase(player);
+  ProudServer::instance()->IteratePlayers([&](Player* const p) -> bool {
+    proxy_.TeamLeft(p->id(), Proud::RmiContext::ReliableSend, player->id(), team->id());
+    return true;
+  });
   L_DEBUG << "[TeamModule] Player removed, Team = " << team->id() << ", Player = " << player->id();
 }
 

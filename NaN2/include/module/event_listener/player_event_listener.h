@@ -21,6 +21,14 @@ public:
   inline PlayerEventListener() : EventListener<PlayerEventListener>() {}
   inline PlayerEventListener(Priority priority) : EventListener<PlayerEventListener>(priority) {}
 
+  static void PlayerJoin(Player* const player) {
+    for (auto li : listeners_) li->OnPlayerJoin(player);
+  }
+
+  static void PlayerLeave(Player* const player) {
+    for (auto li : listeners_) li->OnPlayerLeave(player);
+  }
+
 };
 
 }

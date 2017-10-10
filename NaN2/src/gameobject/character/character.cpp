@@ -42,6 +42,9 @@ namespace nan2 {
     SetSkill(SkillSlot::SECONDARY, skill2);
 
     registerRecorder(static_cast<RecorderInterface*>(&recorder_));
+
+    ProudServer::instance()->ProxyCharacterSpawned(this, placeable_.position());
+    L_DEBUG << "[Character] Spawned at " << placeable_.position() << ". id = " << player_->id();
   }
 
   Character::~Character() {
@@ -114,11 +117,13 @@ namespace nan2 {
         if (alive_) {
           alive_ = false;
           ProudServer::instance()->ProxyCharacterDied(this);
+          L_DEBUG << "[Character] Died at " << placeable_.position() << ". id = " << player_->id();
           if (revivable_) {
             World::instance()->scheduler().Timeout(5000, [this]() -> void {
               living_.set_hp(30);
               alive_ = true;
               ProudServer::instance()->ProxyCharacterSpawned(this, placeable_.position());
+              L_DEBUG << "[Character] Spawned at " << placeable_.position() << ". id = " << player_->id();
             }, this);
           }
         }
