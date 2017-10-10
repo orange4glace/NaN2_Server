@@ -6,6 +6,8 @@
 #include "../../../pidl/team_mod_s2c_common.cpp"
 #include "../../../pidl/team_mod_s2c_proxy.cpp"
 
+#include "logger/logger.h"
+
 namespace nan2 {
 
 namespace module {

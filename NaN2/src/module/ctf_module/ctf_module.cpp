@@ -5,6 +5,8 @@
 #include "../pidl/ctf_mod_s2c_proxy.cpp"
 #include "../pidl/ctf_mod_s2c_stub.cpp"
 
+#include "logger/logger.h"
+
 #include <cassert>
 
 namespace nan2 {

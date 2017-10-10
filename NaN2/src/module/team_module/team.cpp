@@ -4,6 +4,8 @@
 #include "module/team_module/team_module.h"
 #include "network/proud_server.h"
 
+#include "logger/logger.h"
+
 namespace nan2 {
 
 namespace module {

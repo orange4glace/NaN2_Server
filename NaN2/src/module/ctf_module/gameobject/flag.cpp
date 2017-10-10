@@ -4,6 +4,8 @@
 #include "module/ctf_module/ctf_module.h"
 #include "module/team_module/team_module.h"
 
+#include "logger/logger.h"
+
 namespace nan2 {
 
 namespace module {
