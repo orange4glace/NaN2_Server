@@ -35,8 +35,8 @@ namespace nan2 {
 
     Proud::CNetServer* server_;
     Proud::CThreadPool* thread_;
-	  Proud::CriticalSection cs_;
-	  Proud::CriticalSectionLock cs_lock_;
+	Proud::CriticalSection cs_;
+	Proud::CriticalSectionLock cs_lock_;
 
     GameS2C::Proxy s2c_proxy_;
 
@@ -47,16 +47,19 @@ namespace nan2 {
 
     void Initialize();
 
-	  void Lock();
-	  void Unlock();
+	void Lock();
+	void Unlock();
 
     void Process();
 
+    void AttachProxy(Proud::IRmiProxy* proxy);
+    void AttachStub(Proud::IRmiStub* stub);
+
     bool OnConnectionRequest(Proud::AddrPort client_addr, Proud::ByteArray& data, Proud::ByteArray& reply) override;
-	  void OnClientJoin(Proud::CNetClientInfo* client_info) override;
-	  void OnClientLeave(Proud::CNetClientInfo* client_info, Proud::ErrorInfo* error_info, const Proud::ByteArray& comment) override;
-	  void OnClientOffline(Proud::CRemoteOfflineEventArgs& args) override;
-	  void OnClientOnline(Proud::CRemoteOnlineEventArgs& args) override;
+	void OnClientJoin(Proud::CNetClientInfo* client_info) override;
+	void OnClientLeave(Proud::CNetClientInfo* client_info, Proud::ErrorInfo* error_info, const Proud::ByteArray& comment) override;
+	void OnClientOffline(Proud::CRemoteOfflineEventArgs& args) override;
+	void OnClientOnline(Proud::CRemoteOnlineEventArgs& args) override;
     
     // Not used
     void OnP2PGroupJoinMemberAckComplete(Proud::HostID group_host_id, Proud::HostID member_host_id, Proud::ErrorType result) override {}

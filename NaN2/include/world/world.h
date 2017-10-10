@@ -68,6 +68,7 @@ namespace nan2 {
         template<typename Lambda>
         void IterateGameObjects(Lambda&& lambda) {
             for(auto const &entry : game_objects_) {
+              if (entry.second->staging_state() != StagingState::STAGED) continue;
                 std::forward<Lambda>(lambda)(entry.second);
             }
         }
@@ -77,6 +78,7 @@ namespace nan2 {
           // Must be improved later with
           // <GameObject>::Type()
           for (auto const &entry : game_objects_) {
+            if (entry.second->staging_state() != StagingState::STAGED) continue;
             if (TGameObject* casted = dynamic_cast<TGameObject*>(entry.second)) {
               if (!std::forward<Lambda>(lambda)(casted)) break;
             }

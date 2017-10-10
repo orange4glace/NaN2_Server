@@ -26,6 +26,7 @@ namespace nan2 {
 
   ProudServer::ProudServer() :
   cs_lock_(cs_, false) {
+    server_ = Proud::CNetServer::Create();
   }
 
   ProudServer::~ProudServer() {
@@ -34,7 +35,6 @@ namespace nan2 {
   void ProudServer::Initialize() {
     try
     {
-    server_ = Proud::CNetServer::Create();
     Proud::CStartServerParameter server_param;
 
     Proud::CThreadPoolEventFunctional e;
@@ -67,6 +67,14 @@ namespace nan2 {
     catch (exception e) {
       cout << e.what() << endl;
     }
+  }
+
+  void ProudServer::AttachProxy(Proud::IRmiProxy* proxy) {
+    server_->AttachProxy(proxy);
+  }
+
+  void ProudServer::AttachStub(Proud::IRmiStub* stub) {
+    server_->AttachStub(stub);
   }
 
   bool ProudServer::OnConnectionRequest(Proud::AddrPort client_addr, Proud::ByteArray& data, Proud::ByteArray& reply) {

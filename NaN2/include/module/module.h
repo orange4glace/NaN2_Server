@@ -28,25 +28,17 @@ protected:
 public:
   inline static Derived* Activate(void* args...) {
     module_ = new Derived();
-#ifdef _DEBUG
-    if (module_ == nullptr)
-      throw std::string("Access to unactivated mod. " + Derived::GetName());
+    assert(module_ != nullptr);
     L_DEBUG << "Module " << Derived::GetName() << " Activated.";
-#endif
     module_->Initialize(args);
-#ifdef _DEBUG
     L_DEBUG << "Module " << Derived::GetName() << " Initialized.";
-#endif
     return module_;
   }
 
   inline static void Deactivate() {
     module_->Destroy();
-#ifdef _DEBUG
-    if (module_ != nullptr)
-      throw std::string("Access to unactivated mod. " + Derived::GetName());
+    assert(module_ != nullptr)
     L_DEBUG << "Module " << Derived::GetName() << " Deactivated.";
-#endif
     delete module_;
   }
 
@@ -55,11 +47,7 @@ public:
   }
 
   inline static Derived* const GetModule() {
-#ifdef _DEBUG
-    if (module_ == nullptr) {
-      throw std::string("Access to unactivated mod. " + Derived::GetName());
-    }
-#endif
+    assert(module_ != nullptr);
     return module_;
   }
 

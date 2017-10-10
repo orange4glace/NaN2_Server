@@ -18,7 +18,8 @@ team_(team),
 base_position_(position),
 returned_(true),
 attached_player_(nullptr) {
-
+  AddComponent<Placeable>(&placeable_);
+  AddComponent<Movable>(&movable_);
 }
 
 void Flag::base_position(const Vector2& position) {
@@ -30,10 +31,7 @@ const Vector2& Flag::base_position() const {
 }
 
 void Flag::Attach(Character* const character) {
-#ifdef _DEBUG
-  if (attached_player_ != nullptr)
-    throw std::string("[Flag] Already attached to " + character->player()->id());
-#endif
+  assert(attached_player_ == nullptr);
   returned_ = false;
   CTFModule::GetModule()->ProxyFlagCaptured(this, character->player());
   attached_player_ = character->player();
@@ -41,14 +39,11 @@ void Flag::Attach(Character* const character) {
 }
 
 void Flag::Detach() {
-#ifdef _DEBUG
-  if (attached_player_ != nullptr)
-    throw std::string("[Flag] Not attached.");
-#endif
+  assert(attached_player_ != nullptr);
   auto pos = attached_player_->character()->GetComponent<Movable>()->position();
   movable_.MoveTo(pos);
-  attached_player_ = nullptr;
   CTFModule::GetModule()->ProxyFlagDropped(this, attached_player_, pos);
+  attached_player_ = nullptr;
   L_DEBUG << "[Flag team_id = " << team_->id() << "] Detached";
 }
 
@@ -60,10 +55,7 @@ void Flag::Return(Character* const character) {
 }
 
 void Flag::Score() {
-#ifdef _DEBUG
-  if (attached_player_ == nullptr)
-    throw std::string("[Flag] Try to score while not attached.");
-#endif
+  assert(attached_player_ != nullptr);
   auto attached_player_team = team_module::TeamModule::GetModule()->GetTeam(attached_player_);
   returned_ = true;
   movable_.MoveTo(base_position_);
@@ -79,7 +71,8 @@ void Flag::Update() {
       if (placeable_.Intersect(placeable)) {
         auto team = team_module::TeamModule::GetModule()->GetTeam(character->player());
         if (this->team_ == team) {
-          Return(character);
+          if (!this->returned_)
+            Return(character);
         }
         else {
           Attach(character);

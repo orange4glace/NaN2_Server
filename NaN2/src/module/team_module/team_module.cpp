@@ -18,6 +18,7 @@ PlayerEventListener(event_listener::HIGHEST) {
 }
 
 void TeamModule::Initialize(const void* args ...) {
+  ProudServer::instance()->AttachProxy(&proxy_);
   num_of_teams_ = *(int*)args;
   L_DEBUG << "Team Module initialized with # of teams = " << num_of_teams_;
   for (int i = 0; i < num_of_teams_; i ++)
@@ -49,16 +50,15 @@ void TeamModule::OnPlayerJoin(Player* const player) {
 }
 
 void TeamModule::OnPlayerLeave(Player* const player) {
+  L_DEBUG << "[TeamModule] Player leave";
   auto team = GetTeam(player);
   RemovePlayer(team, player);
+  L_DEBUG << "[TeamModule] Player leave Done";
 }
 
 void TeamModule::AddPlayer(Team* const team, Player* const player) {
   team->addPlayer(player);
-#ifdef _DEBUG
-  if (player_team_map_.count(player))
-    throw std::string("[TeamModule] player_team_map duplicated player. " + player->id());
-#endif
+  assert(!player_team_map_.count(player));
   player_team_map_.insert({ player, team });
   ProudServer::instance()->IteratePlayers([&](Player* const p) -> bool {
     proxy_.TeamJoined(p->id(), Proud::RmiContext::ReliableSend, player->id(), team->id());
@@ -69,10 +69,7 @@ void TeamModule::AddPlayer(Team* const team, Player* const player) {
 
 void TeamModule::RemovePlayer(Team* const team, Player* const player) {
   team->removePlayer(player);
-#ifdef _DEBUG
-  if (!player_team_map_.count(player))
-    throw std::string("[TeamModule] player_team_map no player. " + player->id());
-#endif
+  assert(player_team_map_.count(player) > 0);
   player_team_map_.erase(player);
   ProudServer::instance()->IteratePlayers([&](Player* const p) -> bool {
     proxy_.TeamLeft(p->id(), Proud::RmiContext::ReliableSend, player->id(), team->id());
@@ -82,17 +79,12 @@ void TeamModule::RemovePlayer(Team* const team, Player* const player) {
 }
 
 Team* const TeamModule::GetTeam(TeamID id) {
-#ifdef _DEBUG
-  
-#endif
+  assert(teams_.size() > id);
   return &teams_[id];
 }
 
 Team* const TeamModule::GetTeam(Player* player) {
-#ifdef _DEBUG
-  if (!player_team_map_.count(player))
-    throw std::string("[TeamModule] player_team_map no player. " + player->id());
-#endif
+  assert(player_team_map_.count(player) > 0);
   return player_team_map_.at(player);
 }
 

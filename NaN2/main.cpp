@@ -19,8 +19,8 @@ int main() {
 
   // Initiate ProudServer
   ProudServer* server = ProudServer::instance();
-  server->Initialize();
   World* world = World::instance();
+  server->Initialize();
 
   std::chrono::high_resolution_clock::time_point last_system_time(std::chrono::high_resolution_clock::now());
 

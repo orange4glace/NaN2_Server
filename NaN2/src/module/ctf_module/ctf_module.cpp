@@ -17,6 +17,8 @@ CTFModule::CTFModule() {
 }
 
 void CTFModule::Initialize(const void* args ...) {
+  ProudServer::instance()->AttachProxy(&proxy_);
+  ProudServer::instance()->AttachStub(&stub_);
   auto team_mod = team_module::TeamModule::GetModule();
   for (int i = 0; i < team_mod->num_of_teams(); i++) {
     auto team = team_mod->GetTeam(i);
@@ -34,6 +36,7 @@ void CTFModule::Destroy() {
 
 
 void CTFModule::OnPlayerJoin(Player* const player) {
+  return;
   Snapshot snapshot;
   for (auto team_data_pair : team_infos_) {
     auto& team_data = team_data_pair.second;
@@ -60,19 +63,21 @@ void CTFModule::OnPlayerJoin(Player* const player) {
 }
 
 void CTFModule::OnPlayerLeave(Player* const player) {
+  L_DEBUG << "[CTFModule] Player leave";
   // Check is attached player
   for (auto team_data_pair : team_infos_) {
     auto& team_data = team_data_pair.second;
     if (team_data.flag->attached_player() == player) {
+      L_DEBUG << "[CTFModule] Try detach " << team_data.flag;
       team_data.flag->Detach();
+      L_DEBUG << "[CTFModule] Detached";
     }
   }
+  L_DEBUG << "[CTFModule] Player leave Done";
 }
 
 const TeamData& CTFModule::team_data(const team_module::Team* const team) const {
-#ifdef _DEBUG
   assert(team_infos_.count(team));
-#endif
   return team_infos_.at(team);
 }
 

@@ -16,35 +16,28 @@ id_(id) {
 }
 
 void Team::addPlayer(Player* const player) {
-#ifdef _DEBUG
-  if (players_.count(player->id()))
-    throw std::string("[Team] Already has player, " + player->id());
-#endif
+  assert(!players_.count(player->id()));
   players_.insert({ player->id(), player });
 }
 
 void Team::removePlayer(Player* const player) {
-#ifdef _DEBUG
-  if (!players_.count(player->id()))
-    throw std::string("[Team] No player, " + player->id());
-#endif
+  assert(players_.count(player->id()));
   players_.erase(player->id());
 }
 
 Player* const Team::GetPlayer(PlayerID id) const {
-#ifdef _DEBUG
-  if (players_.count(id))
-    throw std::string("[Team] No player, " + id);
-#endif
+  assert(players_.count(id) > 0);
   return players_.at(id);
 }
 
 void Team::AddScore(int score) {
+  /* WHY ProudNet ASSERT ? 
   auto proxy = team_module::TeamModule::GetModule()->proxy();
   ProudServer::instance()->IteratePlayers([&](Player* const p) -> bool {
     proxy.Scored(p->id(), Proud::RmiContext::ReliableSend, id_, score);
     return true;
   });
+  */
 }
 
 int Team::score() const {
