@@ -121,32 +121,6 @@ nan2.ProudMarshaler.Write(__msg, player_id);
 	return RmiSend(remotes,rmiContext,__msg,
 		RmiName_FlagReturned, Common.FlagReturned);
 }
-public bool Scored(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, Nettention.Proud.HostID player_id)
-{
-	Nettention.Proud.Message __msg=new Nettention.Proud.Message();
-		__msg.SimplePacketMode = core.IsSimplePacketMode();
-		Nettention.Proud.RmiID __msgid= Common.Scored;
-		__msg.Write(__msgid);
-		nan2.ProudMarshaler.Write(__msg, player_id);
-		
-	Nettention.Proud.HostID[] __list = new Nettention.Proud.HostID[1];
-	__list[0] = remote;
-		
-	return RmiSend(__list,rmiContext,__msg,
-		RmiName_Scored, Common.Scored);
-}
-
-public bool Scored(Nettention.Proud.HostID[] remotes,Nettention.Proud.RmiContext rmiContext, Nettention.Proud.HostID player_id)
-{
-	Nettention.Proud.Message __msg=new Nettention.Proud.Message();
-__msg.SimplePacketMode = core.IsSimplePacketMode();
-Nettention.Proud.RmiID __msgid= Common.Scored;
-__msg.Write(__msgid);
-nan2.ProudMarshaler.Write(__msg, player_id);
-		
-	return RmiSend(remotes,rmiContext,__msg,
-		RmiName_Scored, Common.Scored);
-}
 #if USE_RMI_NAME_STRING
 // RMI name declaration.
 // It is the unique pointer that indicates RMI name such as RMI profiler.
@@ -154,7 +128,6 @@ const string RmiName_Snapshot="Snapshot";
 const string RmiName_FlagCaptured="FlagCaptured";
 const string RmiName_FlagDropped="FlagDropped";
 const string RmiName_FlagReturned="FlagReturned";
-const string RmiName_Scored="Scored";
        
 const string RmiName_First = RmiName_Snapshot;
 #else
@@ -164,7 +137,6 @@ const string RmiName_Snapshot="";
 const string RmiName_FlagCaptured="";
 const string RmiName_FlagDropped="";
 const string RmiName_FlagReturned="";
-const string RmiName_Scored="";
        
 const string RmiName_First = "";
 #endif
