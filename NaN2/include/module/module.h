@@ -37,7 +37,7 @@ public:
 
   inline static void Deactivate() {
     module_->Destroy();
-    assert(module_ != nullptr)
+    assert(module_ != nullptr);
     L_DEBUG << "Module " << Derived::GetName() << " Deactivated.";
     delete module_;
   }
