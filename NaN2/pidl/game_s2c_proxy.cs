@@ -147,6 +147,60 @@ nan2.ProudMarshaler.Write(__msg, snapshot);
 	return RmiSend(remotes,rmiContext,__msg,
 		RmiName_SkillCasted, Common.SkillCasted);
 }
+public bool CharacterSpawned(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, Nettention.Proud.HostID player_id, UnityEngine.Vector2 position)
+{
+	Nettention.Proud.Message __msg=new Nettention.Proud.Message();
+		__msg.SimplePacketMode = core.IsSimplePacketMode();
+		Nettention.Proud.RmiID __msgid= Common.CharacterSpawned;
+		__msg.Write(__msgid);
+		nan2.ProudMarshaler.Write(__msg, player_id);
+		nan2.ProudMarshaler.Write(__msg, position);
+		
+	Nettention.Proud.HostID[] __list = new Nettention.Proud.HostID[1];
+	__list[0] = remote;
+		
+	return RmiSend(__list,rmiContext,__msg,
+		RmiName_CharacterSpawned, Common.CharacterSpawned);
+}
+
+public bool CharacterSpawned(Nettention.Proud.HostID[] remotes,Nettention.Proud.RmiContext rmiContext, Nettention.Proud.HostID player_id, UnityEngine.Vector2 position)
+{
+	Nettention.Proud.Message __msg=new Nettention.Proud.Message();
+__msg.SimplePacketMode = core.IsSimplePacketMode();
+Nettention.Proud.RmiID __msgid= Common.CharacterSpawned;
+__msg.Write(__msgid);
+nan2.ProudMarshaler.Write(__msg, player_id);
+nan2.ProudMarshaler.Write(__msg, position);
+		
+	return RmiSend(remotes,rmiContext,__msg,
+		RmiName_CharacterSpawned, Common.CharacterSpawned);
+}
+public bool CharacterDied(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, Nettention.Proud.HostID player_id)
+{
+	Nettention.Proud.Message __msg=new Nettention.Proud.Message();
+		__msg.SimplePacketMode = core.IsSimplePacketMode();
+		Nettention.Proud.RmiID __msgid= Common.CharacterDied;
+		__msg.Write(__msgid);
+		nan2.ProudMarshaler.Write(__msg, player_id);
+		
+	Nettention.Proud.HostID[] __list = new Nettention.Proud.HostID[1];
+	__list[0] = remote;
+		
+	return RmiSend(__list,rmiContext,__msg,
+		RmiName_CharacterDied, Common.CharacterDied);
+}
+
+public bool CharacterDied(Nettention.Proud.HostID[] remotes,Nettention.Proud.RmiContext rmiContext, Nettention.Proud.HostID player_id)
+{
+	Nettention.Proud.Message __msg=new Nettention.Proud.Message();
+__msg.SimplePacketMode = core.IsSimplePacketMode();
+Nettention.Proud.RmiID __msgid= Common.CharacterDied;
+__msg.Write(__msgid);
+nan2.ProudMarshaler.Write(__msg, player_id);
+		
+	return RmiSend(remotes,rmiContext,__msg,
+		RmiName_CharacterDied, Common.CharacterDied);
+}
 #if USE_RMI_NAME_STRING
 // RMI name declaration.
 // It is the unique pointer that indicates RMI name such as RMI profiler.
@@ -155,6 +209,8 @@ const string RmiName_JoinWorld="JoinWorld";
 const string RmiName_PlayerJoin="PlayerJoin";
 const string RmiName_PlayerLeave="PlayerLeave";
 const string RmiName_SkillCasted="SkillCasted";
+const string RmiName_CharacterSpawned="CharacterSpawned";
+const string RmiName_CharacterDied="CharacterDied";
        
 const string RmiName_First = RmiName_PlayerSnapshots;
 #else
@@ -165,6 +221,8 @@ const string RmiName_JoinWorld="";
 const string RmiName_PlayerJoin="";
 const string RmiName_PlayerLeave="";
 const string RmiName_SkillCasted="";
+const string RmiName_CharacterSpawned="";
+const string RmiName_CharacterDied="";
        
 const string RmiName_First = "";
 #endif

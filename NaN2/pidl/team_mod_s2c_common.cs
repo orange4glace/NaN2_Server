@@ -15,10 +15,14 @@ namespace TeamModS2C
 		// Message ID that replies to each RMI method. 
 			public const Nettention.Proud.RmiID Snapshot = (Nettention.Proud.RmiID)8000+1;
 			public const Nettention.Proud.RmiID TeamJoined = (Nettention.Proud.RmiID)8000+2;
+			public const Nettention.Proud.RmiID TeamLeft = (Nettention.Proud.RmiID)8000+3;
+			public const Nettention.Proud.RmiID Scored = (Nettention.Proud.RmiID)8000+4;
 		// List that has RMI ID.
 		public static Nettention.Proud.RmiID[] RmiIDList = new Nettention.Proud.RmiID[] {
 			Snapshot,
 			TeamJoined,
+			TeamLeft,
+			Scored,
 		};
 	}
 }

@@ -18,6 +18,8 @@ namespace GameS2C
 			public const Nettention.Proud.RmiID PlayerJoin = (Nettention.Proud.RmiID)6000+3;
 			public const Nettention.Proud.RmiID PlayerLeave = (Nettention.Proud.RmiID)6000+4;
 			public const Nettention.Proud.RmiID SkillCasted = (Nettention.Proud.RmiID)6000+5;
+			public const Nettention.Proud.RmiID CharacterSpawned = (Nettention.Proud.RmiID)6000+6;
+			public const Nettention.Proud.RmiID CharacterDied = (Nettention.Proud.RmiID)6000+7;
 		// List that has RMI ID.
 		public static Nettention.Proud.RmiID[] RmiIDList = new Nettention.Proud.RmiID[] {
 			PlayerSnapshots,
@@ -25,6 +27,8 @@ namespace GameS2C
 			PlayerJoin,
 			PlayerLeave,
 			SkillCasted,
+			CharacterSpawned,
+			CharacterDied,
 		};
 	}
 }

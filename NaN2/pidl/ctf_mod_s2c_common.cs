@@ -17,14 +17,12 @@ namespace CTFModS2C
 			public const Nettention.Proud.RmiID FlagCaptured = (Nettention.Proud.RmiID)7000+2;
 			public const Nettention.Proud.RmiID FlagDropped = (Nettention.Proud.RmiID)7000+3;
 			public const Nettention.Proud.RmiID FlagReturned = (Nettention.Proud.RmiID)7000+4;
-			public const Nettention.Proud.RmiID Scored = (Nettention.Proud.RmiID)7000+5;
 		// List that has RMI ID.
 		public static Nettention.Proud.RmiID[] RmiIDList = new Nettention.Proud.RmiID[] {
 			Snapshot,
 			FlagCaptured,
 			FlagDropped,
 			FlagReturned,
-			Scored,
 		};
 	}
 }

@@ -41,6 +41,16 @@ public BeforeRmiInvocationDelegate BeforeRmiInvocation = delegate(Nettention.Pro
 		{ 
 			return false;
 		};
+		public delegate bool CharacterSpawnedDelegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, Nettention.Proud.HostID player_id, UnityEngine.Vector2 position);  
+		public CharacterSpawnedDelegate CharacterSpawned = delegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, Nettention.Proud.HostID player_id, UnityEngine.Vector2 position)
+		{ 
+			return false;
+		};
+		public delegate bool CharacterDiedDelegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, Nettention.Proud.HostID player_id);  
+		public CharacterDiedDelegate CharacterDied = delegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, Nettention.Proud.HostID player_id)
+		{ 
+			return false;
+		};
 	public override bool ProcessReceivedMessage(Nettention.Proud.ReceivedMessage pa, Object hostTag) 
 	{
 		Nettention.Proud.HostID remote=pa.RemoteHostID;
@@ -316,6 +326,110 @@ parameterString+=snapshot.ToString()+",";
 		}
 	}
 	break;
+case Common.CharacterSpawned:
+	{
+		Nettention.Proud.RmiContext ctx=new Nettention.Proud.RmiContext();
+		ctx.sentFrom=pa.RemoteHostID;
+		ctx.relayed=pa.IsRelayed;
+		ctx.hostTag=hostTag;
+		ctx.encryptMode = pa.EncryptMode;
+		ctx.compressMode = pa.CompressMode;
+			
+		Nettention.Proud.HostID player_id; nan2.ProudMarshaler.Read(__msg,out player_id);	
+UnityEngine.Vector2 position; nan2.ProudMarshaler.Read(__msg,out position);	
+core.PostCheckReadMessage(__msg, RmiName_CharacterSpawned);
+		if(enableNotifyCallFromStub==true)
+		{
+			string parameterString="";
+			parameterString+=player_id.ToString()+",";
+parameterString+=position.ToString()+",";
+			NotifyCallFromStub(Common.CharacterSpawned, RmiName_CharacterSpawned,parameterString);
+		}
+			
+		if(enableStubProfiling)
+		{
+			Nettention.Proud.BeforeRmiSummary summary = new Nettention.Proud.BeforeRmiSummary();
+			summary.rmiID = Common.CharacterSpawned;
+			summary.rmiName = RmiName_CharacterSpawned;
+			summary.hostID = remote;
+			summary.hostTag = hostTag;
+			BeforeRmiInvocation(summary);
+		}
+			
+		long t0 = Nettention.Proud.PreciseCurrentTime.GetTimeMs();
+			
+		// Call this method.
+		bool __ret=CharacterSpawned (remote,ctx , player_id, position );
+			
+		if(__ret==false)
+		{
+			// Error: RMI function that a user did not create has been called. 
+			core.ShowNotImplementedRmiWarning(RmiName_CharacterSpawned);
+		}
+			
+		if(enableStubProfiling)
+		{
+			Nettention.Proud.AfterRmiSummary summary = new Nettention.Proud.AfterRmiSummary();
+			summary.rmiID = Common.CharacterSpawned;
+			summary.rmiName = RmiName_CharacterSpawned;
+			summary.hostID = remote;
+			summary.hostTag = hostTag;
+			summary.elapsedTime = Nettention.Proud.PreciseCurrentTime.GetTimeMs()-t0;
+			AfterRmiInvocation(summary);
+		}
+	}
+	break;
+case Common.CharacterDied:
+	{
+		Nettention.Proud.RmiContext ctx=new Nettention.Proud.RmiContext();
+		ctx.sentFrom=pa.RemoteHostID;
+		ctx.relayed=pa.IsRelayed;
+		ctx.hostTag=hostTag;
+		ctx.encryptMode = pa.EncryptMode;
+		ctx.compressMode = pa.CompressMode;
+			
+		Nettention.Proud.HostID player_id; nan2.ProudMarshaler.Read(__msg,out player_id);	
+core.PostCheckReadMessage(__msg, RmiName_CharacterDied);
+		if(enableNotifyCallFromStub==true)
+		{
+			string parameterString="";
+			parameterString+=player_id.ToString()+",";
+			NotifyCallFromStub(Common.CharacterDied, RmiName_CharacterDied,parameterString);
+		}
+			
+		if(enableStubProfiling)
+		{
+			Nettention.Proud.BeforeRmiSummary summary = new Nettention.Proud.BeforeRmiSummary();
+			summary.rmiID = Common.CharacterDied;
+			summary.rmiName = RmiName_CharacterDied;
+			summary.hostID = remote;
+			summary.hostTag = hostTag;
+			BeforeRmiInvocation(summary);
+		}
+			
+		long t0 = Nettention.Proud.PreciseCurrentTime.GetTimeMs();
+			
+		// Call this method.
+		bool __ret=CharacterDied (remote,ctx , player_id );
+			
+		if(__ret==false)
+		{
+			// Error: RMI function that a user did not create has been called. 
+			core.ShowNotImplementedRmiWarning(RmiName_CharacterDied);
+		}
+			
+		if(enableStubProfiling)
+		{
+			Nettention.Proud.AfterRmiSummary summary = new Nettention.Proud.AfterRmiSummary();
+			summary.rmiID = Common.CharacterDied;
+			summary.rmiName = RmiName_CharacterDied;
+			summary.hostID = remote;
+			summary.hostTag = hostTag;
+			summary.elapsedTime = Nettention.Proud.PreciseCurrentTime.GetTimeMs()-t0;
+			AfterRmiInvocation(summary);
+		}
+	}
+	break;
 		default:
 			 goto __fail;
 		}
@@ -334,6 +448,8 @@ const string RmiName_JoinWorld="JoinWorld";
 const string RmiName_PlayerJoin="PlayerJoin";
 const string RmiName_PlayerLeave="PlayerLeave";
 const string RmiName_SkillCasted="SkillCasted";
+const string RmiName_CharacterSpawned="CharacterSpawned";
+const string RmiName_CharacterDied="CharacterDied";
        
 const string RmiName_First = RmiName_PlayerSnapshots;
 #else
@@ -344,6 +460,8 @@ const string RmiName_JoinWorld="";
 const string RmiName_PlayerJoin="";
 const string RmiName_PlayerLeave="";
 const string RmiName_SkillCasted="";
+const string RmiName_CharacterSpawned="";
+const string RmiName_CharacterDied="";
        
 const string RmiName_First = "";
 #endif
