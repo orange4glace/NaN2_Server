@@ -45,10 +45,8 @@ void TeamModule::OnPlayerJoin(Player* const player) {
     for (auto p : team.players_)
       team_snapshot.players.push_back(p.first);
   }
-  ProudServer::instance()->IteratePlayers([&](Player* const p) -> bool {
-    proxy_.Snapshot(p->id(), Proud::RmiContext::ReliableSend, snapshot);
-    return true;
-  });
+
+  proxy_.Snapshot(player->id(), Proud::RmiContext::ReliableSend, snapshot);
 }
 
 void TeamModule::OnPlayerLeave(Player* const player) {
@@ -97,9 +95,6 @@ const TeamModS2C::Proxy& TeamModule::proxy() const {
 int TeamModule::num_of_teams() const {
   return num_of_teams_;
 }
-
 }
-
 }
-
 }

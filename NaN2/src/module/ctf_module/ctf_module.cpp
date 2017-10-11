@@ -58,10 +58,8 @@ void CTFModule::OnPlayerJoin(Player* const player) {
       team_data_snapshot.flag_snapshot.y = team_data.flag->position().y();
     }
   }
-  ProudServer::instance()->IteratePlayers([&](Player* const p) -> bool {
-    proxy_.Snapshot(p->id(), Proud::RmiContext::ReliableSend, snapshot);
-    return true;
-  });
+
+  proxy_.Snapshot(player->id(), Proud::RmiContext::ReliableSend, snapshot);
 }
 
 void CTFModule::OnPlayerLeave(Player* const player) {
