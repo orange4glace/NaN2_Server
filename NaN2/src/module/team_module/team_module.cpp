@@ -34,9 +34,6 @@ void TeamModule::Destroy() {
 void TeamModule::OnPlayerJoin(Player* const player) {
   Snapshot snapshot;
 
-  // For test
-  AddPlayer(GetTeam(player->id() % 2), player);
-
   for (auto team : teams_) {
     snapshot.team_snapshots.emplace_back(TeamSnapshot{});
     auto& team_snapshot = snapshot.team_snapshots.back();
@@ -47,6 +44,9 @@ void TeamModule::OnPlayerJoin(Player* const player) {
   }
 
   proxy_.Snapshot(player->id(), Proud::RmiContext::ReliableSend, snapshot);
+
+  // For test
+  AddPlayer(GetTeam(player->id() % 2), player);
 }
 
 void TeamModule::OnPlayerLeave(Player* const player) {

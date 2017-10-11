@@ -103,9 +103,9 @@ namespace nan2 {
   void ProudServer::OnClientLeave(Proud::CNetClientInfo* client_info, Proud::ErrorInfo* error_info, const Proud::ByteArray& comment) {
     auto player = GetPlayerByHostID(client_info->m_HostID);
 
-    module::event_listener::PlayerEventListener::PlayerLeave(player);
-
     players_.Remove(player->id());
+
+    module::event_listener::PlayerEventListener::PlayerLeave(player);
 
     for (auto& pair : players_) {
       auto p = pair.GetSecond();

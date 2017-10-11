@@ -38,7 +38,6 @@ void CTFModule::Destroy() {
 
 
 void CTFModule::OnPlayerJoin(Player* const player) {
-  return;
   Snapshot snapshot;
   for (auto team_data_pair : team_infos_) {
     auto& team_data = team_data_pair.second;
