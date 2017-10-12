@@ -54,7 +54,7 @@ public:
   Team* const GetTeam(TeamID id);
   Team* const GetTeam(Player* player);
 
-  const TeamModS2C::Proxy& proxy() const;
+  TeamModS2C::Proxy& proxy();
   //const TeamModC2S::Stub& stub() const;
 
   int num_of_teams() const;

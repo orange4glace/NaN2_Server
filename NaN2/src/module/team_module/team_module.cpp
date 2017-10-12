@@ -89,7 +89,7 @@ Team* const TeamModule::GetTeam(Player* player) {
   return player_team_map_.at(player);
 }
 
-const TeamModS2C::Proxy& TeamModule::proxy() const {
+TeamModS2C::Proxy& TeamModule::proxy() {
   return proxy_;
 }
 

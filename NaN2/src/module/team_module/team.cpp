@@ -33,13 +33,11 @@ Player* const Team::GetPlayer(PlayerID id) const {
 }
 
 void Team::AddScore(int score) {
-  /* WHY ProudNet ASSERT ? 
-  auto proxy = team_module::TeamModule::GetModule()->proxy();
+  auto& proxy = team_module::TeamModule::GetModule()->proxy();
   ProudServer::instance()->IteratePlayers([&](Player* const p) -> bool {
     proxy.Scored(p->id(), Proud::RmiContext::ReliableSend, id_, score);
     return true;
   });
-  */
 }
 
 int Team::score() const {
