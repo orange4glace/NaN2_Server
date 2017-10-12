@@ -24,11 +24,12 @@ void CTFModule::Initialize(const void* args ...) {
   auto team_mod = team_module::TeamModule::GetModule();
   for (int i = 0; i < team_mod->num_of_teams(); i++) {
     auto team = team_mod->GetTeam(i);
-    Flag* flag = new Flag(team_mod->GetTeam(i), Vector2::ZERO);
+    Vector2 point = (i == 0 ? Vector2(-48, 56) : Vector2(80, 56));
+    Flag* flag = new Flag(team_mod->GetTeam(i), point);
     World::instance()->AddGameObject(flag);
     team_infos_[team].team_id = i;
     team_infos_[team].flag = flag;
-    team_infos_[team].base_point = Vector2::ZERO;
+    team_infos_[team].base_point = point;
   }
 };
 
@@ -59,6 +60,7 @@ void CTFModule::OnPlayerJoin(Player* const player) {
   }
 
   proxy_.Snapshot(player->id(), Proud::RmiContext::ReliableSend, snapshot);
+  L_DEBUG << "[CTFModule] Snapshot sent to player " << player->id();
 }
 
 void CTFModule::OnPlayerLeave(Player* const player) {
@@ -95,8 +97,9 @@ void CTFModule::ProxyFlagDropped(const Flag* const flag, const Player* const pla
 }
 
 void CTFModule::ProxyFlagReturned(const Flag* const flag, const Player* const player) {
+  auto player_id = (player == nullptr ? -1 : player->id());
   ProudServer::instance()->IteratePlayers([&](Player* const p) -> bool {
-    proxy_.FlagReturned(p->id(), Proud::RmiContext::ReliableSend, player->id());
+    proxy_.FlagReturned(p->id(), Proud::RmiContext::ReliableSend, (PlayerID)player_id);
     return true;
   });
 }

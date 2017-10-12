@@ -183,4 +183,8 @@ namespace nan2 {
     revivable_ = value;
   }
 
+  const Vector2& Character::position() const {
+    return placeable_.position();
+  }
+
 }

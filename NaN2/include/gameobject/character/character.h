@@ -72,6 +72,8 @@ namespace nan2 {
 
 	Weapon* const weapon();
     void revivable(bool value);
+
+    const Vector2& position() const;
     
   };
 

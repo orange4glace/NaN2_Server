@@ -44,6 +44,7 @@ void TeamModule::OnPlayerJoin(Player* const player) {
   }
 
   proxy_.Snapshot(player->id(), Proud::RmiContext::ReliableSend, snapshot);
+  L_DEBUG << "[TeamModule] Snapshot sent to player " << player->id();
 
   // For test
   AddPlayer(GetTeam(player->id() % 2), player);

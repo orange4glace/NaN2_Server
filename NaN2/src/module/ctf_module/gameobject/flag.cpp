@@ -52,8 +52,8 @@ void Flag::Detach() {
 void Flag::Return(Character* const character) {
   returned_ = true;
   movable_.MoveTo(base_position_);
-  CTFModule::GetModule()->ProxyFlagReturned(this, character->player());
-  L_DEBUG << "[Flag team_id = " << team_->id() << "] Returned by player " << character->player()->id();
+  CTFModule::GetModule()->ProxyFlagReturned(this, (character == nullptr ? nullptr : character->player()));
+  L_DEBUG << "[Flag team_id = " << team_->id() << "] Returned by player " << (character == nullptr ? "Scoring" : ""+character->player()->id());
 }
 
 void Flag::Score() {
@@ -64,6 +64,7 @@ void Flag::Score() {
   attached_player_team->AddScore(1);
   L_DEBUG << "[Flag team_id = " << team_->id() << "] is scored to team " << attached_player_team << " by player " << attached_player_->id();
   attached_player_ = nullptr;
+  Return(nullptr);
 }
 
 void Flag::Update() {
@@ -86,6 +87,7 @@ void Flag::Update() {
   }
   else {
     auto character = attached_player_->character();
+    placeable_.set_position(character->position());
     auto team = team_module::TeamModule::GetModule()->GetTeam(attached_player_);
     auto team_data = CTFModule::GetModule()->team_data(team);
     if (placeable_.Contain(team_data.base_point)) {
