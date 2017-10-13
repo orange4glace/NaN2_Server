@@ -51,12 +51,13 @@ void CTFModule::OnPlayerJoin(Player* const player) {
     team_data_snapshot.flag_snapshot.attached_player = (attached_player == nullptr ? -1 : attached_player->id());
     if (team_data.flag->returned()) {
       team_data_snapshot.flag_snapshot.x = -1;
-      team_data_snapshot.flag_snapshot.x = -1;
+      team_data_snapshot.flag_snapshot.y = -1;
     }
     else {
       team_data_snapshot.flag_snapshot.x = team_data.flag->position().x();
       team_data_snapshot.flag_snapshot.y = team_data.flag->position().y();
     }
+
   }
 
   proxy_.Snapshot(player->id(), Proud::RmiContext::ReliableSend, snapshot);
