@@ -38,12 +38,18 @@ inline CMessage& operator >> (CMessage& a, nan2::module::team_module::Snapshot& 
 
 inline CMessage& operator << (CMessage& a, const nan2::module::team_module::Snapshot& packet) {
   a << (int32_t)packet.team_snapshots.size();
+  L_DEBUG << "Team Snapshot;;;";
+  L_DEBUG << packet.team_snapshots.size();
   for (auto& team_snapshot : packet.team_snapshots) {
     a << team_snapshot.id;
     a << (int32_t)team_snapshot.players.size();
-    for (auto& player : team_snapshot.players)
+    L_DEBUG << team_snapshot.id << " " << team_snapshot.players.size();
+    for (auto& player : team_snapshot.players) {
       a << player;
+      L_DEBUG << "(p) " << player;
+    }
     a << team_snapshot.score;
+    L_DEBUG << "(score) " << team_snapshot.score;
   }
   return a;
 }
