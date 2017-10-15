@@ -283,6 +283,7 @@ namespace CTFModS2C {
 					ctx.m_compressMode = pa.GetCompressMode();
 					
 					
+					int team_id; __msg >> team_id;
 					Proud::HostID player_id; __msg >> player_id;
 					m_core->PostCheckReadMessage(__msg,RmiName_FlagReturned);
 					
@@ -291,6 +292,9 @@ namespace CTFModS2C {
 					{
 						::Proud::String parameterString;
 						
+						::Proud::AppendTextOut(parameterString,team_id);	
+										
+						parameterString += _PNT(", ");
 						::Proud::AppendTextOut(parameterString,player_id);	
 						
 						NotifyCallFromStub(remote, (::Proud::RmiID)Rmi_FlagReturned, 
@@ -323,7 +327,7 @@ namespace CTFModS2C {
 					}
 						
 					// Call this method.
-					bool __ret = FlagReturned (remote,ctx , player_id );
+					bool __ret = FlagReturned (remote,ctx , team_id, player_id );
 						
 					if(__ret==false)
 					{

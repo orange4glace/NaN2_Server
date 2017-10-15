@@ -47,6 +47,7 @@ public:
 
   const Vector2& position() const;
   bool returned() const;
+  team_module::Team* const team() const;
   const Player* const attached_player() const;
 
 };

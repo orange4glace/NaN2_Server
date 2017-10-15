@@ -52,7 +52,7 @@ void Flag::Detach() {
 void Flag::Return(Character* const character) {
   returned_ = true;
   movable_.MoveTo(base_position_);
-  CTFModule::GetModule()->ProxyFlagReturned(this, (character == nullptr ? nullptr : character->player()));
+  CTFModule::GetModule()->ProxyFlagReturned(this, character->player());
   L_DEBUG << "[Flag team_id = " << team_->id() << "] Returned by player " << (character == nullptr ? "Scoring" : ""+character->player()->id());
 }
 
@@ -63,8 +63,8 @@ void Flag::Score() {
   movable_.MoveTo(base_position_);
   attached_player_team->AddScore(1);
   L_DEBUG << "[Flag team_id = " << team_->id() << "] is scored to team " << attached_player_team << " by player " << attached_player_->id();
+  Return(attached_player_->character());
   attached_player_ = nullptr;
-  Return(nullptr);
 }
 
 void Flag::Update() {
@@ -107,6 +107,10 @@ const Vector2& Flag::position() const {
 
 bool Flag::returned() const {
   return returned_;
+}
+
+team_module::Team* const Flag::team() const {
+  return team_;
 }
 
 const Player* const Flag::attached_player() const {

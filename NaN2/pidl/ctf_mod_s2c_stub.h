@@ -51,15 +51,15 @@ namespace CTFModS2C {
 #define CALL_CTFModS2C_FlagDropped FlagDropped ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const float  & pos_x, const float  & pos_y)
 #define PARAM_CTFModS2C_FlagDropped ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id, const float  & pos_x, const float  & pos_y)
                
-		virtual bool FlagReturned ( ::Proud::HostID, ::Proud::RmiContext& , const Proud::HostID  & )		{ 
+		virtual bool FlagReturned ( ::Proud::HostID, ::Proud::RmiContext& , const int  & , const Proud::HostID  & )		{ 
 			return false;
 		} 
 
-#define DECRMI_CTFModS2C_FlagReturned bool FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id) PN_OVERRIDE
+#define DECRMI_CTFModS2C_FlagReturned bool FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & team_id, const Proud::HostID  & player_id) PN_OVERRIDE
 
-#define DEFRMI_CTFModS2C_FlagReturned(DerivedClass) bool DerivedClass::FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
-#define CALL_CTFModS2C_FlagReturned FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
-#define PARAM_CTFModS2C_FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id)
+#define DEFRMI_CTFModS2C_FlagReturned(DerivedClass) bool DerivedClass::FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & team_id, const Proud::HostID  & player_id)
+#define CALL_CTFModS2C_FlagReturned FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & team_id, const Proud::HostID  & player_id)
+#define PARAM_CTFModS2C_FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & team_id, const Proud::HostID  & player_id)
  
 		virtual bool ProcessReceivedMessage(::Proud::CReceivedMessage &pa, void* hostTag) PN_OVERRIDE;
 		static const PNTCHAR* RmiName_Snapshot;
@@ -104,12 +104,12 @@ namespace CTFModS2C {
 		}
 
                
-		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const Proud::HostID  & ) > FlagReturned_Function;
-		virtual bool FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID  & player_id) 
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int  & , const Proud::HostID  & ) > FlagReturned_Function;
+		virtual bool FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & team_id, const Proud::HostID  & player_id) 
 		{ 
 			if (FlagReturned_Function==nullptr) 
 				return true; 
-			return FlagReturned_Function(remote,rmiContext, player_id); 
+			return FlagReturned_Function(remote,rmiContext, team_id, player_id); 
 		}
 
 	};

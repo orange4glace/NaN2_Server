@@ -31,8 +31,8 @@ public BeforeRmiInvocationDelegate BeforeRmiInvocation = delegate(Nettention.Pro
 		{ 
 			return false;
 		};
-		public delegate bool FlagReturnedDelegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, Nettention.Proud.HostID player_id);  
-		public FlagReturnedDelegate FlagReturned = delegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, Nettention.Proud.HostID player_id)
+		public delegate bool FlagReturnedDelegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int team_id, Nettention.Proud.HostID player_id);  
+		public FlagReturnedDelegate FlagReturned = delegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int team_id, Nettention.Proud.HostID player_id)
 		{ 
 			return false;
 		};
@@ -218,12 +218,14 @@ case Common.FlagReturned:
 		ctx.encryptMode = pa.EncryptMode;
 		ctx.compressMode = pa.CompressMode;
 			
-		Nettention.Proud.HostID player_id; nan2.ProudMarshaler.Read(__msg,out player_id);	
+		int team_id; nan2.ProudMarshaler.Read(__msg,out team_id);	
+Nettention.Proud.HostID player_id; nan2.ProudMarshaler.Read(__msg,out player_id);	
 core.PostCheckReadMessage(__msg, RmiName_FlagReturned);
 		if(enableNotifyCallFromStub==true)
 		{
 			string parameterString="";
-			parameterString+=player_id.ToString()+",";
+			parameterString+=team_id.ToString()+",";
+parameterString+=player_id.ToString()+",";
 			NotifyCallFromStub(Common.FlagReturned, RmiName_FlagReturned,parameterString);
 		}
 			
@@ -240,7 +242,7 @@ core.PostCheckReadMessage(__msg, RmiName_FlagReturned);
 		long t0 = Nettention.Proud.PreciseCurrentTime.GetTimeMs();
 			
 		// Call this method.
-		bool __ret=FlagReturned (remote,ctx , player_id );
+		bool __ret=FlagReturned (remote,ctx , team_id, player_id );
 			
 		if(__ret==false)
 		{

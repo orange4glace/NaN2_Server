@@ -100,7 +100,7 @@ void CTFModule::ProxyFlagDropped(const Flag* const flag, const Player* const pla
 void CTFModule::ProxyFlagReturned(const Flag* const flag, const Player* const player) {
   auto player_id = (player == nullptr ? -1 : player->id());
   ProudServer::instance()->IteratePlayers([&](Player* const p) -> bool {
-    proxy_.FlagReturned(p->id(), Proud::RmiContext::ReliableSend, (PlayerID)player_id);
+    proxy_.FlagReturned(p->id(), Proud::RmiContext::ReliableSend, flag->team()->id(), (PlayerID)player_id);
     return true;
   });
 }

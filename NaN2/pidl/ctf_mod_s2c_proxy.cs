@@ -95,12 +95,13 @@ nan2.ProudMarshaler.Write(__msg, pos_y);
 	return RmiSend(remotes,rmiContext,__msg,
 		RmiName_FlagDropped, Common.FlagDropped);
 }
-public bool FlagReturned(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, Nettention.Proud.HostID player_id)
+public bool FlagReturned(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int team_id, Nettention.Proud.HostID player_id)
 {
 	Nettention.Proud.Message __msg=new Nettention.Proud.Message();
 		__msg.SimplePacketMode = core.IsSimplePacketMode();
 		Nettention.Proud.RmiID __msgid= Common.FlagReturned;
 		__msg.Write(__msgid);
+		nan2.ProudMarshaler.Write(__msg, team_id);
 		nan2.ProudMarshaler.Write(__msg, player_id);
 		
 	Nettention.Proud.HostID[] __list = new Nettention.Proud.HostID[1];
@@ -110,12 +111,13 @@ public bool FlagReturned(Nettention.Proud.HostID remote,Nettention.Proud.RmiCont
 		RmiName_FlagReturned, Common.FlagReturned);
 }
 
-public bool FlagReturned(Nettention.Proud.HostID[] remotes,Nettention.Proud.RmiContext rmiContext, Nettention.Proud.HostID player_id)
+public bool FlagReturned(Nettention.Proud.HostID[] remotes,Nettention.Proud.RmiContext rmiContext, int team_id, Nettention.Proud.HostID player_id)
 {
 	Nettention.Proud.Message __msg=new Nettention.Proud.Message();
 __msg.SimplePacketMode = core.IsSimplePacketMode();
 Nettention.Proud.RmiID __msgid= Common.FlagReturned;
 __msg.Write(__msgid);
+nan2.ProudMarshaler.Write(__msg, team_id);
 nan2.ProudMarshaler.Write(__msg, player_id);
 		
 	return RmiSend(remotes,rmiContext,__msg,

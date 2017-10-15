@@ -6,5 +6,5 @@ rename cs(Proud::HostID, Nettention.Proud.HostID);
 	Snapshot([in] nan2::module::ctf_module::Snapshot snapshot);
 	FlagCaptured([in] Proud::HostID player_id);
 	FlagDropped([in] Proud::HostID player_id, [in] float pos_x, [in] float pos_y);
-	FlagReturned([in] Proud::HostID player_id);
+	FlagReturned([in] int team_id, [in] Proud::HostID player_id);
 }

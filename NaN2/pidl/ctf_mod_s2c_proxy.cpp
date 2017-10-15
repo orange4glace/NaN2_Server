@@ -101,7 +101,7 @@ __msg << pos_y;
 			RmiName_FlagDropped, (::Proud::RmiID)Rmi_FlagDropped);
 	}
         
-	bool Proxy::FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const Proud::HostID & player_id)	{
+	bool Proxy::FlagReturned ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & team_id, const Proud::HostID & player_id)	{
 		::Proud::CMessage __msg;
 __msg.UseInternalBuffer();
 __msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
@@ -109,13 +109,14 @@ __msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
 ::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_FlagReturned;
 __msg.Write(__msgid); 
 	
+__msg << team_id;
 __msg << player_id;
 		
 		return RmiSend(&remote,1,rmiContext,__msg,
 			RmiName_FlagReturned, (::Proud::RmiID)Rmi_FlagReturned);
 	}
 
-	bool Proxy::FlagReturned ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const Proud::HostID & player_id)  	{
+	bool Proxy::FlagReturned ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & team_id, const Proud::HostID & player_id)  	{
 		::Proud::CMessage __msg;
 __msg.UseInternalBuffer();
 __msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
@@ -123,6 +124,7 @@ __msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
 ::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_FlagReturned;
 __msg.Write(__msgid); 
 	
+__msg << team_id;
 __msg << player_id;
 		
 		return RmiSend(remotes,remoteCount,rmiContext,__msg,
