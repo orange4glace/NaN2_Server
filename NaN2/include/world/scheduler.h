@@ -27,8 +27,7 @@ struct SchedulerTask {
   }
 
   bool operator<(const SchedulerTask& rhs) const {
-    if (rhs.time == rhs.time) return this < &rhs;
-    return time < rhs.time;
+    return dtime > rhs.dtime;
   }
 };
 

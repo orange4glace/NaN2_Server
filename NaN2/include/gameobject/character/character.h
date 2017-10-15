@@ -74,6 +74,7 @@ namespace nan2 {
     void revivable(bool value);
 
     const Vector2& position() const;
+    bool alive() const;
     
   };
 

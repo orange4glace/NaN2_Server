@@ -7,6 +7,8 @@
 #include "skill/instant_clear_skill.h"
 #include "network/skill_cast_snapshot.h"
 
+#include "module/event_listener/character_event_listener.h"
+
 #include "logger/logger.h"
 #include "world_time.h"
 
@@ -23,7 +25,7 @@ namespace nan2 {
   recorder_(this),
   speed_(60.0f),
   alive_(true),
-  revivable_(false) {
+  revivable_(true) {
     weapon_ = WeaponFactory::CreateProjectileWeapon(this);
 
     AddComponent(&living_);
@@ -45,6 +47,7 @@ namespace nan2 {
 
     ProudServer::instance()->ProxyCharacterSpawned(this, placeable_.position());
     L_DEBUG << "[Character] Spawned at " << placeable_.position() << ". id = " << player_->id();
+
   }
 
   Character::~Character() {
@@ -116,12 +119,17 @@ namespace nan2 {
       else {
         if (alive_) {
           alive_ = false;
+          L_DEBUG << "[CharacterEventListener] CharacterDeath " << this->player_->id();
+          module::event_listener::CharacterEventListener::CharacterDeath(this);
           ProudServer::instance()->ProxyCharacterDied(this);
           L_DEBUG << "[Character] Died at " << placeable_.position() << ". id = " << player_->id();
           if (revivable_) {
+            L_DEBUG << "[Character] Spawn Timer started." ;
             World::instance()->scheduler().Timeout(5000, [this]() -> void {
               living_.set_hp(30);
               alive_ = true;
+              L_DEBUG << "[CharacterEventListener] CharacterSpawn " << this->player_->id();
+              module::event_listener::CharacterEventListener::CharacterSpawn(this);
               ProudServer::instance()->ProxyCharacterSpawned(this, placeable_.position());
               L_DEBUG << "[Character] Spawned at " << placeable_.position() << ". id = " << player_->id();
             }, this);
@@ -185,6 +193,10 @@ namespace nan2 {
 
   const Vector2& Character::position() const {
     return placeable_.position();
+  }
+
+  bool Character::alive() const {
+    return living_.hp() > 0;
   }
 
 }

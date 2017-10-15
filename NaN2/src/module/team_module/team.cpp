@@ -13,7 +13,8 @@ namespace module {
 namespace team_module {
 
 Team::Team(TeamID id) :
-id_(id) {
+id_(id),
+score_(0) {
 
 }
 

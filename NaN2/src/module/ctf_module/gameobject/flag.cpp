@@ -70,6 +70,7 @@ void Flag::Score() {
 void Flag::Update() {
   if (attached_player_ == nullptr) {
     World::instance()->IterateGameObjects<Character>([&](Character* character) -> bool {
+      if (!character->alive()) return true;
       auto placeable = character->GetComponent<Placeable>();
       if (placeable_.Intersect(placeable)) {
         auto team = team_module::TeamModule::GetModule()->GetTeam(character->player());
@@ -97,7 +98,7 @@ void Flag::Update() {
 }
 
 void Flag::OnCharacterDeath(Character* const character) {
-  if (attached_player_->character() == character)
+  if (attached_player_ == character->player())
     Detach();
 }
 
