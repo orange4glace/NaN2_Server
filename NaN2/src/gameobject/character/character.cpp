@@ -23,7 +23,7 @@ namespace nan2 {
   placeable_(this, Vector2(0, 0), Vector2(8, 20), Vector2(0, 3)),
   movable_(this),
   recorder_(this),
-  speed_(60.0f),
+  speed_(70.0f),
   alive_(true),
   revivable_(true) {
     weapon_ = WeaponFactory::CreateProjectileWeapon(this);

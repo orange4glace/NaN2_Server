@@ -38,12 +38,16 @@ namespace nan2 {
     // Pool network ids
     for (int i = 1; i < 65536; i++) network_id_pool_.push(i);
 
-    StaticCollider* sc = new StaticCollider(Vector2(50, 0), Vector2(20, 20));
-    AddGameObject(sc);
-
     int teams = 2;
     ActivateModule<module::team_module::TeamModule>((void*)&teams);
     ActivateModule<module::ctf_module::CTFModule>(nullptr);
+
+    AddGameObject(new StaticCollider(Vector2(-136, -48), Vector2(80, 32)));
+    AddGameObject(new StaticCollider(Vector2(168, -48), Vector2(80, 32)));
+    AddGameObject(new StaticCollider(Vector2(16, 152), Vector2(448, 48)));
+    AddGameObject(new StaticCollider(Vector2(16, -248), Vector2(448, 16)));
+    AddGameObject(new StaticCollider(Vector2(-192, -40), Vector2(32, 432)));
+    AddGameObject(new StaticCollider(Vector2(224, -40), Vector2(32, 432)));
   }
 
   void World::Update(int dt) {
